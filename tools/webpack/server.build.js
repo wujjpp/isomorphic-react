@@ -22,18 +22,8 @@ export default {
       },
 
       {
-        test: /\.scss$/i,
-        use: ['null-loader', 'css-loader', 'sass-loader']
-      },
-
-      {
-        test: /\.less$/i,
-        use: ['null-loader', 'css-loader', 'less-loader']
-      },
-
-      {
-        test: /\.css$/i,
-        use: ['null-loader', 'css-loader']
+        test: /\.(scss|less|css)$/,
+        use: ['null-loader']
       },
 
       {
@@ -41,7 +31,7 @@ export default {
         use: [{
           loader: 'file-loader',
           options: {
-            name: '[path][name]-[hash:8].[ext]',
+            name: '[name]-[hash:8].[ext]',
             emitFile: false
           }
         }]
@@ -51,7 +41,7 @@ export default {
         test: /\.(mp4|webm|wav|mp3|m4a|aac|oga)$/i,
         loader: 'file-loader',
         options: {
-          name: '[path][name]-[hash:8].[ext]',
+          name: '[name]-[hash:8].[ext]',
           emitFile: false
         },
       },
@@ -61,7 +51,7 @@ export default {
         use: [{
           loader: 'file-loader',
           options: {
-            name: 'font/[name]-[hash:8].[ext]',
+            name: '[name]-[hash:8].[ext]',
             emitFile: false
           }
         }]

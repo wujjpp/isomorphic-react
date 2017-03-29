@@ -31,18 +31,8 @@ export default {
       },
 
       {
-        test: /\.scss$/,
-        use: ['null-loader', 'css-loader', 'sass-loader']
-      },
-
-      {
-        test: /\.less$/,
-        use: ['null-loader', 'css-loader', 'less-loader']
-      },
-
-      {
-        test: /\.css$/,
-        use: ['null-loader', 'css-loader']
+        test: /\.(scss|less|css)$/,
+        use: ['null-loader']
       },
 
       {
@@ -72,7 +62,7 @@ export default {
         use: [{
           loader: 'file-loader',
           options: {
-            name: 'font/[name].[ext]',
+            name: '[path][name].[ext]',
             emitFile: false
           }
         }]
