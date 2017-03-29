@@ -1,0 +1,150 @@
+/**
+ * Created by JP on 2017/2/9.
+ */
+
+import webpack from 'webpack'
+import path from 'path'
+
+export default {
+  target: 'node',
+  devtool: 'source-map',
+  entry: './src/server.js',
+
+  module: {
+    rules: [{
+        test: /\.(js|jsx)$/i,
+        use: ['babel-loader'],
+        include: [
+          path.join(process.cwd(), 'src')
+        ]
+      },
+
+      {
+        test: /\.scss$/i,
+        use: ['null-loader', 'css-loader', 'sass-loader']
+      },
+
+      {
+        test: /\.less$/i,
+        use: ['null-loader', 'css-loader', 'less-loader']
+      },
+
+      {
+        test: /\.css$/i,
+        use: ['null-loader', 'css-loader']
+      },
+
+      {
+        test: /\.(ico|gif|png|jpg|jpeg|webp)$/i,
+        use: [{
+          loader: 'file-loader',
+          options: {
+            name: '[path][name]-[hash:8].[ext]',
+            emitFile: false
+          }
+        }]
+      },
+
+      {
+        test: /\.(mp4|webm|wav|mp3|m4a|aac|oga)$/i,
+        loader: 'file-loader',
+        options: {
+          name: '[path][name]-[hash:8].[ext]',
+          emitFile: false
+        },
+      },
+
+      {
+        test: /\.(woff2?|ttf|eot|svg)$/i,
+        use: [{
+          loader: 'file-loader',
+          options: {
+            name: 'font/[name]-[hash:8].[ext]',
+            emitFile: false
+          }
+        }]
+      }
+    ]
+  },
+
+  output: {
+    path: path.join(process.cwd(), 'dist'),
+    filename: 'server.js',
+    libraryTarget: 'commonjs2',
+    publicPath: '/'
+  },
+  externals: [
+    /^\.\/assets\.json$/,
+
+    (context, request, callback) => {
+      const isExternal =
+        //the module name start with ('@' or 'a-z') character and contains 'a-z' or '/' or '.' or '-' or '0-9'
+        request.match(/^[@a-z][a-z/.\-0-9]*$/i)
+        //not stylesheet
+        &&
+        !request.match(/\.(css|less|scss|sss)$/i) &&
+        !request.match(/react$/i) &&
+        !request.match(/react-dom\/server$/i)
+        //environment config file, auto generated during build
+        ||
+        request.match(/^\.\/env\.json$/)
+
+      //console.log(request, '------- ', Boolean(isExternal))
+
+      callback(null, Boolean(isExternal))
+    },
+  ],
+
+  resolveLoader: {
+    alias: {}
+  },
+
+  resolve: {
+    alias: {
+      //because of react-dom issue, we should built the following 2 module to main package
+      'react': 'react/dist/react.min',
+      'react-dom/server': 'react-dom/dist/react-dom-server.min'
+    },
+    extensions: ['.js', '.jsx', '.json']
+  },
+
+  node: {
+    __filename: false,
+    __dirname: false
+  },
+
+  plugins: [
+    new webpack.DefinePlugin({
+      '__BROWSER__': false,
+      '__DEV__': false
+    }),
+
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify('production')
+    }),
+
+    new webpack.BannerPlugin({
+      banner: "require('source-map-support').install();process.env.NODE_ENV='production';",
+      raw: true,
+      entryOnly: true
+    }),
+
+    new webpack.optimize.LimitChunkCountPlugin({
+      maxChunks: 1
+    }),
+    new webpack.optimize.UglifyJsPlugin({
+      sourceMap: true,
+      comments: false,
+      compress: {
+        warnings: false
+      },
+      /*mangle: false*/
+    })
+  ],
+
+  stats: {
+    colors: true,
+    warnings: false
+  }
+  //stats:'verbose'
+}

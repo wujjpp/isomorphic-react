@@ -1,0 +1,31 @@
+^_^ task list
+
+1.  react                                                                     --DONE
+2.  react-router                                                              --DONE
+3.  react-redux                                                               --DONE
+4.  redux-thunk                                                               --DONE
+5.  axios                                                                     --DONE
+6.  redial                                                                    --DONE
+7.  webpack                                                                   --DONE
+8.  babel(es2015,es2016,es2017,stage-0)                                       --DONE
+9.  devServer(with client HMR and server auto-compile&restart)                --DONE
+10. helmet & react-helmet                                                     --DONE
+11. build-client                                                              --DONE
+12. build-server                                                              --DONE
+13. start app from dist                                                       --DONE
+14. bootstrap-sass                                                            --DONE
+15. antd                                                                      --DONE
+16. bootstrap-react                                                           --DONE
+18. react-router-redux                                                        --DONE
+19. temporary resolve react-dom issue                                         --DONE
+20. source map supporting for server.js                                       --DONE
+21. source map for css-loader\sass-load\less-loader                           --DONE
+
+99. training examples                                                         --DONE
+
+. redux-form(used for validation)
+. friendly enhancement for api call
+. enhance history listening for trigger
+....
+
+99. eslint
