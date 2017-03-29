@@ -8,10 +8,10 @@ import App from '../components/App'
 const routes = {
   path: '/',
   component: App,
+  indexRoute: { onEnter: (nextState, replace) => replace('/home') },
   childRoutes: [
-    require('./about').default,
-    require('./todos').default,
-    require('./lifecycle').default,
+    require('./home').default,
+    require('./test').default
   ]
 }
 

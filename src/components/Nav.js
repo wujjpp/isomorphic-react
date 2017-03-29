@@ -7,20 +7,36 @@ import React, {Component} from 'react'
 
 function Nav() {
   return (
-    <ul role="nav">
-      <li>
-        <Link to="/">Home</Link>
-      </li>
-      <li>
-        <Link to="/about">About</Link>
-      </li>
-      <li>
-        <Link to="/todos">Todos</Link>
-      </li>
-      <li>
-        <Link to="/lifecycle">Lifecycle</Link>
-      </li>
-    </ul>
+    <nav className="navbar navbar-default navbar-fixed-top">
+      <div className="container">
+        <div className="navbar-header">
+          <button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span className="sr-only">Toggle navigation</span>
+            <span className="icon-bar"/>
+            <span className="icon-bar"/>
+            <span className="icon-bar"/>
+          </button>
+          <a className="navbar-brand" href="https://github.com/wujjpp/isomorphic-react">
+            Isomorphic React
+          </a>
+        </div>
+        <div id="navbar" className="navbar-collapse collapse">
+          <ul className="nav navbar-nav">
+            <li>
+              <Link to="/home" activeClassName="active" onlyActiveOnIndex={true}>Home</Link>
+            </li>
+            <li>
+              <Link to="/Test" activeClassName="active">Test</Link>
+            </li>
+          </ul>
+          <ul className="nav navbar-nav navbar-right">
+            <li>
+              <a href="javascript:;">xxxx</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
   )
 }
 
