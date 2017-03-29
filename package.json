@@ -9,10 +9,30 @@
     "build:server": "cross-env NODE_ENV=production babel-node ./tools/run build-server",
     "build": "cross-env NODE_ENV=production babel-node ./tools/run build",
     "test": "mocha \"src/**/*.test.js\" --require babel-register --require test/setup.js",
-    "lint:js": "cls && eslint src"
+    "lint:js": "eslint src"
   },
-  "author": "",
-  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wujjpp/isomorphic-react.git"
+  },
+  "keywords": [
+    "marko",
+    "starter kit",
+    "universal web",
+    "webpack",
+    "express",
+    "babel",
+    "es6",
+    "template engine"
+  ],
+  "author": "Wu Jian Ping <wujjpp@hotmail.com>",
+  "maintainers": [
+    "Wu Jian Ping <wujjpp@hotmail.com>"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/wujjpp/isomorphic-react/issues"
+  },
   "dependencies": {
     "axios": "^0.15.3",
     "bootstrap-sass": "^3.3.7",
@@ -81,6 +101,5 @@
     "webpack-dev-middleware": "^1.9.0",
     "webpack-hot-middleware": "^2.15.0"
   },
-  "main": "./dist/server.js",
-  "description": ""
+  "main": "./dist/server.js"
 }
