@@ -47,7 +47,7 @@ $ npm run build -- prod
 ```
 NOTE：`--` 与 `prod`之间有个空格
 
-___/tools/config.js
+通过修改 ___/tools/config.js___ 配置CDN
 ```javascript
 const shared = {
   dist: 'dist',
@@ -58,10 +58,9 @@ const shared = {
 const config = {
   dev: {
     publicPath: `http://127.0.0.1:${shared.frontPort}/`
-    // publicPath: `public/`
   },
   prod: {
-    publicPath: '//cache.YourCDN.com/' /这里可以配置CDN路径，打包完成后，将`/dist/public`目录复制到CDN，完成CDN加速
+    publicPath: '//cache.YourCDN.com/' //这里可以配置CDN路径，打包完成后，将`/dist/public`目录复制到CDN，完成CDN加速
   }
 }
 
