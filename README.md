@@ -105,7 +105,7 @@ $ npm install
 │   ├── /dev-tools/             # 开发者工具
 │   ├── /lib/                   # 构建相关的辅助函数
 │   ├── /loaders/               # 自定义webpack loader
-│   ├── /webpacks/              # 构建相关配置
+│   ├── /webpacks/              # webpack相关配置
 │   ├── config.js               # 构建配置参数
 │   ├── postcss.config.js       # postcss-loader配置
 │   └── <other>.js              # 构建相关脚本
