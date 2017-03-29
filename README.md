@@ -10,19 +10,57 @@ $ npm install
 ```
 NOTE: 执行`npm install`之前，先运行 `npm config set registry=http://registry.npm.taobao.org` 添加npm淘宝源，可以极大的加快npm包安装速度，减少错误
 
-## 编译&运行
-- 开发&调试：`npm start`
-- 编译：`npm run build`
+## 运行&打包
 
-      构建sit环境包：  `npm run build -- sit`
-      构建uat环境包：  `npm run build -- uat`
-      构建prod环境包： `npm run build -- prod`
+#### 运行&开发
+```shell
+$ npm start
+```
 
-      注意： "--" 与 "环境参数(sit,uat,prod)"之间有个空格
+#### 打包
+```shell
+$ npm run build
+```
 
-- 运行dist: `npm run start:dist`
-- clean: `npm run clean`
-- eslint: `npm run lint:js`
+#### 构建prod环境包
+使用参数prod进行打包，可以配置CDN路径
+```shell
+$ npm run build -- prod
+```
+NOTE："--" 与 "环境参数(sit,uat,prod)"之间有个空格
+
+___/tools/config.js
+```javascript
+const shared = {
+  dist: 'dist',
+  frontPort: 3000,//前端服务端口
+  backendPort: 9000//后端服务端口
+}
+
+const config = {
+  dev: {
+    publicPath: `http://127.0.0.1:${shared.frontPort}/`
+    // publicPath: `public/`
+  },
+  prod: {
+    publicPath: '//cache.YourCDN.com/' /这里可以配置CDN路径，打包完成后，将`/dist/public`目录复制到CDN，完成CDN加速
+  }
+}
+
+export default Object.assign({}, shared, config)
+```
+
+
+
+#### 从dist目录运行
+```shell
+$ npm run start:dist
+```
+
+#### 清理
+```shell
+$ npm run clean
+```
 
 ## 更新
 ```shell
