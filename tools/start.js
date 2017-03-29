@@ -1,5 +1,5 @@
 /**
- * Created by JP on 2017/2/11.
+ * Created by Wu Jian Ping on 2017/2/11.
  */
 import webpack from 'webpack'
 import webpackDevMiddleware from 'webpack-dev-middleware'

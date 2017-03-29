@@ -1,5 +1,5 @@
 /**
- * Created by JP on 2017/2/7.
+ * Created by Wu Jian Ping on 2017/2/7.
  */
 if (typeof require.ensure !== 'function') require.ensure = (d, c) => c(require)
 

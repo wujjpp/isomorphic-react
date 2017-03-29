@@ -1,5 +1,5 @@
 /**
- * Created by JP on 2017/2/8.
+ * Created by Wu Jian Ping on 2017/2/8.
  */
 import sharedConfig from './shared'
 import devConfig from './config-dev'

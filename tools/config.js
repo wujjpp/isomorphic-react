@@ -1,5 +1,5 @@
 /**
- * Created by JP on 2017/2/18.
+ * Created by Wu Jian Ping on 2017/2/18.
  */
 
 const shared = {

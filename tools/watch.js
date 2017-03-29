@@ -1,5 +1,5 @@
 /**
- * Created by JP on 2017/2/17.
+ * Created by Wu Jian Ping on 2017/2/17.
  */
 import path from 'path';
 import chokidar from 'chokidar'

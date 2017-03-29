@@ -1,6 +1,21 @@
 # Isomorphic-React
 同构系统，同时支持服务器端渲染及客户端渲染，SEO友好
 
+## 技术栈
+- react
+- react-router
+- react-redux
+- redux-thunk
+- axios
+- redial
+- webpack
+- babel
+- react-hot
+- helmet
+- react-helmet
+- react-router-redux
+
+
 ## 安装
 
 ```shell
@@ -8,7 +23,7 @@ $ git clone https://github.com/wujjpp/isomorphic-react.git
 $ cd isomorphic-react
 $ npm install
 ```
-NOTE: 执行`npm install`之前，先运行 `npm config set registry=http://registry.npm.taobao.org` 添加npm淘宝源，可以极大的加快npm包安装速度，减少错误
+NOTE: 执行`npm install`之前，先运行 `npm config set registry=http://registry.npm.taobao.org` 添加npm淘宝源，可以极大的加快npm包安装速度，减少因为网络原因带来的错误
 
 ## 运行&打包
 
@@ -27,7 +42,7 @@ $ npm run build
 ```shell
 $ npm run build -- prod
 ```
-NOTE："--" 与 "环境参数(sit,uat,prod)"之间有个空格
+NOTE：`--` 与 `prod`之间有个空格
 
 ___/tools/config.js
 ```javascript
@@ -57,7 +72,7 @@ export default Object.assign({}, shared, config)
 $ npm run start:dist
 ```
 
-#### 清理
+#### Clean
 ```shell
 $ npm run clean
 ```
