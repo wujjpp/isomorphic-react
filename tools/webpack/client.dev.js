@@ -55,8 +55,6 @@ export default {
           {
             loader: 'css-loader',
             options: {
-              // because of url(), user cannot use sourceMap in css
-              // detailed info please refer: https://github.com/webpack-contrib/style-loader
               sourceMap: true
             }
           },
