@@ -5,18 +5,16 @@
 import {
   combineReducers
 } from 'redux'
+
 import {
   routerReducer
 } from 'react-router-redux'
+
 import {
-  user
-} from './user'
-import {
-  todos
-} from './todo'
+  readme
+} from './readme'
 
 export default combineReducers({
   routing: routerReducer,
-  user,
-  todos
+  readme
 });

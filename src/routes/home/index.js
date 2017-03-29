@@ -7,8 +7,7 @@ export default {
   path: '/home',
   getComponent(nextState, callback) {
     require.ensure([], (require) => {
-      callback(null, require('./Home').default)
+      callback(null, require('./containers/Home').default)
     })
-
   }
 }

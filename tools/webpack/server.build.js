@@ -4,6 +4,8 @@
 
 import webpack from 'webpack'
 import path from 'path'
+import marked from "marked"
+const renderer = new marked.Renderer()
 
 export default {
   target: 'node',
@@ -63,6 +65,21 @@ export default {
             emitFile: false
           }
         }]
+      },
+
+      {
+        test: /\.md$/,
+        use: [{
+            loader: "html-loader"
+          },
+          {
+            loader: "markdown-loader",
+            options: {
+              pedantic: true,
+              renderer
+            }
+          }
+        ]
       }
     ]
   },
@@ -75,7 +92,7 @@ export default {
   },
   externals: [
     /^\.\/assets\.json$/,
-
+    /^\.\/env\.json$/
     (context, request, callback) => {
       const isExternal =
         //the module name start with ('@' or 'a-z') character and contains 'a-z' or '/' or '.' or '-' or '0-9'
@@ -85,9 +102,6 @@ export default {
         !request.match(/\.(css|less|scss|sss)$/i) &&
         !request.match(/react$/i) &&
         !request.match(/react-dom\/server$/i)
-        //environment config file, auto generated during build
-        ||
-        request.match(/^\.\/env\.json$/)
 
       //console.log(request, '------- ', Boolean(isExternal))
 

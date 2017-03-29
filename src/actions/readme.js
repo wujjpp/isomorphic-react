@@ -2,24 +2,24 @@
  * Created by JP on 2017/2/8.
  */
 
-import * as types from '../constants/todo'
+import * as types from '../constants/readme'
 
-export function loadTodoList() {
+export function loadReadme() {
   return (dispatch, getState, {client}) => {
 
-    dispatch({ type: types.LOAD_TODO_LIST_REQUEST })
+    dispatch({ type: types.LOAD_README_REQUEST })
 
     return client
-      .get('/loadTodoList')
+      .get('/loadReadme')
       .then((res) => {
         dispatch({
-          type: types.LOAD_TODO_LIST_SUCCESS,
+          type: types.LOAD_README_SUCCESS,
           payload: res.data
         })
       })
       .catch((error) => {
         dispatch({
-          type: types.LOAD_TODO_LIST_ERROR,
+          type: types.LOAD_README_ERROR,
           payload: error
         })
       })

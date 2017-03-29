@@ -32,7 +32,7 @@ class Html extends Component {
         {process.env.NODE_ENV === 'production' && stylesheets && stylesheets.map(css => <link {...css}/>)}
       </head>
       <body>
-      <div className="container" id="app" dangerouslySetInnerHTML={{__html: children}}/>
+      <div id="app" dangerouslySetInnerHTML={{__html: children}}/>
       {/*{<div className="container" id="app" dangerouslySetInnerHTML={{__html: __DEV__ ? ReactDOMStream.renderToStaticMarkup(children) : ReactDOMStream.renderToString(children)}}/>}*/}
       {initialState && (
         <script
@@ -49,5 +49,3 @@ class Html extends Component {
 }
 
 export default Html
-
-

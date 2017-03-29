@@ -4,40 +4,46 @@
 
 import {Link} from 'react-router'
 import React, {Component} from 'react'
+import {Navbar, Nav, MenuItem, NavItem, NavDropdown} from 'react-bootstrap'
 
-function Nav() {
-  return (
-    <nav className="navbar navbar-default navbar-fixed-top">
-      <div className="container">
-        <div className="navbar-header">
-          <button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span className="sr-only">Toggle navigation</span>
-            <span className="icon-bar"/>
-            <span className="icon-bar"/>
-            <span className="icon-bar"/>
-          </button>
-          <a className="navbar-brand" href="https://github.com/wujjpp/isomorphic-react">
-            Isomorphic React
-          </a>
-        </div>
-        <div id="navbar" className="navbar-collapse collapse">
-          <ul className="nav navbar-nav">
-            <li>
-              <Link to="/home" activeClassName="active" onlyActiveOnIndex={true}>Home</Link>
+class NavBar extends React.Component {
+  render() {
+    return (
+      <Navbar className="navbar-fixed-top">
+        <Navbar.Header>
+          <Navbar.Brand>
+            <a href="https://github.com/wujjpp/isomorphic-react">Isomorphic React</a>
+          </Navbar.Brand>
+          <Navbar.Toggle/>
+        </Navbar.Header>
+        <Navbar.Collapse>
+          <Nav>
+            <li className={this.props.router.isActive('/home', true)
+              ? 'active'
+              : ''}>
+              <Link to='/home'>Home</Link>
             </li>
-            <li>
-              <Link to="/Test" activeClassName="active">Test</Link>
+            <li className={this.props.router.isActive('/test', false)
+              ? 'active'
+              : ''}>
+              <Link to='/test'>Test</Link>
             </li>
-          </ul>
-          <ul className="nav navbar-nav navbar-right">
-            <li>
-              <a href="javascript:;">xxxx</a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
-  )
+            <NavDropdown title="Dropdown" id="dropdown">
+              <MenuItem>Action</MenuItem>
+              <MenuItem>Another action</MenuItem>
+              <MenuItem>Something else here</MenuItem>
+              <MenuItem divider/>
+              <MenuItem>Separated link</MenuItem>
+            </NavDropdown>
+          </Nav>
+          <Nav pullRight>
+            <NavItem>Link Right</NavItem>
+            <NavItem>Link Right</NavItem>
+          </Nav>
+        </Navbar.Collapse>
+      </Navbar>
+    )
+  }
 }
 
-export default Nav
+export default NavBar

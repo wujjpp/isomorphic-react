@@ -11,7 +11,10 @@ export default class App extends Component {
   render() {
     return (
       <div>
-        <Nav/> {this.props.children}
+        <Nav router={this.props.router}/>
+        <div className='container content-container'>
+          {this.props.children}
+        </div>
         <Footer/>
       </div>
     )
