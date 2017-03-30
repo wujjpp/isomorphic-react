@@ -156,7 +156,7 @@ class Test extends Component {
 
 
 ## 分析 webpack stats
-构建完成之后就结束了吗？没有，我们集成了bundle文件进行分析工具，试着在控制台下敲入下面3条命令。
+构建完成之后就结束了吗？没有，我们集成了bundle文件分析工具，试着在控制台下敲入下面3条命令。你会喜欢的
 
 ```shell
 $ npm run analyse:client
