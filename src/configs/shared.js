@@ -18,7 +18,8 @@ if (__BROWSER__) {
 }
 
 if (!__BROWSER__) {
-  config.apiRoot = `http://127.0.0.1:9000/api`
+  var port = require('../../tools/config').default.backendPort
+  config.apiRoot = `http://127.0.0.1:${port}/api`
 }
 
 export default config

@@ -16,6 +16,7 @@ import {trigger} from './core/redial'
 import configureStore from './store/configureStore'
 import routes from './routes'
 import Html from './components/Html'
+import config from '../tools/config'
 
 let assets = null
 const app = express()
@@ -133,7 +134,7 @@ app.get('*', (req, res) => {
   })
 })
 
-const PORT = 9000
+const PORT = config.backendPort
 
 app.listen(PORT, (err) => {
   if (err) {
