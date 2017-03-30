@@ -2,7 +2,7 @@
  * Created by Wu Jian Ping on 2017/2/18.
  */
 
-import shared from '../port-settings'
+import shared from '../settings'
 
 const config = {
   dev: {

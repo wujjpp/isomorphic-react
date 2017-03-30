@@ -221,7 +221,7 @@ $ npm install
 │   ├── /run.js                     # 执行任务脚本
 │   ├── /start.js                   # 启动开发脚本
 │   └── /watch.js                   # watch & copy
-├── port-settings.js                # 服务器端口设置
+├── settings.js                     # dist目录，API根路径，服务器端口设置
 └── package.json                    # The list of 3rd party libraries and utilities
 ```
 ---
