@@ -114,7 +114,7 @@ plugins: [
 ```
 你可以使用这2个变量进行条件编译
 
-例如: 在文件 `/src/routes/test/Test.js`中, 我们使用 `__BROWSER__` 变量通知构建工具 `jquery.easypiechart` 和 `toastr` 这两个包只有在前端文件打包的时候才需要包含, 实际上这两个包在服务器端也没什么用
+例如: 在文件 `/src/routes/test/Test.js`中, 我们使用 `__BROWSER__` 变量通知构建工具 `jquery.easypiechart` 和 `toastr` 这两个包只有在前端文件打包的时候才需要包含, 实际上这两个包在服务器端也没什么用。
 
 ___/src/routes/test/Test.js___
 ```javascript
@@ -156,7 +156,7 @@ class Test extends Component {
 
 
 ## 分析 webpack stats
-构建完成之后就结束了吗？没有，我们集成了bundle文件分析工具，试着在控制台下敲入下面3条命令。你会喜欢的
+构建完成之后就结束了吗？没有，我们集成了bundle文件分析工具，试着在控制台下敲入下面3条命令。你会喜欢的。
 
 ```shell
 $ npm run analyse:client
