@@ -16,7 +16,7 @@ import {trigger} from './core/redial'
 import configureStore from './store/configureStore'
 import routes from './routes'
 import Html from './components/Html'
-import config from '../tools/config'
+import config from '../settings'
 
 let assets = null
 const app = express()

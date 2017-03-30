@@ -167,11 +167,6 @@ export default {
       jQuery: 'jquery'
     }),
     new HotModuleReplacementPlugin(),
-    new webpack.optimize.CommonsChunkPlugin({
-      name: 'vendor',
-      filename: 'vendor.js',
-      minChunks: 2
-    }),
     new webpack.NoEmitOnErrorsPlugin()
   ],
 
