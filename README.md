@@ -61,11 +61,7 @@ NOTE：`--` 与 `prod`之间有个空格
 
 通过修改 ___/tools/config.js___ 配置CDN
 ```javascript
-const shared = {
-  dist: 'build',
-  frontPort: 3000,//前端服务端口
-  backendPort: 9000//后端服务端口
-}
+import shared from '../settings'
 
 const config = {
   dev: {
