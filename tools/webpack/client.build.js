@@ -30,7 +30,6 @@ export default {
     publicPath: '/',
   },
 
-
   module: {
     rules: [{
         test: /\.(js|jsx)$/i,
