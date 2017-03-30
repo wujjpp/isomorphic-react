@@ -1,6 +1,5 @@
 build
 node_modules
-.tmp
 .git
 .tern-project
 assets.json
