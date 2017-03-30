@@ -18,6 +18,7 @@ export default {
 
   entry: {
     script: [
+      'babel-polyfill',
       'webpack-hot-middleware/client?reload=true', //reload - Set to true to auto-reload the page when webpack gets stuck
       './src/client.js'
     ]

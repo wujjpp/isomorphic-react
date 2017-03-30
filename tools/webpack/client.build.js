@@ -18,12 +18,8 @@ export default {
 
   entry: {
     script: [
+      'babel-polyfill',
       './src/client.js'
-    ],
-    vendor: [
-      'react',
-      'react-dom',
-      'react-router'
     ]
   },
 
@@ -161,11 +157,6 @@ export default {
       allChunks: true
     }),
     new webpack.optimize.AggressiveMergingPlugin(),
-    new webpack.optimize.CommonsChunkPlugin({
-      name: 'vendor',
-      filename: 'vendor.[hash:8].js',
-      minChunks: 2
-    }),
     new AssetsPlugin({
       filename: 'assets.json',
       path: path.join(process.cwd(), config.dist),

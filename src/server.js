@@ -72,7 +72,6 @@ app.get('*', (req, res) => {
 
       const data = {
         scripts: [
-          (assets && assets.vendor && assets.vendor.js) || 'vendor.js',
           (assets && assets.script && assets.script.js) || 'script.js'
         ],
         stylesheets: [
