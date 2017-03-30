@@ -18,7 +18,7 @@ if (__BROWSER__) {
 }
 
 if (!__BROWSER__) {
-  var port = require('../../tools/config').default.backendPort
+  let port = require('../../port-settings').default.backendPort
   config.apiRoot = `http://127.0.0.1:${port}/api`
 }
 

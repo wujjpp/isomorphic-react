@@ -2,11 +2,7 @@
  * Created by Wu Jian Ping on 2017/2/18.
  */
 
-const shared = {
-  dist: 'build',
-  frontPort: 3000, //前端服务端口
-  backendPort: 9001 //后端服务端口
-}
+import shared from '../port-settings'
 
 const config = {
   dev: {
