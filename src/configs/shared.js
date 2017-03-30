@@ -13,7 +13,7 @@ config.custom1 = 'custom val 1'
 
 if (__BROWSER__) {
   if (typeof window !== 'undefined' && window.location) {
-    config.apiRoot = `${window.location.protocol}//${window.location.host}/api`
+    config.apiRoot = `${window.location.protocol}//${window.location.host}`
   }
 }
 
