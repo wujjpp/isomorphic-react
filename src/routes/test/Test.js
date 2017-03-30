@@ -66,7 +66,7 @@ class Test extends Component {
         <div className="col-md-12">
           <h1>
             React14.5.2 + Webpack2 + Babel6
-            <small>Support ES6</small>
+            <small>&nbsp;Support ES6</small>
           </h1>
         </div>
         <div className="col-md-12">

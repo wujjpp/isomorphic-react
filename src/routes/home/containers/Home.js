@@ -4,8 +4,10 @@
 import React, {Component} from 'react'
 import {provideHooks} from '../../../core/redial'
 import {connect} from 'react-redux'
-import 'markdown-loader/example/markdown.css'
 import {loadReadme} from '../../../actions/readme'
+
+// less also be supported
+import '../style.less'
 
 const hooks = {
   init: ({dispatch}) => {
