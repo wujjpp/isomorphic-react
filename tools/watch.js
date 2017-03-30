@@ -7,7 +7,7 @@ import {
   copyFile,
   makeDir,
   cleanDir
-} from './lib/fs'
+} from './libs/fs'
 import config from './config'
 
 async function watch({

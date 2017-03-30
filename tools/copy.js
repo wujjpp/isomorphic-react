@@ -6,7 +6,7 @@ import {
   writeFile,
   makeDir,
   copyDir
-} from './lib/fs'
+} from './libs/fs'
 import pkg from '../package.json'
 import config from './config'
 

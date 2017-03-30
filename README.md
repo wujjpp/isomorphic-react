@@ -107,27 +107,42 @@ $ npm install
 ## 目录说明
 ```
 .
-├── /src/                       # 源码目录
-│   ├── /actions/               # 存放redux actions
-│   ├── /components             # 系统级组件   
-│   ├── /configs/               # 系统运行配置文件
-│   ├── /constants/             # 存放redux action常量
-│   ├── /core/                  # 系统基础库
-│   └── /reducers/              # 存放redux reducers
-├── /routes/                    # The source code of the application
-│   ├── /xxxx/                  # 存放router对应页面   
-│   └── /index.js               # 路由配置
-├── /server/                    # 存放服务端API router
-├── /store/                     # redux store相关
-├── /tools/                     # 构建相关
-│   ├── /dev-tools/             # 开发者工具
-│   ├── /lib/                   # 构建相关的辅助函数
-│   ├── /loaders/               # 自定义webpack loader
-│   ├── /webpacks/              # webpack相关配置
-│   ├── config.js               # 构建配置参数
-│   ├── postcss.config.js       # postcss-loader配置
-│   └── <other>.js              # 构建相关脚本
-└── package.json                # The list of 3rd party libraries and utilities
+├── /src/                           # 源码目录
+│   ├── /actions/                   # 存放redux actions
+│   ├── /components                 # 系统级组件   
+│   ├── /configs/                   # 前端运行配置文件，不同环境配置文件单独存放
+│   ├── /constants/                 # 存放redux action常量
+│   ├── /core/                      # 系统基础库
+│   ├── /reducers/                  # 存放redux reducers
+│   ├── /routes/                    # 路由&页面，需要补脑的走这里https://github.com/ReactTraining/react-router/tree/v3/examples/huge-apps
+│   │   ├── /home/                  # route home
+│   │   │   ├──/components/         # components
+│   │   │   ├──/containers/         # containers
+│   │   │   └──/index.js            # 动态路由配置文件
+│   │   └── /index.js               # 动态路由配置文件
+│   └── /server.js                  # 服务端入口
+│   ├── /server/                    # 存放只运行在服务端的代码，例如:RESTful API
+│   ├── /store/                     # Redux store
+│   ├── /styles/                    # 全局样式
+│   ├── /client.js                  # 前端入口js
+│   └── /server.js                  # 服务端入口
+├── /tools/                         # 构建相关
+│   ├── /analyse/                   # webpack stats分析工具
+│   ├── /dev-tools/                 # 开发者工具
+│   ├── /libs/                      # 构建相关的辅助库
+│   ├── /loaders/                   # 自定义webpack loader
+│   ├── /webpacks/                  # webpack相关配置
+│   ├── /build-client.js            # 客户端构建脚本
+│   ├── /build-server.js            # 服务端构建脚本
+│   ├── /build.js                   # 统一构建脚本
+│   ├── /clean.js                   # 清理脚本
+│   ├── /config.js                  # 构建配置参数
+│   ├── /copy.js                    # 复制静态资源、复制构建资源等
+│   ├── /postcss.config.js          # postcss-loader配置
+│   ├── /run.js                     # 执行任务脚本
+│   ├── /start.js                   # 启动开发脚本
+│   └── /watch.js                   # watch & copy
+└── package.json                    # The list of 3rd party libraries and utilities
 ```
 ---
 

@@ -9,10 +9,10 @@ import {
   getPublicPath,
   logger,
   getEnv
-} from './lib/utils'
+} from './libs/utils'
 import {
   writeFile
-} from './lib/fs'
+} from './libs/fs'
 
 async function build(env) {
   env = env || getEnv()

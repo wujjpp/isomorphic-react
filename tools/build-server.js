@@ -7,10 +7,10 @@ import {
   getPublicPath,
   logger,
   getEnv
-} from './lib/utils'
+} from './libs/utils'
 import {
   writeFile
-} from './lib/fs'
+} from './libs/fs'
 import webpackConfig from './webpack/server.build'
 import config from './config'
 

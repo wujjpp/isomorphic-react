@@ -13,7 +13,7 @@ import {
   format,
   getEnv,
   getPublicPath
-} from './lib/utils'
+} from './libs/utils'
 
 import run from './run'
 import clean from './clean'

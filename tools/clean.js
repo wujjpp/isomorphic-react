@@ -4,7 +4,7 @@
 
 import {
   cleanDir
-} from './lib/fs'
+} from './libs/fs'
 
 import config from './config'
 
