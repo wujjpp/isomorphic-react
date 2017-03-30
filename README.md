@@ -87,8 +87,6 @@ const config = {
 export default Object.assign({}, shared, config)
 ```
 
-
-
 #### 从打包结果目录运行程序
 ```shell
 $ npm run start:dist
