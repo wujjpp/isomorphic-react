@@ -1,5 +1,6 @@
 # Isomorphic-React
-同构系统，同时支持服务器端渲染及客户端渲染，SEO友好
+同构系统，支持服务器端渲染及客户端渲染，对SEO友好。
+为什么需要同构系统，需要补脑的[这边走](http://nerds.airbnb.com/isomorphic-javascript-future-web-apps/)
 
 ## 技术栈
 - [react](https://facebook.github.io/react/)
@@ -96,6 +97,65 @@ $ npm run start:dist
 ```shell
 $ npm run clean
 ```
+
+
+## 关于条件编译
+**IMPORTANT**：请记住，你写的React Component是要能同时运行在服务端和客户端，然而有些前端插件（实际上是大部分jquery插件）是没法运行在服务器端的，
+所以我们定义了2个条件变量用于区分环境，正确使用这两个变量，可以让你愉快的使用大部分纯前端插件。
+
+___/tools/webpack/client.build.js___
+```javascript
+...
+plugins: [
+  new webpack.DefinePlugin({
+    '__BROWSER__': true,
+    '__DEV__': false
+  }),
+  ...
+]  
+...
+```
+你可以使用这2个变量进行条件编译
+
+例如: In `/src/routes/test/Test.js`, 我们使用 `__BROWSER__` 变量通知构建工具 `jquery.easypiechart` 和 `toastr` 这两个包只有在前端文件打包的时候才需要包含, 实际上这两个包在服务器端也没什么用
+
+___/src/routes/test/Test.js___
+```javascript
+if (__BROWSER__) {
+  require('easy-pie-chart/dist/jquery.easypiechart')
+  var toastr = require('toastr')
+}
+
+class Test extends Component {
+  constructor(props, context) {
+    ...
+    this.updateChart = this.updateChart.bind(this)
+  }
+  ...
+  componentDidMount(){    
+    $('.chart').easyPieChart({
+      easing: 'easeOutBounce',
+      onStep: function(from, to, percent) {
+        $(this.el).find('.percent').text(Math.round(percent))
+      }
+    })
+    this.chart = $('.chart').data('easyPieChart');
+    this.chart.update(Math.random() * 200 - 100)
+  }
+  ...
+
+  updateChart() {
+    this.chart.update(Math.random() * 200 - 100)
+  }
+
+  showToastr() {
+    toastr.success('Have fun storming the castle!', 'Miracle Max Says')
+  }
+  ..
+}
+
+```
+同样我们在`/src/store/configureStore.js`中使用`__BROWSER__`和`__DEV__`两个变量来决定只有在开发环境和浏览器环境下需要挂载`Redux Dev Tools Extension`， 别忘了configureStore作为redux的store配置组件，同样是需要运行在服务器端的
 
 
 ## 分析 webpack stats

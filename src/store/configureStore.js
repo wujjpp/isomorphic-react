@@ -2,7 +2,11 @@
  * Created by Wu Jian Ping on 2017/1/23.
  */
 
-import {createStore, applyMiddleware, compose} from 'redux'
+import {
+  createStore,
+  applyMiddleware,
+  compose
+} from 'redux'
 import thunk from 'redux-thunk'
 import reducers from '../reducers'
 import client from '../core/request'
@@ -12,7 +16,10 @@ export default (initialState) => {
 
   const middleware = [];
   middleware.push(applyMiddleware(
-    thunk.withExtraArgument({client, axios})
+    thunk.withExtraArgument({
+      client,
+      axios
+    })
   ));
 
   if (__BROWSER__ && __DEV__) {

@@ -6,7 +6,7 @@ import img1 from './images/1.jpg'
 import './style.scss'
 import '../../styles/toastr.scss'
 
-if(__BROWSER__){
+if (__BROWSER__) {
   require('easy-pie-chart/dist/jquery.easypiechart')
   var toastr = require('toastr') //toastr is a client library for displaying notification, it is useless in server side
 }
@@ -26,8 +26,7 @@ class Test extends Component {
     this.updateChart = this.updateChart.bind(this)
   }
 
-  componentDidMount(){
-    console.log('aaa')
+  componentDidMount() {
     $('.chart').easyPieChart({
       easing: 'easeOutBounce',
       onStep: function(from, to, percent) {
@@ -49,10 +48,8 @@ class Test extends Component {
     })
   }
 
-  handleInput(e){
-    this.setState({
-      content: e.target.value
-    })
+  handleInput(e) {
+    this.setState({content: e.target.value})
   }
 
   updateChart() {
@@ -98,7 +95,7 @@ class Test extends Component {
             4. Two way data-binding
             <small>Try to type any character in the following textbox</small>
           </h2>
-          <input value={this.state.content} type="text" onChange = {this.handleInput}/>
+          <input value={this.state.content} type="text" onChange={this.handleInput}/>
           <span>{this.state.content}</span>
         </div>
         <div className="col-md-12">
