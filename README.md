@@ -97,6 +97,23 @@ $ npm run start:dist
 $ npm run clean
 ```
 
+
+## 分析 webpack stats
+构建完成之后，我们可以通过下面的3条命令对bundle文件进行分析
+
+```shell
+$ npm run analyse:client
+```
+
+```shell
+$ npm run analyse:server
+```
+
+```shell
+$ npm run analyse
+```
+
+
 ## 更新
 ```shell
 $ git checkout master
