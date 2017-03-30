@@ -197,6 +197,10 @@ $ npm install
 │   │   │   ├──/components/         # components
 │   │   │   ├──/containers/         # containers
 │   │   │   └──/index.js            # 动态路由配置文件
+│   │   ├── /xxxx/                  # route xxxx
+│   │   │   ├──/components/         # components
+│   │   │   ├──/containers/         # containers
+│   │   │   └──/index.js            # 动态路由配置文件
 │   │   └── /index.js               # 动态路由配置文件
 │   └── /server.js                  # 服务端入口
 │   ├── /server/                    # 存放只运行在服务端的代码，例如:RESTful API
