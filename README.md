@@ -124,6 +124,8 @@ $ npm install
 ## 目录说明
 ```
 .
+├── /build/                         # dist目录
+├── /public/                        # 存放静态资源
 ├── /src/                           # 源码目录
 │   ├── /actions/                   # 存放redux actions
 │   ├── /components                 # 系统级组件   
