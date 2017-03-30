@@ -10,6 +10,7 @@ import { syncHistoryWithStore } from 'react-router-redux'
 import routes from './routes'
 import {trigger} from './core/redial'
 import configureStore from './store/configureStore'
+import 'jquery'
 
 const container = document.getElementById('app')
 const initialState = window.INITIAL_STATE || {}
