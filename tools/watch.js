@@ -3,12 +3,21 @@
  */
 import path from 'path';
 import chokidar from 'chokidar'
-import {copyFile, makeDir, cleanDir} from './lib/fs'
+import {
+  copyFile,
+  makeDir,
+  cleanDir
+} from './lib/fs'
+import config from './config'
 
-async function watch({dest}) {
+async function watch({
+  dest
+}) {
   const watcher = chokidar.watch([
     'public/**/*',
-  ], {ignoreInitial: true});
+  ], {
+    ignoreInitial: true
+  })
 
   watcher.on('all', async(event, filePath) => {
     const start = new Date()
@@ -19,22 +28,24 @@ async function watch({dest}) {
       case 'change':
         await makeDir(path.dirname(dist))
         await copyFile(filePath, dist)
-        break;
+        break
       case 'unlink':
       case 'unlinkDir':
-        cleanDir(dist, {nosort: true, dot: true})
-        break;
+        cleanDir(dist, {
+          nosort: true,
+          dot: true
+        })
+        break
       default:
-        return;
+        return
     }
     const end = new Date()
     const time = end.getTime() - start.getTime()
-    console.log(`[${end}] ${event} '${dist}' after ${time} ms`)
-  });
+    logger.info(`${event} '${dist}' after ${time} ms`)
+  })
 }
 
 export default {
   name: 'watch',
   func: watch
 }
-

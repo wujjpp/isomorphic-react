@@ -2,20 +2,18 @@
  * Created by Wu Jian Ping on 2017/2/17.
  */
 
-import {cleanDir} from './lib/fs'
+import {
+  cleanDir
+} from './lib/fs'
+
+import config from './config'
 
 function clean() {
   return Promise.all([
-    cleanDir('dist', {
+    cleanDir(config.dist, {
       nosort: true,
       dot: true
-    }),
-
-    cleanDir('.tmp/*', {
-      nosort: true,
-      dot: true,
-      ignore: ['.tmp/.cache'],
-    }),
+    })
   ])
 }
 

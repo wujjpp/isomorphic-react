@@ -5,6 +5,7 @@
 import webpack from 'webpack'
 import path from 'path'
 import marked from "marked"
+import config from '../config'
 const renderer = new marked.Renderer()
 
 export default {
@@ -75,7 +76,7 @@ export default {
   },
 
   output: {
-    path: path.join(process.cwd(), 'dist'),
+    path: path.join(process.cwd(), config.dist),
     filename: 'server.js',
     libraryTarget: 'commonjs2',
     publicPath: '/'

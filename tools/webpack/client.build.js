@@ -6,7 +6,7 @@ import webpack from 'webpack'
 
 import AssetsPlugin from 'assets-webpack-plugin'
 import path from 'path'
-
+import config from '../config'
 import ExtractTextPlugin from 'extract-text-webpack-plugin'
 
 export default {
@@ -28,7 +28,7 @@ export default {
   },
 
   output: {
-    path: path.join(process.cwd(), 'dist', 'public'),
+    path: path.join(process.cwd(), config.dist, 'public'),
     filename: '[name].[hash:8].js',
     chunkFilename: '[name].[hash:8].js',
     publicPath: '/',
@@ -115,7 +115,7 @@ export default {
         use: [{
           loader: 'file-loader',
           options: {
-            name: '[path][name]-[hash:8].[ext]'
+            name: '[name]-[hash:8].[ext]'
           }
         }]
       },
@@ -124,7 +124,7 @@ export default {
         test: /\.(mp4|webm|wav|mp3|m4a|aac|oga)$/i,
         loader: 'file-loader',
         options: {
-          name: '[path][name]-[hash:8].[ext]'
+          name: '[name]-[hash:8].[ext]'
 
         },
       },
@@ -134,7 +134,7 @@ export default {
         use: [{
           loader: 'file-loader',
           options: {
-            name: 'font/[name]-[hash:8].[ext]'
+            name: '[name]-[hash:8].[ext]'
           }
         }]
       }
@@ -163,7 +163,7 @@ export default {
     }),
     new AssetsPlugin({
       filename: 'assets.json',
-      path: path.join(process.cwd(), 'dist'),
+      path: path.join(process.cwd(), config.dist),
       prettyPrint: true
     }),
     new webpack.optimize.UglifyJsPlugin({

@@ -9,13 +9,19 @@ import cp from 'child_process';
 
 import browserSync from 'browser-sync'
 
-import {format, getEnv, getPublicPath} from './lib/utils'
+import {
+  format,
+  getEnv,
+  getPublicPath
+} from './lib/utils'
 
 import run from './run'
 import clean from './clean'
 import watch from './watch'
-import copyPublic from './copy-public'
-import copyEnvConfig from './copy-env-config'
+import {
+  copyPublic,
+  copyEnvConfig
+} from './copy'
 
 import config from './config'
 import devClientConfig from './webpack/client.dev'
@@ -24,8 +30,13 @@ import devServerConfig from './webpack/server.dev'
 async function start() {
   let env = getEnv()
   await run(clean)
-  await run(copyPublic, {dest: '.tmp'})
-  await run(copyEnvConfig, {dest: '.tmp', env: env})
+  await run(copyPublic, {
+    dest: config.dist
+  })
+  await run(copyEnvConfig, {
+    dest: config.dist,
+    env: env
+  })
 
   devClientConfig.output.publicPath = devServerConfig.output.publicPath = getPublicPath('dev')
 
@@ -69,17 +80,17 @@ async function start() {
       }
     }
 
-    const startServer = function () {
+    const startServer = function() {
       if (server) {
         server.kill('SIGTERM')
       }
 
-      server = cp.spawn('node',
-        ['./.tmp/server'],
-        {
-          env: Object.assign({NODE_ENV: 'development'}, process.env),
-          silent: false
-        });
+      server = cp.spawn('node', [`./${config.dist}/server`], {
+        env: Object.assign({
+          NODE_ENV: 'development'
+        }, process.env),
+        silent: false
+      });
 
       server.stdout.on('data', onStdOut);
       server.stderr.on('data', x => process.stderr.write(x))
@@ -88,7 +99,7 @@ async function start() {
     serverCompiler.watch({
       aggregateTimeout: 300,
       poll: true
-    }, function (err, stats) {
+    }, function(err, stats) {
 
       console.log(stats.toString(devServerConfig.stats))
 
@@ -102,7 +113,9 @@ async function start() {
       }
     })
   })
-  await run(watch, {dest: '.tmp'})
+  await run(watch, {
+    dest: config.dist
+  })
 }
 
 export default {

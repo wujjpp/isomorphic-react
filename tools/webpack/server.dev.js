@@ -5,7 +5,11 @@ import webpack, {
   HotModuleReplacementPlugin
 } from 'webpack'
 import path from 'path'
+
+
 import marked from "marked"
+import config from '../config'
+
 const renderer = new marked.Renderer()
 
 export default {
@@ -22,7 +26,7 @@ export default {
         use: [{
           loader: 'babel-loader',
           options: {
-            cacheDirectory: './.tmp/.cache/babel-loader'
+            cacheDirectory: './.cache/babel-loader'
           }
         }],
         include: [
@@ -86,7 +90,7 @@ export default {
   },
 
   output: {
-    path: path.join(process.cwd(), '.tmp'),
+    path: path.join(process.cwd(), config.dist),
     filename: 'server.js',
     libraryTarget: 'commonjs2',
     publicPath: '/'

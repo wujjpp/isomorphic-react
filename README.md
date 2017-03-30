@@ -2,21 +2,21 @@
 同构系统，同时支持服务器端渲染及客户端渲染，SEO友好
 
 ## 技术栈
-- react
-- react-router
-- react-redux
-- redux-thunk
-- axios
-- redial
-- webpack
-- babel
-- react-hot
-- helmet
-- react-helmet
-- react-router-redux
-- PostCSS
-- less
-- sass
+- [react](https://facebook.github.io/react/)
+- [react-router](https://github.com/ReactTraining/react-router/tree/v3/docs)
+- [redux & react-redux](http://redux.js.org/docs/basics/UsageWithReact.html)
+- [redux-thunk](https://github.com/gaearon/redux-thunk)
+- [axios](https://github.com/mzabriskie/axios)
+- [redial](https://github.com/markdalgleish/redial)
+- [webpack](https://webpack.js.org/)
+- [babel](https://babeljs.io/)
+- [react-hot-loader](https://github.com/gaearon/react-hot-loader)
+- [helmet](https://github.com/helmetjs/helmet)
+- [react-helmet](https://github.com/nfl/react-helmet)
+- [react-router-redux](https://github.com/reactjs/react-router-redux)
+- [postcss](https://github.com/postcss/postcss)
+- [less](http://lesscss.org/)
+- [sass](http://sass-lang.com/)
 
 
 ## 安装
@@ -51,7 +51,7 @@ NOTE：`--` 与 `prod`之间有个空格
 通过修改 ___/tools/config.js___ 配置CDN
 ```javascript
 const shared = {
-  dist: 'dist',
+  dist: 'build',
   frontPort: 3000,//前端服务端口
   backendPort: 9000//后端服务端口
 }
@@ -62,15 +62,15 @@ const config = {
     publicPath: `http://127.0.0.1:${shared.frontPort}/`
   },
   sit: {
-    //这里可以配置SIT环境CDN路径，打包完成后，将`/dist/public`目录复制到CDN，完成CDN加速
+    //这里可以配置SIT环境CDN路径，打包完成后，将`/build/public`目录复制到CDN，完成CDN加速
     publicPath: '//sitcache.YourCDN.com/'
   },
   uat: {
-    //这里可以配置UAT环境CDN路径，打包完成后，将`/dist/public`目录复制到CDN，完成CDN加速
+    //这里可以配置UAT环境CDN路径，打包完成后，将`/build/public`目录复制到CDN，完成CDN加速
     publicPath: '//uatcache.YourCDN.com/'
   },
   prod: {
-    //这里可以配置PROD环境CDN路径，打包完成后，将`/dist/public`目录复制到CDN，完成CDN加速
+    //这里可以配置PROD环境CDN路径，打包完成后，将`/build/public`目录复制到CDN，完成CDN加速
     publicPath: '//cache.YourCDN.com/'
   }
 }

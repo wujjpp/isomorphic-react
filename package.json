@@ -3,11 +3,14 @@
   "version": "1.0.0",
   "scripts": {
     "start": "cross-env NODE_ENV=development babel-node ./tools/run start",
-    "start:dist": "node ./dist/server.js",
+    "start:dist": "node ./build/server.js",
     "clean": "babel-node ./tools/run clean",
     "build:client": "cross-env NODE_ENV=production babel-node ./tools/run build-client",
     "build:server": "cross-env NODE_ENV=production babel-node ./tools/run build-server",
     "build": "cross-env NODE_ENV=production babel-node ./tools/run build",
+    "analyse": "babel-node ./tools/analyse",
+    "analyse:client": "webpack-bundle-analyzer build/webpack-client-stats.json build/public",
+    "analyse:server": "webpack-bundle-analyzer build/webpack-server-stats.json",
     "test": "mocha \"src/**/*.test.js\" --require babel-register --require test/setup.js",
     "lint:js": "eslint src"
   },
@@ -98,8 +101,9 @@
     "style-loader": "^0.13.1",
     "url-loader": "^0.5.7",
     "webpack": "^2.2.1",
+    "webpack-bundle-analyzer": "^2.3.1",
     "webpack-dev-middleware": "^1.9.0",
     "webpack-hot-middleware": "^2.15.0"
   },
-  "main": "./dist/server.js"
+  "main": "./build/server.js"
 }

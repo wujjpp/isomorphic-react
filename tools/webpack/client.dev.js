@@ -6,6 +6,7 @@ import webpack, {
   HotModuleReplacementPlugin
 } from 'webpack'
 import path from 'path'
+import config from '../config'
 
 
 export default {
@@ -23,7 +24,7 @@ export default {
   },
 
   output: {
-    path: path.join(process.cwd(), '.tmp', 'public'),
+    path: path.join(process.cwd(), config.dist, 'public'),
     filename: '[name].js',
     chunkFilename: '[name].chunk.js',
     publicPath: '/',
@@ -38,7 +39,7 @@ export default {
           {
             loader: 'babel-loader',
             options: {
-              cacheDirectory: './.tmp/.cache/babel-loader'
+              cacheDirectory: './.cache/babel-loader'
             }
           }
         ],
