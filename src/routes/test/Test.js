@@ -3,7 +3,7 @@
  */
 import React, {Component} from 'react'
 
-class Home extends Component {
+class Test extends Component {
   constructor(props, context) {
     super(props, context)
   }
@@ -20,4 +20,4 @@ class Home extends Component {
 
 }
 
-export default Home
+export default Test
