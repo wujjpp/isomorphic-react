@@ -7,14 +7,15 @@
 - [react-router](https://github.com/ReactTraining/react-router/tree/v3/docs)
 - [redux & react-redux](http://redux.js.org/docs/basics/UsageWithReact.html)
 - [redux-thunk](https://github.com/gaearon/redux-thunk)
+- [react-helmet](https://github.com/nfl/react-helmet)
+- [react-router-redux](https://github.com/reactjs/react-router-redux)
 - [axios](https://github.com/mzabriskie/axios)
 - [redial](https://github.com/markdalgleish/redial)
 - [webpack](https://webpack.js.org/)
 - [babel](https://babeljs.io/)
+- [Browsersync](https://browsersync.io/docs)
 - [react-hot-loader](https://github.com/gaearon/react-hot-loader)
 - [helmet](https://github.com/helmetjs/helmet)
-- [react-helmet](https://github.com/nfl/react-helmet)
-- [react-router-redux](https://github.com/reactjs/react-router-redux)
 - [postcss](https://github.com/postcss/postcss)
 - [less](http://lesscss.org/)
 - [sass](http://sass-lang.com/)
@@ -173,6 +174,8 @@ $ npm run analyse:server
 $ npm run analyse
 ```
 
+## Browsersync
+打开[http://localhost:3001](http://localhost:3001)可配置Browsersync
 
 ## 更新
 ```shell
