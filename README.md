@@ -175,7 +175,7 @@ $ npm run analyse
 ```
 
 ## Browsersync
-打开[http://localhost:3001](http://localhost:3001)可配置Browsersync
+打开[http://localhost:3001](http://localhost:3001)可配置Browsersync，需要补脑的[这边走](https://browsersync.io/docs)
 
 ## 更新
 ```shell
