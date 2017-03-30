@@ -21,7 +21,7 @@ class Home extends Component {
   render() {
     return (
       <div className="row">
-        <div className="col-md-12" dangerouslySetInnerHTML={{...this.props.data}}></div>
+        <div className="col-md-12 markdown" dangerouslySetInnerHTML={{__html: this.props.data.__html}}></div>
       </div>
     )
   }
