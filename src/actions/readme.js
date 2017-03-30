@@ -10,7 +10,7 @@ export function loadReadme() {
     dispatch({ type: types.LOAD_README_REQUEST })
 
     return client
-      .get('/loadReadme')
+      .get('/api/loadReadme')
       .then((res) => {
         dispatch({
           type: types.LOAD_README_SUCCESS,
