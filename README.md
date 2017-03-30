@@ -134,10 +134,10 @@ $ npm install
 ## 相关资料
 - [React](https://facebook.github.io/react/docs/installation.html)
 - 关于 Container 和 Presentational Component的几篇文章
-   >https://segmentfault.com/a/1190000007786080
-   >http://www.tuicool.com/articles/uqey6f
-   >https://medium.com/@learnreact/container-components-c0e67432e005
-   >https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0
+>https://segmentfault.com/a/1190000007786080
+>http://www.tuicool.com/articles/uqey6f
+>https://medium.com/@learnreact/container-components-c0e67432e005
+>https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0
 - [React Router](https://github.com/ReactTraining/react-router/tree/v3/docs)   
 - [Redux](https://github.com/reactjs/redux)
 - [React Redux](https://github.com/reactjs/react-redux)
