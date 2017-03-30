@@ -173,7 +173,7 @@ $ npm run analyse
 ## Browsersync
 打开[http://localhost:3001](http://localhost:3001)可配置[Browsersync](https://browsersync.io/docs)
 
-## 更新
+## 更新源码
 ```shell
 $ git checkout master
 $ git pull origin master
@@ -184,7 +184,7 @@ $ npm install
 ```
 .
 ├── /build/                         # dist目录
-├── /public/                        # 存放静态资源
+├── /public/                        # 存放静态资源(favicon.ico, robots.txt等，图片不需要放这里)
 ├── /src/                           # 源码目录
 │   ├── /actions/                   # 存放redux actions
 │   ├── /components                 # 系统级组件   
@@ -194,8 +194,10 @@ $ npm install
 │   ├── /reducers/                  # 存放redux reducers
 │   ├── /routes/                    # 路由&页面，需要补脑的走这里https://github.com/ReactTraining/react-router/tree/v3/examples/huge-apps
 │   │   ├── /home/                  # route home
+│   │   │   ├──/images/             # 页面级图片资源
 │   │   │   ├──/components/         # components
 │   │   │   ├──/containers/         # containers
+│   │   │   ├──/xxx.scss(less)      # 页面级样式
 │   │   │   └──/index.js            # 动态路由配置文件
 │   │   ├── /xxxx/                  # route xxxx
 │   │   │   ├──/components/         # components
