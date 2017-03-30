@@ -27,7 +27,7 @@ $ git clone https://github.com/wujjpp/isomorphic-react.git
 $ cd isomorphic-react
 $ npm install
 ```
-NOTE: 执行`npm install`之前，先运行 `npm config set registry=http://registry.npm.taobao.org` 添加npm淘宝源，可以极大的加快npm包安装速度，减少因为网络原因带来的错误
+NOTE: 执行`npm install`之前，先运行 `npm config set registry=http://registry.npm.taobao.org` 添加npm淘宝源，可以极大的加快npm包安装速度，减少因为网络原因带来的错误，安装过程中假如出现node-sass下载xxxxx_binding.node失败情况，可以手动从[淘宝镜像](https://npm.taobao.org/mirrors/node-sass/)下载对应平台的.node文件，然后改名为`binding.node`复制到`/node_modules/node-sass/vendor/xxxxx/`目录下。
 
 ## 运行&打包
 
