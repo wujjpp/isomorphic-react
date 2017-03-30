@@ -89,7 +89,7 @@ export default Object.assign({}, shared, config)
 
 
 
-#### 从build目录运行
+#### 从打包结果目录运行程序
 ```shell
 $ npm run start:dist
 ```
