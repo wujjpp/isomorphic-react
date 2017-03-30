@@ -17,7 +17,7 @@ class Test extends Component {
 
     this.state = {
       count: 10,
-      content: 'hello'
+      content: 'isomorphic-react'
     }
 
     this.inc = this.inc.bind(this)
@@ -42,6 +42,7 @@ class Test extends Component {
       count: this.state.count + 1
     })
   }
+
   dec() {
     this.setState({
       count: this.state.count - 1
@@ -93,10 +94,16 @@ class Test extends Component {
         <div className="col-md-12">
           <h2>
             4. Two way data-binding
-            <small>Try to type any character in the following textbox</small>
+            <small>&nbsp;Try to type any character in the following textbox</small>
           </h2>
-          <input value={this.state.content} type="text" onChange={this.handleInput}/>
-          <span>{this.state.content}</span>
+          <div className="row">
+            <div className="form-group">
+              <div className="col-md-4"><input className="form-control" value={this.state.content} type="text" onChange={this.handleInput}/></div>
+              <div className="col-md-8">
+                <p className="form-control-static"><b>{this.state.content}</b></p>
+              </div>
+            </div>
+          </div>
         </div>
         <div className="col-md-12">
           <h2>5. Test integrate jquery plugin</h2>
@@ -119,7 +126,6 @@ class Test extends Component {
       </div>
     )
   }
-
 }
 
 export default Test
