@@ -87,11 +87,10 @@ export default {
     (context, request, callback) => {
       const isExternal =
         //the module name start with ('@' or 'a-z') character and contains 'a-z' or '/' or '.' or '-' or '0-9'
-        request.match(/^[@a-z][a-z/.\-0-9]*$/i)
+        request.match(/^[@a-z][a-z/.\-0-9]*$/i) &&
         //not stylesheet
-        &&
         !request.match(/\.(css|less|scss|sss)$/i) &&
-        !request.match(/react$/i) &&
+        //for performance issue, built react-dom/server to package, it can avoid server use un-minfied react-dom/server
         !request.match(/react-dom\/server$/i)
 
       //console.log(request, '------- ', Boolean(isExternal))
@@ -105,11 +104,7 @@ export default {
   },
 
   resolve: {
-    alias: {
-      //because of react-dom issue, we should built the following 2 module to main package
-      'react': 'react/dist/react.min',
-      'react-dom/server': 'react-dom/dist/react-dom-server.min'
-    },
+    alias: {},
     extensions: ['.js', '.jsx', '.json']
   },
 
