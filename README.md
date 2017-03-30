@@ -44,8 +44,17 @@ $ npm run build
 使用参数sit, uat或者prod进行打包，可以配置不同环境CDN路径， 没有使用CDN的情况下，请将`publicPath`改成 `/`
 例如：
 ```shell
+$ npm run build -- sit
+```
+
+```shell
+$ npm run build -- uat
+```
+
+```shell
 $ npm run build -- prod
 ```
+
 NOTE：`--` 与 `prod`之间有个空格
 
 通过修改 ___/tools/config.js___ 配置CDN
