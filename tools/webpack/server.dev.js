@@ -93,6 +93,7 @@ export default {
   },
   externals: [
     /^\.\/assets\.json$/,
+    /^\.\/env\.json$/,
 
     (context, request, callback) => {
       const isExternal =
@@ -102,9 +103,6 @@ export default {
         // not stylesheet
         &&
         !request.match(/\.(css|less|scss)$/i)
-        //environment config file, auto generated during build
-        ||
-        request.match(/^\.\/env\.json$/)
 
       //console.log(request + '--------' + Boolean(isExternal))
 

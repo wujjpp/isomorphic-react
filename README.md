@@ -40,8 +40,9 @@ $ npm start
 $ npm run build
 ```
 
-#### 构建prod环境包
-使用参数prod进行打包，可以配置CDN路径
+#### 构建sit/uat/prod环境包
+使用参数sit, uat或者prod进行打包，可以配置不同环境CDN路径， 没有使用CDN的情况下，请将`publicPath`改成 `/`
+例如：
 ```shell
 $ npm run build -- prod
 ```
@@ -57,10 +58,20 @@ const shared = {
 
 const config = {
   dev: {
+    //这里publicPath没有直接使用`/`, 是因为在开发环境下我们需要依赖sourceMap, 具体说明可以查看：https://github.com/webpack-contrib/style-loader#recommended-configuration
     publicPath: `http://127.0.0.1:${shared.frontPort}/`
   },
+  sit: {
+    //这里可以配置SIT环境CDN路径，打包完成后，将`/dist/public`目录复制到CDN，完成CDN加速
+    publicPath: '//sitcache.YourCDN.com/'
+  },
+  uat: {
+    //这里可以配置UAT环境CDN路径，打包完成后，将`/dist/public`目录复制到CDN，完成CDN加速
+    publicPath: '//uatcache.YourCDN.com/'
+  },
   prod: {
-    publicPath: '//cache.YourCDN.com/' //这里可以配置CDN路径，打包完成后，将`/dist/public`目录复制到CDN，完成CDN加速
+    //这里可以配置PROD环境CDN路径，打包完成后，将`/dist/public`目录复制到CDN，完成CDN加速
+    publicPath: '//cache.YourCDN.com/'
   }
 }
 

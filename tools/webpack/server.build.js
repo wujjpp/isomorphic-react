@@ -82,7 +82,7 @@ export default {
   },
   externals: [
     /^\.\/assets\.json$/,
-    /^\.\/env\.json$/
+    /^\.\/env\.json$/,
     (context, request, callback) => {
       const isExternal =
         //the module name start with ('@' or 'a-z') character and contains 'a-z' or '/' or '.' or '-' or '0-9'
