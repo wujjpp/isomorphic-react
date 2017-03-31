@@ -4,11 +4,7 @@
 import run from './run'
 import clean from './clean'
 import config from './config'
-import {
-  copyEnvConfig,
-  copyPublic,
-  copyPkg
-} from './copy'
+import { copyEnvConfig, copyPublic, copyPkg } from './copy'
 import buildClient from './build-client'
 import buildServer from './build-server'
 import {

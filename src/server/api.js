@@ -2,9 +2,7 @@
  * Created by Wu Jian Ping on 2017/2/8.
  */
 
-import {
-  Router
-} from 'express'
+import { Router } from 'express'
 
 //just for demo
 import readme from '../../README.md'

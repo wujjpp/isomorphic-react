@@ -16,6 +16,6 @@ export const readme = (state = initialState, action) => {
     case types.LOAD_README_ERROR:
       return action.error
     default:
-      return state;
+      return state
   }
 }

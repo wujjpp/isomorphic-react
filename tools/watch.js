@@ -3,21 +3,13 @@
  */
 import path from 'path';
 import chokidar from 'chokidar'
-import {
-  copyFile,
-  makeDir,
-  cleanDir
-} from './libs/fs'
+import { copyFile, makeDir, cleanDir } from './libs/fs'
 import config from './config'
 
-async function watch({
-  dest
-}) {
+async function watch({ dest }) {
   const watcher = chokidar.watch([
     'public/**/*',
-  ], {
-    ignoreInitial: true
-  })
+  ], { ignoreInitial: true })
 
   watcher.on('all', async(event, filePath) => {
     const start = new Date()

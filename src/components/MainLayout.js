@@ -8,7 +8,7 @@ class MainLayout extends Component {
   render() {
     return (
       <div>
-        <Nav />
+        <Nav/>
         <div>
           {this.props.children}
         </div>

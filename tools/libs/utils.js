@@ -19,10 +19,10 @@ export const logger = {
   info: (msg) => {
     console.log(`${format(new Date())}${chalk.blue(msg)}`)
   },
-  debug:(msg) =>{
+  debug: (msg) => {
     console.log(`${format(new Date())}${chalk.yellow(msg)}`)
   },
-  chalk:(msg) =>{
+  chalk: (msg) => {
     console.log(`${format(new Date())}${msg}`)
   }
 }

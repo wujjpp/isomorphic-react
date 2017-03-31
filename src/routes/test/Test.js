@@ -100,7 +100,9 @@ class Test extends Component {
             <div className="form-group">
               <div className="col-md-4"><input className="form-control" value={this.state.content} type="text" onChange={this.handleInput}/></div>
               <div className="col-md-8">
-                <p className="form-control-static"><b>{this.state.content}</b></p>
+                <p className="form-control-static">
+                  <b>{this.state.content}</b>
+                </p>
               </div>
             </div>
           </div>

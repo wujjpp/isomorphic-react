@@ -3,14 +3,8 @@
  */
 import webpack from 'webpack'
 import chalk from 'chalk'
-import {
-  getPublicPath,
-  logger,
-  getEnv
-} from './libs/utils'
-import {
-  writeFile
-} from './libs/fs'
+import { getPublicPath, logger, getEnv } from './libs/utils'
+import { writeFile } from './libs/fs'
 import webpackConfig from './webpack/server.build'
 import config from './config'
 

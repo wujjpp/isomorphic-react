@@ -9,6 +9,5 @@ export default {
     require.ensure([], (require) => {
       callback(null, require('./Test').default)
     })
-
   }
 }

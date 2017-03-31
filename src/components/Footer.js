@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 
-function Footer(){
+function Footer() {
   return (
     <footer className="footer">
       <div className="container">

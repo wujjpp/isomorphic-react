@@ -2,15 +2,11 @@
  * Created by Wu Jian Ping on 2017/3/30.
  */
 
-import {
-  writeFile,
-  makeDir,
-  copyDir
-} from './libs/fs'
+import { writeFile, makeDir, copyDir } from './libs/fs'
 import pkg from '../package.json'
 import config from './config'
 
-async function copyEnvConfig({env}) {
+async function copyEnvConfig({ env }) {
   await makeDir(config.dist)
   await writeFile(`${config.dist}/env.json`, JSON.stringify({
     env

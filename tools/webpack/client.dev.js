@@ -2,9 +2,7 @@
  * Created by Wu Jian Ping on 2017/2/6.
  */
 
-import webpack, {
-  HotModuleReplacementPlugin
-} from 'webpack'
+import webpack, { HotModuleReplacementPlugin } from 'webpack'
 import path from 'path'
 import config from '../config'
 

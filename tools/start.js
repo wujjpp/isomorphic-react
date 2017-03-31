@@ -9,19 +9,12 @@ import cp from 'child_process';
 
 import browserSync from 'browser-sync'
 
-import {
-  format,
-  getEnv,
-  getPublicPath
-} from './libs/utils'
+import { format, getEnv, getPublicPath } from './libs/utils'
 
 import run from './run'
 import clean from './clean'
 import watch from './watch'
-import {
-  copyPublic,
-  copyEnvConfig
-} from './copy'
+import { copyPublic, copyEnvConfig } from './copy'
 
 import config from './config'
 import devClientConfig from './webpack/client.dev'
@@ -30,13 +23,8 @@ import devServerConfig from './webpack/server.dev'
 async function start() {
   let env = getEnv()
   await run(clean)
-  await run(copyPublic, {
-    dest: config.dist
-  })
-  await run(copyEnvConfig, {
-    dest: config.dist,
-    env: env
-  })
+  await run(copyPublic, { dest: config.dist })
+  await run(copyEnvConfig, { dest: config.dist, env: env })
 
   devClientConfig.output.publicPath = devServerConfig.output.publicPath = getPublicPath('dev')
 
