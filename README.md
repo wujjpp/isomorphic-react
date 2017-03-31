@@ -238,7 +238,7 @@ $ npm install
 
     NOTE: tools/dev-tools/chrome 包含以上两个开发工具的安装包，用chrome打开即可安装
 
-## 不喜欢React？ 没关系，我们还有基于Marko版的
-[Marko Starter Kit](https://github.com/wujjpp/marko-starter-kit)， 目前Marko在服务端的渲染速度还是非常乐观的。
+## 不喜欢React？ 没关系，我们提供基于Marko版的[Marko Starter Kit](https://github.com/wujjpp/marko-starter-kit)
+Marko在服务端的渲染速度相对于React、Vue来说，还是非常乐观的。
 
 Made with ♥ by Wu Jian Ping
