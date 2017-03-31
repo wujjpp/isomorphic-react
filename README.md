@@ -3,7 +3,6 @@
 为什么需要同构系统，需要补脑的[这边走](http://nerds.airbnb.com/isomorphic-javascript-future-web-apps/)
 
 [![Build Status](https://travis-ci.org/wujjpp/isomorphic-react.svg?branch=master)](https://travis-ci.org/wujjpp/isomorphic-react)
-[![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/isomorphic-react/Lobby)
 
 ## 技术栈
 - [react](https://facebook.github.io/react/)
