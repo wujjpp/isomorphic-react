@@ -11,15 +11,14 @@
 - [react-router-redux](https://github.com/reactjs/react-router-redux)
 - [axios](https://github.com/mzabriskie/axios)
 - [redial](https://github.com/markdalgleish/redial)
+- [helmet](https://github.com/helmetjs/helmet)
 - [webpack](https://webpack.js.org/)
 - [babel](https://babeljs.io/)
 - [Browsersync](https://browsersync.io/docs)
 - [react-hot-loader](https://github.com/gaearon/react-hot-loader)
-- [helmet](https://github.com/helmetjs/helmet)
 - [postcss](https://github.com/postcss/postcss)
 - [less](http://lesscss.org/)
 - [sass](http://sass-lang.com/)
-
 
 ## 安装
 
@@ -236,7 +235,7 @@ $ npm install
 - 安装 [React Developer Tools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi?utm_source=chrome-app-launcher-info-dialog)
 - 安装 [Redux Dev Tools Extension](https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd?utm_source=chrome-app-launcher-info-dialog)
 
-    NOTE: tools/dev-tools/chrome 包含以上两个开发工具的安装包，用chrome打开即可安装
+    NOTE: `tools/dev-tools/chrome` 包含以上两个开发工具的安装包，用chrome打开即可安装
 
 ## 不喜欢React？ 没关系，我们还提供基于Marko版的
 [Marko Starter Kit](https://github.com/wujjpp/marko-starter-kit)，服务端的渲染速度相对于React、Vue来说，Marko还是非常乐观的。
