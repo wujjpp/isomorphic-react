@@ -33,7 +33,7 @@ class Test extends Component {
         $(this.el).find('.percent').text(Math.round(percent))
       }
     })
-    this.chart = $('.chart').data('easyPieChart');
+    this.chart = $('.chart').data('easyPieChart')
     this.chart.update(Math.random() * 200 - 100)
   }
 

@@ -1,3 +1,4 @@
+/* eslint-disable */
 export const TAG_NAMES = {
   HTML: "htmlAttributes",
   TITLE: "title",

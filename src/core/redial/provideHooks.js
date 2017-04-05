@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import propName from './propName';
 
 export default hooks => ComposedComponent => {

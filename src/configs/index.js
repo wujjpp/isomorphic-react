@@ -17,7 +17,7 @@ if (__BROWSER__) {
         break
       case 'uat':
         config = uatConfig
-        break;
+        break
       case 'prod':
         config = prodConfig
     }

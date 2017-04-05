@@ -9,4 +9,4 @@ import { readme } from './readme'
 export default combineReducers({
   routing: routerReducer,
   readme
-});
+})

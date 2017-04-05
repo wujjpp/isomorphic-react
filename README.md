@@ -91,6 +91,11 @@ export default Object.assign({}, shared, config)
 $ npm run start:dist
 ```
 
+#### eslint检查
+```shell
+$ npm run eslint
+```
+
 #### Clean
 ```shell
 $ npm run clean

@@ -10,7 +10,7 @@ import modifyResponse from './interceptors/response/modifyResponse'
 
 const client = axios.create({
   baseURL: config.apiRoot
-});
+})
 
 //setup interceptor for request
 const [setTokenResolve, setTokenReject] = setToken

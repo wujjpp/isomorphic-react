@@ -125,9 +125,9 @@ app.get('*', (req, res) => {
         })
         .catch((err2) => {
           // TODO: add error handler
-          console.log('============')
-          console.log(err2)
-          console.log('============')
+          console.log('============') // eslint-disable-line
+          console.log(err2) // eslint-disable-line
+          console.log('============') // eslint-disable-line
         })
     }
   })
@@ -137,9 +137,9 @@ const PORT = config.backendPort
 
 app.listen(PORT, (err) => {
   if (err) {
-    console.error(err)
+    console.error(err) // eslint-disable-line
   }
   else {
-    console.log(`Listening at http://localhost:${PORT}/`)
+    console.log(`Listening at http://localhost:${PORT}/`) // eslint-disable-line
   }
 })

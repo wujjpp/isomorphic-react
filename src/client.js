@@ -20,7 +20,7 @@ if (window.INITIAL_STATE) {
   delete window.INITIAL_STATE
 }
 
-const store = configureStore(initialState);
+const store = configureStore(initialState)
 // Create an enhanced history that syncs navigation events with the store
 const history = syncHistoryWithStore(browserHistory, store)
 //const history = browserHistory
@@ -50,15 +50,15 @@ const render = () => {
     match({routes, location}, (error, redirectLocation, renderProps) => {
       if (error) {
         // TODO: error handler is required
-        console.log(error)
+        console.log(error) // eslint-disable-line
       }
       else if (redirectLocation) {
         // TODO: redirection is required
-        console.log(redirectLocation)
+        console.log(redirectLocation) // eslint-disable-line
       }
       else if (!renderProps) {
         // TODO: Page Not Found
-        console.log('404')
+        console.log('404') // eslint-disable-line
       } else {
         const {components} = renderProps
         const locals = {
@@ -68,7 +68,7 @@ const render = () => {
           dispatch
         }
         trigger('init', components, locals)
-        trigger('defer', components, locals);
+        trigger('defer', components, locals)
       }
     })
   })

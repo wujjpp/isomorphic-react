@@ -12,7 +12,7 @@
     "analyse:client": "webpack-bundle-analyzer build/webpack-client-stats.json build/public",
     "analyse:server": "webpack-bundle-analyzer build/webpack-server-stats.json",
     "test": "mocha \"src/**/*.test.js\" --require babel-register --require test/setup.js",
-    "lint:js": "eslint src"
+    "eslint": "eslint src"
   },
   "repository": {
     "type": "git",

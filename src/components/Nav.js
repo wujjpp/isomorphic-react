@@ -3,7 +3,7 @@
  */
 
 import {Link} from 'react-router'
-import React, {Component} from 'react'
+import React from 'react'
 
 class NavBar extends React.Component {
   render() {

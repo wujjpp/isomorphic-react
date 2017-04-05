@@ -13,7 +13,7 @@ const hooks = {
   init: ({dispatch}) => {
     return dispatch(loadReadme())
   }
-};
+}
 
 class Home extends Component {
   constructor(props) {

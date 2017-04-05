@@ -10,13 +10,13 @@ import axios from 'axios'
 
 export default (initialState) => {
 
-  const middleware = [];
+  const middleware = []
   middleware.push(applyMiddleware(
     thunk.withExtraArgument({
       client,
       axios
     })
-  ));
+  ))
 
   if (__BROWSER__ && __DEV__) {
     middleware.push(window && window.__REDUX_DEVTOOLS_EXTENSION__ ? window.__REDUX_DEVTOOLS_EXTENSION__() : f => f)

@@ -1,8 +1,6 @@
 /**
  * Created by Wu Jian Ping on 2017/2/6.
  */
-
-import React from 'react'
 import App from '../components/App'
 
 const routes = {
