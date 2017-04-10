@@ -5,6 +5,8 @@ COPY ./build /usr/local/isomorphic-react/
 WORKDIR /usr/local/isomorphic-react/
 
 # Install Node.js dependencies
+# For chinese user, please unmark the follow code for improving building performance
+# RUM npm config set registry=http://registry.npm.taobao.org
 RUN npm install
 
 CMD [ "node", "server.js" ]
