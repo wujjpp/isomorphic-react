@@ -6,7 +6,7 @@ import { writeFile, makeDir, copyDir } from './libs/fs'
 import pkg from '../package.json'
 import config from './config'
 
-async function copyEnvConfig({ env }) {
+async function copyEnvConfigHelper({ env }) {
   await makeDir(config.dist)
   await writeFile(`${config.dist}/env.json`, JSON.stringify({
     env
@@ -15,10 +15,10 @@ async function copyEnvConfig({ env }) {
 
 export var copyEnvConfig = {
   name: 'generate env.json',
-  func: copyEnvConfig
+  func: copyEnvConfigHelper
 }
 
-async function copyPkg() {
+async function copyPkgHelper() {
 
   await makeDir(`${config.dist}`)
 
@@ -35,10 +35,10 @@ async function copyPkg() {
 
 export var copyPkg = {
   name: 'generate package.json',
-  func: copyPkg
+  func: copyPkgHelper
 }
 
-async function copyPublic() {
+async function copyPublicHelper() {
   await makeDir(config.dist)
   await copyDir('public', `${config.dist}/public`)
   await copyDir('src/views', `${config.dist}/views`)
@@ -46,5 +46,5 @@ async function copyPublic() {
 
 export var copyPublic = {
   name: 'copy assets in public folder',
-  func: copyPublic
+  func: copyPublicHelper
 }

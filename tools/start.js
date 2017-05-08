@@ -5,7 +5,7 @@ import webpack from 'webpack'
 import webpackDevMiddleware from 'webpack-dev-middleware'
 import webpackHotMiddleware from 'webpack-hot-middleware'
 
-import cp from 'child_process';
+import cp from 'child_process'
 
 import browserSync from 'browser-sync'
 
@@ -58,13 +58,13 @@ async function start() {
     let server = null
 
     const onStdOut = (data) => {
-      const match = data.toString('utf8').match(/Listening at http:\/\/(.*?)\//);
-      process.stdout.write(format(new Date()));
-      process.stdout.write(data);
+      const match = data.toString('utf8').match(/Listening at http:\/\/(.*?)\//)
+      process.stdout.write(format(new Date()))
+      process.stdout.write(data)
 
       if (match) {
-        server.stdout.removeListener('data', onStdOut);
-        server.stdout.on('data', x => process.stdout.write(x));
+        server.stdout.removeListener('data', onStdOut)
+        server.stdout.on('data', x => process.stdout.write(x))
       }
     }
 
@@ -78,9 +78,9 @@ async function start() {
           NODE_ENV: 'development'
         }, process.env),
         silent: false
-      });
+      })
 
-      server.stdout.on('data', onStdOut);
+      server.stdout.on('data', onStdOut)
       server.stderr.on('data', x => process.stderr.write(x))
     }
 
