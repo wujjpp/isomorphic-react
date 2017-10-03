@@ -244,7 +244,10 @@ $ npm install
 
     NOTE: `tools/dev-tools/chrome` 包含以上两个开发工具的安装包，用chrome打开即可安装
 
-## 不喜欢React？ 没关系，我们还提供基于Marko版的
-[Marko Starter Kit](https://github.com/wujjpp/marko-starter-kit)，服务端的渲染速度相对于React、Vue来说，Marko还是非常乐观的。
+## 不喜欢React？ 没关系，我们还提供基于Marko和Vue版的
+[isomorphic-marko](https://github.com/wujjpp/isomorphic-marko)，服务端的渲染速度相对于React、Vue来说，Marko还是非常乐观的。
+[isomorphic-vue](https://github.com/wujjpp/isomorphic-vue)
 
 Made with ♥ by Wu Jian Ping
+
+Feel free to contact me if you have any problem [830390@qq.com](mailto:830390@qq.com)
