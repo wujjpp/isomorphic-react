@@ -10,12 +10,6 @@
       "presets": [
         "react-optimize"
       ]
-    },
-    "development": {
-      "plugins": [
-        "transform-react-jsx-source",
-        "transform-react-jsx-self"
-      ]
     }
   }
 }
