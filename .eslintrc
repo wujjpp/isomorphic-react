@@ -17,25 +17,27 @@
   "plugins": [
     "react"
   ],
-  "rules": {
-    "import/extensions": "off",
-    "import/no-extraneous-dependencies": "off",
-    "react/jsx-filename-extension": "off",
-    "react/prefer-stateless-function": "off",
-    "react/jsx-uses-react": "error",
-    "react/jsx-uses-vars": "error",
-
-    "linebreak-style": [
-      "error",
-      "unix"
+  'rules': {
+    'indent': [
+      'error',
+      2
     ],
-    "quotes": [
-      "error",
-      "single"
+    'linebreak-style': [
+      'error',
+      'unix'
     ],
-    "semi": [
-      "error",
-      "never"
+    'quotes': [
+      1,
+      'single'
+    ],
+    'semi': [
+      1,
+      'never'
+    ],
+    'no-console': 1,
+    'space-before-function-paren': 0,
+    'no-multiple-empty-lines': [
+      'off'
     ]
   },
   "globals": {

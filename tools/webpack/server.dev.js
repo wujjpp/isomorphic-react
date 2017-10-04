@@ -1,11 +1,11 @@
 /**
  * Created by Wu Jian Ping on 2017/2/9.
  */
-import webpack, { HotModuleReplacementPlugin } from 'webpack'
+import webpack from 'webpack'
 import path from 'path'
 
 
-import marked from "marked"
+import marked from 'marked'
 import config from '../config'
 
 const renderer = new marked.Renderer()
@@ -16,27 +16,28 @@ export default {
   resolve: {
     extensions: ['.js', '.jsx', '.json']
   },
-  entry: './src/server.js',
+  entry: ['babel-polyfill', './src/server.js'],
 
   module: {
-    rules: [{
+    rules: [
+      {
         test: /\.(js|jsx)$/,
-        use: [{
-          loader: 'babel-loader',
-          options: {
-            cacheDirectory: './.cache/babel-loader'
+        use: [
+          {
+            loader: 'babel-loader',
+            options: {
+              cacheDirectory: './.cache/babel-loader'
+            }
           }
-        }],
+        ],
         include: [
           path.join(process.cwd(), 'src')
         ]
       },
-
       {
         test: /\.(scss|less|css)$/,
         use: ['null-loader']
       },
-
       {
         test: /\.(ico|gif|png|jpg|jpeg|webp)$/i,
         use: [{
@@ -47,7 +48,6 @@ export default {
           }
         }]
       },
-
       {
         test: /\.(mp4|webm|wav|mp3|m4a|aac|oga)$/i,
         use: [{
@@ -58,7 +58,6 @@ export default {
           }
         }]
       },
-
       {
         test: /\.(woff2?|ttf|eot|svg)$/i,
         use: [{
@@ -69,20 +68,18 @@ export default {
           }
         }]
       },
-
       {
         test: /\.md$/,
         use: [{
-            loader: "html-loader"
-          },
-          {
-            loader: "markdown-loader",
-            options: {
-              pedantic: true,
-              renderer
-            }
+          loader: 'html-loader'
+        },
+        {
+          loader: 'markdown-loader',
+          options: {
+            pedantic: true,
+            renderer
           }
-        ]
+        }]
       }
     ]
   },

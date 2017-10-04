@@ -32,107 +32,107 @@ export default {
 
   module: {
     rules: [{
-        test: /\.(js|jsx)$/i,
-        use: ['react-hot-loader', 'babel-loader'],
-        include: [
-          path.join(process.cwd(), 'src')
-        ]
-      },
+      test: /\.(js|jsx)$/i,
+      use: ['react-hot-loader', 'babel-loader'],
+      include: [
+        path.join(process.cwd(), 'src')
+      ]
+    },
 
-      {
-        test: /\.scss$/i,
-        use: ExtractTextPlugin.extract({
-          use: [{
-              loader: 'css-loader',
-              options: {
-                minimize: true
-              }
-            },
-            {
-              loader: 'postcss-loader',
-              options: {
-                config: './tools/postcss.config.js',
-              }
-            },
-            {
-              loader: 'sass-loader'
-            }
-          ],
-          fallback: 'style-loader'
-        })
-      },
-
-      {
-        test: /\.less$/i,
-        use: ExtractTextPlugin.extract({
-          use: [{
-              loader: 'css-loader',
-              options: {
-                minimize: true
-              }
-            },
-            {
-              loader: 'postcss-loader',
-              options: {
-                config: './tools/postcss.config.js',
-              }
-            },
-            {
-              loader: 'less-loader'
-            }
-          ],
-          fallback: 'style-loader'
-        })
-      },
-
-      {
-        test: /\.css$/i,
-        use: ExtractTextPlugin.extract({
-          use: [{
-              loader: 'css-loader',
-              options: {
-                minimize: true
-              }
-            },
-            {
-              loader: 'postcss-loader',
-              options: {
-                config: './tools/postcss.config.js',
-              }
-            }
-          ],
-          fallback: 'style-loader'
-        })
-      },
-
-      {
-        test: /\.(ico|gif|png|jpg|jpeg|webp)$/i,
+    {
+      test: /\.scss$/i,
+      use: ExtractTextPlugin.extract({
         use: [{
-          loader: 'file-loader',
+          loader: 'css-loader',
           options: {
-            name: '[name]-[hash:8].[ext]'
+            minimize: true
           }
-        }]
-      },
+        },
+        {
+          loader: 'postcss-loader',
+          options: {
+            config: './tools/postcss.config.js',
+          }
+        },
+        {
+          loader: 'sass-loader'
+        }
+        ],
+        fallback: 'style-loader'
+      })
+    },
 
-      {
-        test: /\.(mp4|webm|wav|mp3|m4a|aac|oga)$/i,
+    {
+      test: /\.less$/i,
+      use: ExtractTextPlugin.extract({
+        use: [{
+          loader: 'css-loader',
+          options: {
+            minimize: true
+          }
+        },
+        {
+          loader: 'postcss-loader',
+          options: {
+            config: './tools/postcss.config.js',
+          }
+        },
+        {
+          loader: 'less-loader'
+        }
+        ],
+        fallback: 'style-loader'
+      })
+    },
+
+    {
+      test: /\.css$/i,
+      use: ExtractTextPlugin.extract({
+        use: [{
+          loader: 'css-loader',
+          options: {
+            minimize: true
+          }
+        },
+        {
+          loader: 'postcss-loader',
+          options: {
+            config: './tools/postcss.config.js',
+          }
+        }
+        ],
+        fallback: 'style-loader'
+      })
+    },
+
+    {
+      test: /\.(ico|gif|png|jpg|jpeg|webp)$/i,
+      use: [{
         loader: 'file-loader',
         options: {
           name: '[name]-[hash:8].[ext]'
+        }
+      }]
+    },
 
-        },
+    {
+      test: /\.(mp4|webm|wav|mp3|m4a|aac|oga)$/i,
+      loader: 'file-loader',
+      options: {
+        name: '[name]-[hash:8].[ext]'
+
       },
+    },
 
-      {
-        test: /\.(woff2?|ttf|eot|svg)$/,
-        use: [{
-          loader: 'file-loader',
-          options: {
-            name: '[name]-[hash:8].[ext]'
-          }
-        }]
-      }
+    {
+      test: /\.(woff2?|ttf|eot|svg)$/,
+      use: [{
+        loader: 'file-loader',
+        options: {
+          name: '[name]-[hash:8].[ext]'
+        }
+      }]
+    }
     ]
   },
 

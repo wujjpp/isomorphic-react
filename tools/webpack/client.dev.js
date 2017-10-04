@@ -30,92 +30,92 @@ export default {
   },
 
   module: {
-    rules: [{
+    rules: [
+      {
         test: /\.(js|jsx)$/i,
         use: [{
-            loader: 'react-hot-loader'
-          },
-          {
-            loader: 'babel-loader',
-            options: {
-              cacheDirectory: './.cache/babel-loader'
-            }
+          loader: 'react-hot-loader'
+        },
+        {
+          loader: 'babel-loader',
+          options: {
+            cacheDirectory: './.cache/babel-loader'
           }
+        }
         ],
         include: [
           path.join(process.cwd(), 'src')
         ]
       },
-
       {
         test: /\.scss$/i,
         use: [{
-            loader: 'style-loader'
-          },
-          {
-            loader: 'css-loader',
-            options: {
-              sourceMap: true
-            }
-          },
-          {
-            loader: 'postcss-loader',
-            options: {
-              config: './tools/postcss.config.js',
-            }
-          },
-          {
-            loader: 'sass-loader',
-            options: {
-              sourceMap: true
-            }
+          loader: 'style-loader'
+        },
+        {
+          loader: 'css-loader',
+          options: {
+            sourceMap: true
           }
+        },
+        {
+          loader: 'postcss-loader',
+          options: {
+            config: './tools/postcss.config.js',
+          }
+        },
+        {
+          loader: 'sass-loader',
+          options: {
+            sourceMap: true
+          }
+        }
         ]
       },
 
       {
         test: /\.less$/i,
         use: [{
-            loader: 'style-loader'
-          },
-          {
-            loader: 'css-loader',
-            options: {
-              sourceMap: true
-            }
-          },
-          {
-            loader: 'postcss-loader',
-            options: {
-              config: './tools/postcss.config.js',
-            }
-          },
-          {
-            loader: 'less-loader',
-            options: {
-              sourceMap: true
-            }
+          loader: 'style-loader'
+        },
+        {
+          loader: 'css-loader',
+          options: {
+            sourceMap: true
           }
+        },
+        {
+          loader: 'postcss-loader',
+          options: {
+            config: './tools/postcss.config.js',
+          }
+        },
+        {
+          loader: 'less-loader',
+          options: {
+            sourceMap: true
+          }
+        }
         ]
       },
 
       {
         test: /\.css$/i,
         use: [{
-            loader: 'style-loader'
-          },
-          {
-            loader: 'css-loader',
-            options: {
-              sourceMap: true
-            }
-          },
-          {
-            loader: 'postcss-loader',
-            options: {
-              config: './tools/postcss.config.js',
-            }
+          loader: 'style-loader'
+        },
+        {
+          loader: 'css-loader',
+          options: {
+            sourceMap: true
           }
+        },
+        {
+          loader: 'postcss-loader',
+          options: {
+            config: './tools/postcss.config.js',
+          }
+        }
         ]
       },
 

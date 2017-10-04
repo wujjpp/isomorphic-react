@@ -4,18 +4,13 @@
 import webpack from 'webpack'
 import webpackDevMiddleware from 'webpack-dev-middleware'
 import webpackHotMiddleware from 'webpack-hot-middleware'
-
 import cp from 'child_process'
-
 import browserSync from 'browser-sync'
-
 import { format, getEnv, getPublicPath } from './libs/utils'
-
 import run from './run'
 import clean from './clean'
 import watch from './watch'
 import { copyPublic, copyEnvConfig } from './copy'
-
 import config from './config'
 import devClientConfig from './webpack/client.dev'
 import devServerConfig from './webpack/server.dev'

@@ -1,10 +1,10 @@
 /**
  * Created by Wu Jian Ping on 2017/2/17.
  */
-import path from 'path';
+import path from 'path'
 import chokidar from 'chokidar'
 import { copyFile, makeDir, cleanDir } from './libs/fs'
-import config from './config'
+import { logger } from './libs/utils'
 
 async function watch({ dest }) {
   const watcher = chokidar.watch([
@@ -16,20 +16,20 @@ async function watch({ dest }) {
     const src = path.relative('./', filePath)
     const dist = path.join(`${dest}/`, src.startsWith('src') ? path.relative('src', src) : src)
     switch (event) {
-      case 'add':
-      case 'change':
-        await makeDir(path.dirname(dist))
-        await copyFile(filePath, dist)
-        break
-      case 'unlink':
-      case 'unlinkDir':
-        cleanDir(dist, {
-          nosort: true,
-          dot: true
-        })
-        break
-      default:
-        return
+    case 'add':
+    case 'change':
+      await makeDir(path.dirname(dist))
+      await copyFile(filePath, dist)
+      break
+    case 'unlink':
+    case 'unlinkDir':
+      cleanDir(dist, {
+        nosort: true,
+        dot: true
+      })
+      break
+    default:
+      return
     }
     const end = new Date()
     const time = end.getTime() - start.getTime()

@@ -3,7 +3,6 @@
  */
 
 import { cleanDir } from './libs/fs'
-
 import config from './config'
 
 function clean() {

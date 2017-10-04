@@ -5,7 +5,6 @@
 import { logger } from './libs/utils'
 
 function run(task, options) {
-
   const start = new Date()
   logger.chalk(`Starting '${task.name}${options ? ` (${JSON.stringify(options)})` : ''}'...`)
   return task.func(options).then((resolution) => {
@@ -17,7 +16,7 @@ function run(task, options) {
 }
 
 if (require.main === module && process.argv.length > 2) {
-  delete require.cache[__filename]; // eslint-disable-line no-underscore-dangle
+  delete require.cache[__filename] // eslint-disable-line no-underscore-dangle
   const task = require(`./${process.argv[2]}.js`).default // eslint-disable-line import/no-dynamic-require
   run(task).catch((err) => {
     console.error(err.stack)

@@ -4,29 +4,28 @@
 
 import webpack from 'webpack'
 import path from 'path'
-import marked from "marked"
+import marked from 'marked'
 import config from '../config'
 const renderer = new marked.Renderer()
 
 export default {
   target: 'node',
   devtool: 'source-map',
-  entry: './src/server.js',
+  entry: ['babel-polyfill', './src/server.js'],
 
   module: {
-    rules: [{
+    rules: [
+      {
         test: /\.(js|jsx)$/i,
         use: ['babel-loader'],
         include: [
           path.join(process.cwd(), 'src')
         ]
       },
-
       {
         test: /\.(scss|less|css)$/,
         use: ['null-loader']
       },
-
       {
         test: /\.(ico|gif|png|jpg|jpeg|webp)$/i,
         use: [{
@@ -37,7 +36,6 @@ export default {
           }
         }]
       },
-
       {
         test: /\.(mp4|webm|wav|mp3|m4a|aac|oga)$/i,
         loader: 'file-loader',
@@ -46,7 +44,6 @@ export default {
           emitFile: false
         },
       },
-
       {
         test: /\.(woff2?|ttf|eot|svg)$/i,
         use: [{
@@ -57,19 +54,18 @@ export default {
           }
         }]
       },
-
       {
         test: /\.md$/,
         use: [{
-            loader: "html-loader"
-          },
-          {
-            loader: "markdown-loader",
-            options: {
-              pedantic: true,
-              renderer
-            }
+          loader: 'html-loader'
+        },
+        {
+          loader: 'markdown-loader',
+          options: {
+            pedantic: true,
+            renderer
           }
+        }
         ]
       }
     ]
@@ -124,7 +120,7 @@ export default {
     }),
 
     new webpack.BannerPlugin({
-      banner: "require('source-map-support').install();process.env.NODE_ENV='production';",
+      banner: 'require(\'source-map-support\').install();process.env.NODE_ENV=\'production\';',
       raw: true,
       entryOnly: true
     }),
