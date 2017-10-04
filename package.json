@@ -19,9 +19,10 @@
     "url": "https://github.com/wujjpp/isomorphic-react.git"
   },
   "keywords": [
-    "marko",
+    "react",
     "starter kit",
     "universal web",
+    "isomorphic web",
     "webpack",
     "express",
     "babel",
