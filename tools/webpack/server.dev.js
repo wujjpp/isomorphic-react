@@ -13,10 +13,13 @@ const renderer = new marked.Renderer()
 export default {
   target: 'node',
   devtool: 'eval-source-map',
+  mode: 'development',
+
   resolve: {
     extensions: ['.js', '.jsx', '.json']
   },
-  entry: ['babel-polyfill', './src/server.js'],
+
+  entry: ['@babel/polyfill', './src/server.js'],
 
   module: {
     rules: [
@@ -122,10 +125,6 @@ export default {
     new webpack.DefinePlugin({
       '__BROWSER__': false,
       '__DEV__': true
-    }),
-
-    new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify('development')
     }),
 
     new webpack.BannerPlugin({

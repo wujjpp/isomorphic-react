@@ -10,13 +10,16 @@ import config from '../config'
 export default {
   target: 'web',
   devtool: 'eval-source-map',
+  mode: 'development',
+
   resolve: {
-    extensions: ['.js', '.jsx', '.json']
+    extensions: ['.js', '.jsx', '.json'],
+    unsafeCache: true
   },
 
   entry: {
     script: [
-      'babel-polyfill',
+      '@babel/polyfill',
       'webpack-hot-middleware/client?reload=true', //reload - Set to true to auto-reload the page when webpack gets stuck
       './src/client.js'
     ]
@@ -30,18 +33,25 @@ export default {
   },
 
   module: {
+
+    noParse: function (content) {
+      return /lodash/.test(content)
+    },
+    unsafeCache: true,
+
     rules: [
       {
         test: /\.(js|jsx)$/i,
-        use: [{
-          loader: 'react-hot-loader'
-        },
-        {
-          loader: 'babel-loader',
-          options: {
-            cacheDirectory: './.cache/babel-loader'
+        use: [
+          {
+            loader: 'react-hot-loader'
+          },
+          {
+            loader: 'babel-loader',
+            options: {
+              cacheDirectory: './.cache/babel-loader'
+            }
           }
-        }
         ],
         include: [
           path.join(process.cwd(), 'src')
@@ -49,53 +59,61 @@ export default {
       },
       {
         test: /\.scss$/i,
-        use: [{
-          loader: 'style-loader'
-        },
-        {
-          loader: 'css-loader',
-          options: {
-            sourceMap: true
+        use: [
+          {
+            loader: 'style-loader'
+          },
+          {
+            loader: 'css-loader',
+            options: {
+              sourceMap: true
+            }
+          },
+          {
+            loader: 'postcss-loader',
+            options: {
+              config: {
+                path: './tools/postcss.config.js'
+              },
+              sourceMap: 'inline'
+            }
+          },
+          {
+            loader: 'sass-loader',
+            options: {
+              sourceMap: true
+            }
           }
-        },
-        {
-          loader: 'postcss-loader',
-          options: {
-            config: './tools/postcss.config.js',
-          }
-        },
-        {
-          loader: 'sass-loader',
-          options: {
-            sourceMap: true
-          }
-        }
         ]
       },
 
       {
         test: /\.less$/i,
-        use: [{
-          loader: 'style-loader'
-        },
-        {
-          loader: 'css-loader',
-          options: {
-            sourceMap: true
+        use: [
+          {
+            loader: 'style-loader'
+          },
+          {
+            loader: 'css-loader',
+            options: {
+              sourceMap: true
+            }
+          },
+          {
+            loader: 'postcss-loader',
+            options: {
+              config: {
+                path: './tools/postcss.config.js'
+              },
+              sourceMap: 'inline'
+            }
+          },
+          {
+            loader: 'less-loader',
+            options: {
+              sourceMap: true
+            }
           }
-        },
-        {
-          loader: 'postcss-loader',
-          options: {
-            config: './tools/postcss.config.js',
-          }
-        },
-        {
-          loader: 'less-loader',
-          options: {
-            sourceMap: true
-          }
-        }
         ]
       },
 
@@ -113,7 +131,10 @@ export default {
         {
           loader: 'postcss-loader',
           options: {
-            config: './tools/postcss.config.js',
+            config: {
+              path: './tools/postcss.config.js'
+            },
+            sourceMap: 'inline'
           }
         }
         ]
@@ -155,15 +176,14 @@ export default {
       '__BROWSER__': true,
       '__DEV__': true
     }),
-    new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify('development')
-    }),
+
     new webpack.ProvidePlugin({
       $: 'jquery',
       jquery: 'jquery',
       'window.jQuery': 'jquery',
       jQuery: 'jquery'
     }),
+
     new HotModuleReplacementPlugin(),
     new webpack.NoEmitOnErrorsPlugin()
   ],
