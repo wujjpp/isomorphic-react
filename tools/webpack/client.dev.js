@@ -44,9 +44,6 @@ export default {
         test: /\.(js|jsx)$/i,
         use: [
           {
-            loader: 'react-hot-loader'
-          },
-          {
             loader: 'babel-loader',
             options: {
               cacheDirectory: './.cache/babel-loader'

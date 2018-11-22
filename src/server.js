@@ -4,15 +4,15 @@
 import express from 'express'
 import path from 'path'
 import React from 'react'
-import reactHelmet from './core/react-helmet'
+// import reactHelmet from './core/react-helmet'
 import ReactDOMServer from 'react-dom/server'
 //import ReactDOMStream from "react-dom-stream/server";
-import {match, RouterContext, createMemoryHistory} from 'react-router'
-import {Provider} from 'react-redux'
+import { match, RouterContext, createMemoryHistory } from 'react-router'
+import { Provider } from 'react-redux'
 import compression from 'compression'
 import helmet from 'helmet'
 import cors from 'cors'
-import {trigger} from './core/redial'
+import { trigger } from './core/redial'
 import configureStore from './store/configureStore'
 import routes from './routes'
 import Html from './components/Html'
@@ -50,7 +50,7 @@ app.get('*', (req, res) => {
 
   const history = createMemoryHistory(req.originalUrl)
 
-  match({routes, history}, (err, redirect, renderProps) => {
+  match({ routes, history }, (err, redirect, renderProps) => {
     if (err) {
 
       res.status(500).send(err.message)
@@ -66,16 +66,16 @@ app.get('*', (req, res) => {
     } else {
       const store = configureStore()
 
-      const {components} = renderProps
+      const { components } = renderProps
 
-      const {dispatch, getState} = store
+      const { dispatch, getState } = store
 
       const data = {
         scripts: [
           (assets && assets.script && assets.script.js) || 'script.js'
         ],
         stylesheets: [
-          {rel: 'stylesheet', href: (assets && assets.script && assets.script.css)}
+          { rel: 'stylesheet', href: (assets && assets.script && assets.script.css) }
         ],
         env: require('./env.json').env // eslint-disable-line import/no-unresolved
       }
@@ -94,7 +94,7 @@ app.get('*', (req, res) => {
           if (!__DEV__) {
             data.children = ReactDOMServer.renderToString(
               <Provider store={store}>
-                <RouterContext {...renderProps}/>
+                <RouterContext {...renderProps} />
               </Provider>
             )
           }
@@ -107,7 +107,7 @@ app.get('*', (req, res) => {
             )
           }
 
-          data.helmet = reactHelmet.rewind()
+          // data.helmet = reactHelmet.rewind()
           const html = ReactDOMServer.renderToStaticMarkup(<Html {...data} />)
           res.send(`<!doctype html>${html}`)
 

@@ -1,14 +1,14 @@
 /**
  * Created by Wu Jian Ping on 2017/2/15.
  */
-import React, {Component} from 'react'
+import React from 'react'
 import Nav from './Nav'
 
-class MainLayout extends Component {
+class MainLayout extends React.Component {
   render() {
     return (
       <div>
-        <Nav/>
+        <Nav />
         <div>
           {this.props.children}
         </div>

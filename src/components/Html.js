@@ -2,22 +2,13 @@
  * Created by Wu Jian Ping on 2017/2/7.
  */
 
-import React, {PropTypes, Component} from 'react'
+import React from 'react'
+import PropTypes from 'prop-types'
 //import ReactDOMStream from "react-dom-stream/server";
 
-class Html extends Component {
-  static propTypes = {
-    children: PropTypes.string.isRequired,
-    //children: PropTypes.object.isRequired,
-    scripts: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
-    initialState: PropTypes.object, // eslint-disable-line
-    helmet: PropTypes.object, // eslint-disable-line
-    stylesheets: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
-    env: PropTypes.string.isRequired
-  };
+class Html extends React.Component {
 
   render() {
-
     const {
       children,
       initialState,
@@ -30,23 +21,33 @@ class Html extends Component {
     return (
       <html lang="en">
         <head>
-          <meta httpEquiv="Content-Type" content="text/html; charset=utf-8"/>
-          <meta httpEquiv="X-UA-Compatible" content="IE=edge"/>
-          <meta name="viewport" content="width=device-width, initial-scale=1"/>
+          <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
+          <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
+          <meta name="viewport" content="width=device-width, initial-scale=1" />
           {helmet.title.toComponent()}
           {helmet.meta.toComponent()}
           {helmet.link.toComponent()}
-          {process.env.NODE_ENV === 'production' && stylesheets && stylesheets.map(css => <link {...css}/>)}
+          {process.env.NODE_ENV === 'production' && stylesheets && stylesheets.map(css => <link {...css} />)}
         </head>
         <body>
-          <div id="app" dangerouslySetInnerHTML={{__html: children}}/>
-           {/*{<div className="container" id="app" dangerouslySetInnerHTML={{__html: __DEV__ ? ReactDOMStream.renderToStaticMarkup(children) : ReactDOMStream.renderToString(children)}}/>}*/}
-          {initialState && (<script dangerouslySetInnerHTML={{__html: `window.INITIAL_STATE=${JSON.stringify(initialState)};window.__ENV__='${env}'`}}/>)}
-          {scripts && scripts.map(script => <script key={script} src={script}/>)}
+          <div id="app" dangerouslySetInnerHTML={{ __html: children }} />
+          {/*{<div className="container" id="app" dangerouslySetInnerHTML={{__html: __DEV__ ? ReactDOMStream.renderToStaticMarkup(children) : ReactDOMStream.renderToString(children)}}/>}*/}
+          {initialState && (<script dangerouslySetInnerHTML={{ __html: `window.INITIAL_STATE=${JSON.stringify(initialState)};window.__ENV__='${env}'` }} />)}
+          {scripts && scripts.map(script => <script key={script} src={script} />)}
         </body>
       </html>
     )
   }
+}
+
+Html.PropTypes = {
+  children: PropTypes.string.isRequired,
+  //children: PropTypes.object.isRequired,
+  scripts: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+  initialState: PropTypes.object, // eslint-disable-line
+  helmet: PropTypes.object, // eslint-disable-line
+  stylesheets: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
+  env: PropTypes.string.isRequired
 }
 
 export default Html
