@@ -1,18 +1,14 @@
-/**
- * Created by Wu Jian Ping on 2017/2/6.
- */
-import App from '../components/App'
+import Home from './home'
+import About from './about'
 
-const routes = {
-  path: '/',
-  component: App,
-  indexRoute: {
-    onEnter: (nextState, replace) => replace('/home')
+export default [
+  {
+    path: '/',
+    exact: true,
+    component: Home
   },
-  childRoutes: [
-    require('./home').default,
-    require('./test').default
-  ]
-}
-
-export default routes
+  {
+    path: '/about',
+    component: About
+  }
+]

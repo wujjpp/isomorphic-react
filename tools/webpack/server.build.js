@@ -11,7 +11,22 @@ const renderer = new marked.Renderer()
 export default {
   target: 'node',
   devtool: 'source-map',
-  entry: ['babel-polyfill', './src/server.js'],
+
+  mode: 'production',
+
+  optimization: {
+    minimize: true
+  },
+
+
+  entry: ['@babel/polyfill', './src/server.js'],
+
+  output: {
+    path: path.join(process.cwd(), config.dist),
+    filename: 'server.js',
+    libraryTarget: 'commonjs2',
+    publicPath: '/'
+  },
 
   module: {
     rules: [
@@ -71,12 +86,6 @@ export default {
     ]
   },
 
-  output: {
-    path: path.join(process.cwd(), config.dist),
-    filename: 'server.js',
-    libraryTarget: 'commonjs2',
-    publicPath: '/'
-  },
   externals: [
     /^\.\/assets\.json$/,
     /^\.\/env\.json$/,
@@ -115,10 +124,6 @@ export default {
       '__DEV__': false
     }),
 
-    new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify('production')
-    }),
-
     new webpack.BannerPlugin({
       banner: 'require(\'source-map-support\').install();process.env.NODE_ENV=\'production\';',
       raw: true,
@@ -127,15 +132,15 @@ export default {
 
     new webpack.optimize.LimitChunkCountPlugin({
       maxChunks: 1
-    }),
-    new webpack.optimize.UglifyJsPlugin({
-      sourceMap: true,
-      comments: false,
-      compress: {
-        warnings: false
-      },
-      /*mangle: false*/
     })
+    // new webpack.optimize.UglifyJsPlugin({
+    //   sourceMap: true,
+    //   comments: false,
+    //   compress: {
+    //     warnings: false
+    //   },
+    //   /*mangle: false*/
+    // })
   ],
 
   stats: {

@@ -7,10 +7,25 @@ import webpack from 'webpack'
 import AssetsPlugin from 'assets-webpack-plugin'
 import path from 'path'
 import config from '../config'
-import ExtractTextPlugin from 'extract-text-webpack-plugin'
+import MiniCssExtractPlugin from 'mini-css-extract-plugin'
+import UglifyJsPlugin from 'uglifyjs-webpack-plugin'
+import OptimizeCSSAssetsPlugin from 'optimize-css-assets-webpack-plugin'
 
 export default {
   target: 'web',
+
+  mode: 'production',
+
+  optimization: {
+    minimizer: [
+      new UglifyJsPlugin({
+        cache: true,
+        parallel: true,
+        sourceMap: true // set to true if you want JS source maps
+      }),
+      new OptimizeCSSAssetsPlugin({})
+    ]
+  },
 
   resolve: {
     extensions: ['.js', '.jsx', '.json']
@@ -18,7 +33,7 @@ export default {
 
   entry: {
     script: [
-      'babel-polyfill',
+      '@babel/polyfill',
       './src/client.js'
     ]
   },
@@ -33,7 +48,7 @@ export default {
   module: {
     rules: [{
       test: /\.(js|jsx)$/i,
-      use: ['react-hot-loader', 'babel-loader'],
+      use: ['babel-loader'],
       include: [
         path.join(process.cwd(), 'src')
       ]
@@ -41,68 +56,68 @@ export default {
 
     {
       test: /\.scss$/i,
-      use: ExtractTextPlugin.extract({
-        use: [{
+      use: [
+        {
+          loader: MiniCssExtractPlugin.loader
+        },
+        {
           loader: 'css-loader',
-          options: {
-            minimize: true
-          }
         },
         {
           loader: 'postcss-loader',
           options: {
-            config: './tools/postcss.config.js',
+            config: {
+              path: './tools/'
+            }
           }
         },
         {
           loader: 'sass-loader'
         }
-        ],
-        fallback: 'style-loader'
-      })
+      ]
     },
 
     {
       test: /\.less$/i,
-      use: ExtractTextPlugin.extract({
-        use: [{
-          loader: 'css-loader',
-          options: {
-            minimize: true
-          }
+      use: [
+        {
+          loader: MiniCssExtractPlugin.loader
+        },
+        {
+          loader: 'css-loader'
         },
         {
           loader: 'postcss-loader',
           options: {
-            config: './tools/postcss.config.js',
+            config: {
+              path: './tools/'
+            }
           }
         },
         {
           loader: 'less-loader'
         }
-        ],
-        fallback: 'style-loader'
-      })
+      ]
     },
 
     {
       test: /\.css$/i,
-      use: ExtractTextPlugin.extract({
-        use: [{
-          loader: 'css-loader',
-          options: {
-            minimize: true
-          }
+      use: [
+        {
+          loader: MiniCssExtractPlugin.loader
+        },
+        {
+          loader: 'css-loader'
         },
         {
           loader: 'postcss-loader',
           options: {
-            config: './tools/postcss.config.js',
+            config: {
+              path: './tools/'
+            }
           }
         }
-        ],
-        fallback: 'style-loader'
-      })
+      ]
     },
 
     {
@@ -142,32 +157,35 @@ export default {
       '__DEV__': false
     }),
 
-    new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify('production')
-    }),
     new webpack.ProvidePlugin({
       $: 'jquery',
       jquery: 'jquery',
       'window.jQuery': 'jquery',
       jQuery: 'jquery'
     }),
-    new ExtractTextPlugin({
-      filename: 'style.[hash:8].css',
-      allChunks: true
+    // new ExtractTextPlugin({
+    //   filename: 'style.[hash:8].css',
+    //   allChunks: true
+    // }),
+    new MiniCssExtractPlugin({
+      // Options similar to the same options in webpackOptions.output
+      // both options are optional
+      filename: '[contenthash].css',
+      chunkFilename: '[id].css'
     }),
     new webpack.optimize.AggressiveMergingPlugin(),
     new AssetsPlugin({
       filename: 'assets.json',
       path: path.join(process.cwd(), config.dist),
       prettyPrint: true
-    }),
-    new webpack.optimize.UglifyJsPlugin({
-      comments: false,
-      compress: {
-        warnings: false,
-        drop_console: true //remove all console
-      }
     })
+    // new webpack.optimize.UglifyJsPlugin({
+    //   comments: false,
+    //   compress: {
+    //     warnings: false,
+    //     drop_console: true //remove all console
+    //   }
+    // })
   ],
 
   stats: {

@@ -4,16 +4,13 @@
 
 import React from 'react'
 import PropTypes from 'prop-types'
-//import ReactDOMStream from "react-dom-stream/server";
 
 class Html extends React.Component {
-
   render() {
     const {
       children,
       initialState,
       scripts,
-      helmet,
       stylesheets,
       env
     } = this.props
@@ -24,9 +21,6 @@ class Html extends React.Component {
           <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
           <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
           <meta name="viewport" content="width=device-width, initial-scale=1" />
-          {helmet.title.toComponent()}
-          {helmet.meta.toComponent()}
-          {helmet.link.toComponent()}
           {process.env.NODE_ENV === 'production' && stylesheets && stylesheets.map(css => <link {...css} />)}
         </head>
         <body>
@@ -40,12 +34,10 @@ class Html extends React.Component {
   }
 }
 
-Html.PropTypes = {
+Html.propTypes = {
   children: PropTypes.string.isRequired,
-  //children: PropTypes.object.isRequired,
   scripts: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
-  initialState: PropTypes.object, // eslint-disable-line
-  helmet: PropTypes.object, // eslint-disable-line
+  initialState: PropTypes.object,
   stylesheets: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
   env: PropTypes.string.isRequired
 }

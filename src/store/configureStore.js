@@ -4,31 +4,44 @@
 
 import { createStore, applyMiddleware, compose } from 'redux'
 import thunk from 'redux-thunk'
-import reducers from '../reducers'
+import createRootReducer from './reducers'
 import client from '../core/request'
 import axios from 'axios'
+import { createBrowserHistory } from 'history'
+import { routerMiddleware } from 'connected-react-router'
 
-export default (initialState) => {
+export const history = createBrowserHistory()
 
-  const middleware = []
-  middleware.push(applyMiddleware(
+export default initialState => {
+
+  const middlewares = []
+
+  middlewares.push(applyMiddleware(
     thunk.withExtraArgument({
       client,
       axios
     })
   ))
 
+  middlewares.push(applyMiddleware(
+    routerMiddleware(history)
+  ))
+
   if (__BROWSER__ && __DEV__) {
-    middleware.push(window && window.__REDUX_DEVTOOLS_EXTENSION__ ? window.__REDUX_DEVTOOLS_EXTENSION__() : f => f)
+    middlewares.push(window && window.__REDUX_DEVTOOLS_EXTENSION__ ? window.__REDUX_DEVTOOLS_EXTENSION__() : f => f)
   }
 
-  let store = createStore(reducers, initialState, compose(...middleware))
+  const store = createStore(
+    createRootReducer(history),
+    initialState,
+    compose(...middlewares),
+  )
 
   //HMR
   if (module.hot) {
-    module.hot.accept('../reducers', () => {
-      const nextRootReducer = require('../reducers').default
-      store.replaceReducer(nextRootReducer)
+    module.hot.accept('./reducers', () => {
+      const nextRootReducer = require('./reducers')
+      store.replaceReducer(nextRootReducer(history))
     })
   }
 

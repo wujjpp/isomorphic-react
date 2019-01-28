@@ -3,10 +3,10 @@
  */
 
 import { combineReducers } from 'redux'
-import { routerReducer } from 'react-router-redux'
+import { connectRouter } from 'connected-react-router'
 import { readme } from './readme'
 
-export default combineReducers({
-  routing: routerReducer,
+export default history => combineReducers({
+  router: connectRouter(history),
   readme
 })

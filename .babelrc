@@ -1,7 +1,7 @@
 {
   "presets": [
-    "@babel/preset-env",
-    "@babel/preset-react"
+    "@babel/env",
+    "@babel/react"
   ],
   "plugins": [
     "add-module-exports",
@@ -52,12 +52,5 @@
       }
     ],
     "@babel/plugin-proposal-json-strings"
-  ],
-  "env": {
-    "production": {
-      "presets": [
-        "react-optimize"
-      ]
-    }
-  }
+  ]
 }

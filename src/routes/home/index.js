@@ -1,13 +1,16 @@
-/**
- * Created by Wu Jian Ping on 2017/2/7.
- */
-if (typeof require.ensure !== 'function') require.ensure = (d, c) => c(require)
+import React, { Component } from 'react'
 
-export default {
-  path: '/home',
-  getComponent(nextState, callback) {
-    require.ensure([], (require) => {
-      callback(null, require('./containers/Home').default)
-    })
+export default class Home extends Component {
+  handleClick() {
+    console.log('aaaaaaaaaaaaaaaaaa') // eslint-disable-line
+    alert('clicked')
+  }
+
+  render() {
+    return <div>
+      <h2>Home Page</h2>
+      <button onClick={() => this.handleClick()}>Test</button>
+    </div>
+
   }
 }
