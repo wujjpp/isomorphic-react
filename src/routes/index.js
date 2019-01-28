@@ -1,5 +1,6 @@
 import Home from './home'
 import About from './about'
+import NotFound from './NotFound'
 
 export default [
   {
@@ -10,5 +11,9 @@ export default [
   {
     path: '/about',
     component: About
+  },
+  {
+    path: '*',
+    component: NotFound
   }
 ]

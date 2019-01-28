@@ -121,7 +121,7 @@ export default {
   plugins: [
     new webpack.DefinePlugin({
       '__BROWSER__': false,
-      '__DEV__': false
+      '__BUILD__': true
     }),
 
     new webpack.BannerPlugin({

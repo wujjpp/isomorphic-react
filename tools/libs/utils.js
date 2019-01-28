@@ -4,6 +4,7 @@
 
 import chalk from 'chalk'
 import config from '../config'
+import webpack from 'webpack'
 
 export const format = (time) => {
   return time.toTimeString().replace(/.*(\d{2}:\d{2}:\d{2}).*/, '[$1] ')
@@ -47,3 +48,14 @@ export const getEnv = () => {
 export const getPublicPath = (env) => {
   return config[env].publicPath
 }
+
+export const createEnvDefinePlugin = (env) => {
+  return new webpack.DefinePlugin({
+    '__DEV__': env === 'dev',
+    '__SIT__': env === 'sit',
+    '__UAT__': env === 'uat',
+    '__PROD__': env === 'prod'
+  })
+}
+
+

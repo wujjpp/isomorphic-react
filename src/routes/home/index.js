@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
-
+import NewsFeed from './NewsFeed'
 export default class Home extends Component {
   handleClick() {
-    console.log('aaaaaaaaaaaaaaaaaa') // eslint-disable-line
     alert('clicked')
   }
 
@@ -10,6 +9,7 @@ export default class Home extends Component {
     return <div>
       <h2>Home Page</h2>
       <button onClick={() => this.handleClick()}>Test</button>
+      <NewsFeed />
     </div>
 
   }

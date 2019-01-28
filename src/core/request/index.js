@@ -3,7 +3,7 @@
  */
 
 import axios from 'axios'
-import config from '../../configs'
+import config from '../../config/client'
 
 import setToken from './interceptors/request/setToken'
 import modifyResponse from './interceptors/response/modifyResponse'

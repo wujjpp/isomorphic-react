@@ -25,7 +25,6 @@ class Html extends React.Component {
         </head>
         <body>
           <div id="app" dangerouslySetInnerHTML={{ __html: children }} />
-          {/*{<div className="container" id="app" dangerouslySetInnerHTML={{__html: __DEV__ ? ReactDOMStream.renderToStaticMarkup(children) : ReactDOMStream.renderToString(children)}}/>}*/}
           {initialState && (<script dangerouslySetInnerHTML={{ __html: `window.INITIAL_STATE=${JSON.stringify(initialState)};window.__ENV__='${env}'` }} />)}
           {scripts && scripts.map(script => <script key={script} src={script} />)}
         </body>

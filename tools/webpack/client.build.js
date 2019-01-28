@@ -154,7 +154,7 @@ export default {
   plugins: [
     new webpack.DefinePlugin({
       '__BROWSER__': true,
-      '__DEV__': false
+      '__BUILD__': true
     }),
 
     new webpack.ProvidePlugin({

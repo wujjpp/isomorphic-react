@@ -6,7 +6,7 @@ import webpackDevMiddleware from 'webpack-dev-middleware'
 import webpackHotMiddleware from 'webpack-hot-middleware'
 import cp from 'child_process'
 import browserSync from 'browser-sync'
-import { format, getEnv, getPublicPath } from './libs/utils'
+import { format, getEnv, getPublicPath, createEnvDefinePlugin } from './libs/utils'
 import run from './run'
 import clean from './clean'
 import watch from './watch'
@@ -23,7 +23,14 @@ async function start() {
 
   devClientConfig.output.publicPath = devServerConfig.output.publicPath = getPublicPath('dev')
 
+
+
   await new Promise((resolve) => {
+    // setup client env config
+    devClientConfig.plugins.push(createEnvDefinePlugin('dev'))
+    // setup server env config
+    devServerConfig.plugins.push(createEnvDefinePlugin('dev'))
+
     const serverCompiler = webpack(devServerConfig)
     const clientCompiler = webpack(devClientConfig)
 
@@ -63,7 +70,7 @@ async function start() {
       }
     }
 
-    const startServer = function() {
+    const startServer = function () {
       if (server) {
         server.kill('SIGTERM')
       }
@@ -82,7 +89,7 @@ async function start() {
     serverCompiler.watch({
       aggregateTimeout: 300,
       poll: true
-    }, function(err, stats) {
+    }, function (err, stats) {
 
       console.log(stats.toString(devServerConfig.stats))
 

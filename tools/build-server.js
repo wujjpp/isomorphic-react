@@ -3,7 +3,7 @@
  */
 import webpack from 'webpack'
 import chalk from 'chalk'
-import { getPublicPath, logger, getEnv } from './libs/utils'
+import { getPublicPath, logger, getEnv, createEnvDefinePlugin } from './libs/utils'
 import { writeFile } from './libs/fs'
 import webpackConfig from './webpack/server.build'
 import config from './config'
@@ -13,6 +13,8 @@ async function build(env) {
   webpackConfig.output.publicPath = (env === 'dev' ? '/' : getPublicPath(env))
 
   logger.chalk(`${chalk.blue('Server public path: ')}${webpackConfig.output.publicPath}`)
+
+  webpackConfig.plugins.push(createEnvDefinePlugin(env))
 
   return new Promise((resolve, reject) => {
     webpack(webpackConfig, (err, stats) => {
