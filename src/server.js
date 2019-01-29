@@ -6,13 +6,16 @@ import path from 'path'
 import React from 'react'
 import ReactDOMServer from 'react-dom/server'
 import { StaticRouter } from 'react-router'
+import { Provider } from 'react-redux'
 import compression from 'compression'
 import helmet from 'helmet'
 import cors from 'cors'
 
 import config from '../settings'
-import App from './App'
 import Html from './Html'
+import configureStore from './store/configureStore'
+import { renderRoutes } from 'react-router-config'
+import routes from './routes'
 
 let assets = null
 const app = express()
@@ -38,14 +41,28 @@ if (process.env.NODE_ENV === 'production') {
 // static folder
 app.use(express.static(path.join(__dirname, 'public')))
 
+app.get('/api/loadReadme', (req, res) => {
+  res.json({
+    name: `Jack - ${new Date().getTime()}`
+  })
+})
+
 app.get('*', (req, res) => {
+
+  const store = configureStore()
+
+  const { url } = req
+
+  const { getState } = store
 
   const context = {}
 
   const children = ReactDOMServer.renderToString(
-    <StaticRouter location={req.url} context={context}>
-      <App />
-    </StaticRouter>
+    <Provider store={store}>
+      <StaticRouter location={url} context={context}>
+        {renderRoutes(routes)}
+      </StaticRouter>
+    </Provider>
   )
 
   const data = {
@@ -56,6 +73,7 @@ app.get('*', (req, res) => {
     stylesheets: [
       { rel: 'stylesheet', href: (assets && assets.script && assets.script.css) }
     ],
+    initialState: getState(),
     env: require('./env.json').env // eslint-disable-line import/no-unresolved
   }
 

@@ -10,10 +10,13 @@ let initialState = {}
 export const readme = (state = initialState, action) => {
   switch (action.type) {
     case types.LOAD_README_REQUEST:
+      console.log('requesting')
       return state
     case types.LOAD_README_SUCCESS:
+      console.log('success')
       return action.payload
     case types.LOAD_README_ERROR:
+      console.log('error')
       return action.error
     default:
       return state

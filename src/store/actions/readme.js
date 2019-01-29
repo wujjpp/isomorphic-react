@@ -4,7 +4,7 @@
 
 import * as types from '../constants/readme'
 
-export function loadReadme() {
+export default function loadReadme() {
   return (dispatch, getState, { client }) => {
 
     dispatch({ type: types.LOAD_README_REQUEST })

@@ -1,11 +1,5 @@
-import React, { Component } from 'react'
+import React from 'react'
 
-export default class About extends Component {
-  constructor() {
-    super()
-  }
-
-  render() {
-    return (<h2>About Page</h2>)
-  }
+export default () => {
+  return (<h2>About Page</h2>)
 }

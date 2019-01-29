@@ -7,10 +7,6 @@ import thunk from 'redux-thunk'
 import createRootReducer from './reducers'
 import client from '../core/request'
 import axios from 'axios'
-import { createBrowserHistory } from 'history'
-import { routerMiddleware } from 'connected-react-router'
-
-export const history = createBrowserHistory()
 
 export default initialState => {
 
@@ -23,16 +19,12 @@ export default initialState => {
     })
   ))
 
-  middlewares.push(applyMiddleware(
-    routerMiddleware(history)
-  ))
-
   if (__BROWSER__ && __DEV__) {
     middlewares.push(window && window.__REDUX_DEVTOOLS_EXTENSION__ ? window.__REDUX_DEVTOOLS_EXTENSION__() : f => f)
   }
 
   const store = createStore(
-    createRootReducer(history),
+    createRootReducer(),
     initialState,
     compose(...middlewares),
   )
