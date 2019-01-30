@@ -1,6 +1,6 @@
 /**
- * Created by Wu Jian Ping on 2017/2/7.
- */
+* Created by Wu Jian Ping on 2019/01/30
+*/
 
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
