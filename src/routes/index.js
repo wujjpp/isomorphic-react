@@ -1,30 +1,40 @@
+import { matchPath } from 'react-router-dom'
 import Home from './home'
 import About from './about'
-import NotFound from './errors/NotFound'
 import Order from './order'
-import defaultLayout from './default-layout'
+import NotFound from './errors/NotFound'
 
-export default [
+const routes = [
   {
-    component: defaultLayout,
-    routes: [
-      {
-        path: '/',
-        exact: true,
-        component: Home,
-      },
-      {
-        path: '/about',
-        component: About
-      },
-      {
-        path: '/order',
-        component: Order
-      },
-      {
-        path: '*',
-        component: NotFound
-      }
-    ]
+    path: '/',
+    exact: true,
+    component: Home,
+    dependencies: []
+  },
+  {
+    path: '/about',
+    component: About,
+    dependencies: []
+  },
+  {
+    path: '/order',
+    component: Order,
+    dependencies: []
+  },
+  {
+    component: NotFound
   }
 ]
+
+export default routes
+
+export const match = path => {
+  const promises = []
+  routes.some(route => {
+    const match = matchPath(path, route)
+    if (match) promises.push(route.loadData(match))
+    return match
+  })
+
+  return promises
+}

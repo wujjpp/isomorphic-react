@@ -14,8 +14,8 @@ import cors from 'cors'
 import config from '../settings'
 import Html from './Html'
 import configureStore from './store/configureStore'
-import { renderRoutes } from 'react-router-config'
-import routes from './routes'
+import App from './App'
+import { match } from './routes'
 
 let assets = null
 const app = express()
@@ -42,9 +42,11 @@ if (process.env.NODE_ENV === 'production') {
 app.use(express.static(path.join(__dirname, 'public')))
 
 app.get('/api/loadReadme', (req, res) => {
-  res.json({
-    name: `Jack - ${new Date().getTime()}`
-  })
+  setTimeout(() => {
+    res.json({
+      name: 'Jack'
+    })
+  }, 500)
 })
 
 app.get('*', (req, res) => {
@@ -57,13 +59,18 @@ app.get('*', (req, res) => {
 
   const context = {}
 
-  const children = ReactDOMServer.renderToString(
-    <Provider store={store}>
-      <StaticRouter location={url} context={context}>
-        {renderRoutes(routes)}
-      </StaticRouter>
-    </Provider>
-  )
+  let { matched, components } = match(req.url)
+
+  console.log(matched)
+  console.log(components)
+
+  const component = <Provider store={store}>
+    <StaticRouter location={url} context={context}>
+      <App />
+    </StaticRouter>
+  </Provider>
+
+  const children = ReactDOMServer.renderToString(component)
 
   const data = {
     children,

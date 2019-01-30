@@ -15,7 +15,7 @@ class Home extends Component {
     return (
       <div>
         <h2>Home Page</h2>
-        <h3>Name: {this.props.readme.name}</h3>
+        <h3>Name: {(this.props.readme.status !== 'success') && this.props.readme.status} {this.props.readme.data.name}</h3>
         <button onClick={() => this.handleClick()}>Test</button>
         <button onClick={() => this.props.loadReadme()}>LoadReadme</button>
       </div>

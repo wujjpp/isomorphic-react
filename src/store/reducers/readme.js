@@ -4,20 +4,20 @@
 
 import * as types from '../constants/readme'
 
-let initialState = {}
+let initialState = {
+  status: 'success',
+  data: {}
+}
 
 //NOTE: readme决定redux store中的对象名
 export const readme = (state = initialState, action) => {
   switch (action.type) {
     case types.LOAD_README_REQUEST:
-      console.log('requesting')
-      return state
+      return { data: {}, status: 'loading' }
     case types.LOAD_README_SUCCESS:
-      console.log('success')
-      return action.payload
+      return { data: action.payload, status: 'success' }
     case types.LOAD_README_ERROR:
-      console.log('error')
-      return action.error
+      return { ...state, status: 'error' }
     default:
       return state
   }
