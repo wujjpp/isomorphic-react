@@ -14,8 +14,10 @@ import cors from 'cors'
 import config from '../settings'
 import Html from './Html'
 import configureStore from './store/configureStore'
-import App from './App'
-import { match } from './routes'
+import routes from './routes'
+import { matchRoutes, renderRoutes } from 'react-router-config'
+import _ from 'lodash'
+import casual from 'casual'
 
 let assets = null
 const app = express()
@@ -44,54 +46,73 @@ app.use(express.static(path.join(__dirname, 'public')))
 app.get('/api/loadReadme', (req, res) => {
   setTimeout(() => {
     res.json({
-      name: 'Jack'
+      name: casual.name
     })
   }, 500)
 })
 
 app.get('*', (req, res) => {
-
   const store = configureStore()
-
   const { url } = req
-
-  const { getState } = store
-
   const context = {}
 
-  let { matched, components } = match(req.url)
+  const promises = _
+    .chain(matchRoutes(routes, url))
+    .map(o => {
+      if (o.route && o.route.component && _.isFunction(o.route.component.init)) {
+        return o.route.component.init({ store, query: req.query, match: o.match })
+      } else {
+        return Promise.resolve(null)
+      }
+    })
+    .value()
 
-  console.log(matched)
-  console.log(components)
+  Promise
+    .all(promises)
+    .then(() => {
+      const component = <Provider store={store}>
+        <StaticRouter location={url} context={context}>
+          {renderRoutes(routes)}
+        </StaticRouter>
+      </Provider>
 
-  const component = <Provider store={store}>
-    <StaticRouter location={url} context={context}>
-      <App />
-    </StaticRouter>
-  </Provider>
+      const children = ReactDOMServer.renderToString(component)
 
-  const children = ReactDOMServer.renderToString(component)
+      if (context.status === 301) {
+        return res.redirect(301, context.url)
+      }
 
-  const data = {
-    children,
-    scripts: [
-      (assets && assets.script && assets.script.js) || 'script.js'
-    ],
-    stylesheets: [
-      { rel: 'stylesheet', href: (assets && assets.script && assets.script.css) }
-    ],
-    initialState: getState(),
-    env: require('./env.json').env // eslint-disable-line import/no-unresolved
-  }
+      if (context.status === 302) {
+        return res.redirect(302, context.url)
+      }
 
-  const html = ReactDOMServer.renderToStaticMarkup(<Html {...data} />)
+      if (context.status === 404) {
+        res.status(404)
+      }
 
-  res.send(`<!doctype html>${html}`)
+      const data = {
+        children,
+        scripts: [
+          (assets && assets.script && assets.script.js) || '/script.js'
+        ],
+        stylesheets: [
+          { rel: 'stylesheet', href: (assets && assets.script && assets.script.css) }
+        ],
+        initialState: store.getState(),
+        env: require('./env.json').env
+      }
+      const html = ReactDOMServer.renderToStaticMarkup(<Html {...data} />)
+      res.send(`<!doctype html>${html}`)
+    })
+    .catch(err => {
+      res.status(500).send(err)
+    })
+
 })
 
 const PORT = config.backendPort
 
-app.listen(PORT, (err) => {
+app.listen(PORT, err => {
   if (err) {
     console.error(err) // eslint-disable-line
   }

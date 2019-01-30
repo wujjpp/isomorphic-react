@@ -2,10 +2,19 @@
  * Created by Wu Jian Ping on 2017/2/7.
  */
 
-import React from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-class Html extends React.Component {
+class Html extends Component {
+
+  static propTypes = {
+    children: PropTypes.string.isRequired,
+    scripts: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+    initialState: PropTypes.object,
+    stylesheets: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
+    env: PropTypes.string.isRequired
+  }
+
   render() {
     const {
       children,
@@ -31,14 +40,6 @@ class Html extends React.Component {
       </html>
     )
   }
-}
-
-Html.propTypes = {
-  children: PropTypes.string.isRequired,
-  scripts: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
-  initialState: PropTypes.object,
-  stylesheets: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
-  env: PropTypes.string.isRequired
 }
 
 export default Html

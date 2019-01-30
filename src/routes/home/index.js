@@ -1,21 +1,28 @@
 import React, { Component } from 'react'
-import loadReadme from '../../store/actions/readme'
+import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
+import loadReadme from '../../store/actions/readme'
 
 class Home extends Component {
+  static init({ store }) {
+    return store.dispatch(loadReadme())
+  }
+
   handleClick() {
     alert('clicked')
   }
 
   componentDidMount() {
-    console.log('home mounted')
+    console.log(this.props)
+    this.props.loadReadme()
   }
 
   render() {
+    // console.log(this.props)
     return (
       <div>
         <h2>Home Page</h2>
-        <h3>Name: {(this.props.readme.status !== 'success') && this.props.readme.status} {this.props.readme.data.name}</h3>
+        <h3>Name: {(this.props.data.status !== 'success') && this.props.data.status} {this.props.data.data.name}</h3>
         <button onClick={() => this.handleClick()}>Test</button>
         <button onClick={() => this.props.loadReadme()}>LoadReadme</button>
       </div>
@@ -24,13 +31,9 @@ class Home extends Component {
 }
 
 const mapStateToProps = state => ({
-  readme: state.readme
+  data: state.readme
 })
 
-const mapDispatchToProps = dispatch => {
-  return {
-    loadReadme: () => dispatch(loadReadme())
-  }
-}
+const mapDispatchToProps = dispatch => bindActionCreators({ loadReadme }, dispatch)
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home)

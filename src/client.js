@@ -7,7 +7,8 @@ import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
 import configureStore from './store/configureStore'
 import { BrowserRouter } from 'react-router-dom'
-import App from './App'
+import { renderRoutes } from 'react-router-config'
+import routes from './routes'
 
 const initialState = window.INITIAL_STATE || {}
 
@@ -22,7 +23,7 @@ const render = () => {
   ReactDOM.hydrate(
     <Provider store={store}>
       <BrowserRouter>
-        <App />
+        {renderRoutes(routes)}
       </BrowserRouter>
     </Provider >,
     document.getElementById('app')

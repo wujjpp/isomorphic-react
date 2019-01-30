@@ -2,5 +2,9 @@ import React from 'react'
 
 export default ({ staticContext = {} }) => {
   staticContext.status = 404
-  return <h1>Oops, nothing here!</h1>
+  return (
+    <div>
+      <h1>404 : Not Found</h1>
+    </div>
+  )
 }
