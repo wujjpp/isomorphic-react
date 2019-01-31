@@ -11,14 +11,15 @@ import { Provider } from 'react-redux'
 import compression from 'compression'
 import helmet from 'helmet'
 import cors from 'cors'
+import { matchRoutes, renderRoutes } from 'react-router-config'
+import _ from 'lodash'
+import Promise from 'bluebird'
 
 import config from '../settings'
 import Html from './Html'
 import configureStore from './store/configureStore'
 import routes from './routes'
-import { matchRoutes, renderRoutes } from 'react-router-config'
-import _ from 'lodash'
-import casual from 'casual'
+import { ServerError } from './routes/common'
 
 let assets = null
 const app = express()
@@ -37,28 +38,22 @@ app.use(compression())
 // helmet
 app.use(helmet())
 
-if (process.env.NODE_ENV === 'production') {
-  assets = require('./assets.json') // eslint-disable-line import/no-unresolved
-}
-
 // static folder
 app.use(express.static(path.join(__dirname, 'public')))
 
 app.get('/api/loadReadme', (req, res) => {
   setTimeout(() => {
     res.json({
-      name: casual.name
+      name: require('casual').name
     })
   }, 500)
 })
 
 app.get('*', (req, res) => {
   const store = configureStore()
-  const { url } = req
-  const context = {}
 
   const promises = _
-    .chain(matchRoutes(routes, url))
+    .chain(matchRoutes(routes, req.url))
     .map(o => {
       if (o.route && o.route.component && _.isFunction(o.route.component.init)) {
         return o.route.component.init({ store, query: req.query, match: o.match })
@@ -67,16 +62,15 @@ app.get('*', (req, res) => {
       }
     })
     .value()
-
   Promise
     .all(promises)
     .then(() => {
+      const context = {}
       const component = <Provider store={store}>
-        <StaticRouter location={url} context={context}>
+        <StaticRouter location={req.url} context={context}>
           {renderRoutes(routes)}
         </StaticRouter>
       </Provider>
-
       const children = ReactDOMServer.renderToString(component)
 
       if (context.status === 301) {
@@ -90,25 +84,29 @@ app.get('*', (req, res) => {
       if (context.status === 404) {
         res.status(404)
       }
-
+      // 200
       const data = {
         children,
-        scripts: [
-          (assets && assets.script && assets.script.js) || '/script.js'
-        ],
-        stylesheets: [
-          { rel: 'stylesheet', href: (assets && assets.script && assets.script.css) }
-        ],
+        scripts: [(assets && assets.script && assets.script.js) || '/script.js'],
+        stylesheets: [{ rel: 'stylesheet', href: (assets && assets.script && assets.script.css) }],
         initialState: store.getState(),
         env: require('./env.json').env
       }
       const html = ReactDOMServer.renderToStaticMarkup(<Html {...data} />)
       res.send(`<!doctype html>${html}`)
+
     })
     .catch(err => {
-      res.status(500).send(err)
+      const data = {
+        children: ReactDOMServer.renderToString(<ServerError error={err} />),
+        scripts: [(assets && assets.errors && assets.errors.js) || '/errors.js'],
+        stylesheets: [{ rel: 'stylesheet', href: (assets && assets.errors && assets.errors.css) }],
+        // initialState: store.getState(),
+        env: require('./env.json').env
+      }
+      const html = ReactDOMServer.renderToStaticMarkup(<Html {...data} />)
+      res.status(500).send(`<!doctype html>${html}`)
     })
-
 })
 
 const PORT = config.backendPort

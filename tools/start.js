@@ -10,10 +10,12 @@ import { format, getEnv, getPublicPath, createEnvDefinePlugin } from './libs/uti
 import run from './run'
 import clean from './clean'
 import watch from './watch'
-import { copyPublic, copyEnvConfig } from './copy'
+import { copyPublic, copyEnvConfig, copyDevAssets } from './copy'
 import config from './config'
 import devClientConfig from './webpack/client.dev'
 import devServerConfig from './webpack/server.dev'
+import entrySettings from '../entry-settings'
+import _ from 'lodash'
 
 async function start() {
   let env = getEnv()
@@ -23,9 +25,36 @@ async function start() {
 
   devClientConfig.output.publicPath = devServerConfig.output.publicPath = getPublicPath('dev')
 
+  await new Promise(async (resolve) => {
+    // load entry setting
+    let entryKeys = _.keys(entrySettings)
+    let virtualAssets = {}
+    let clientEntry = {}
+    let watchOptions = {
+      aggregateTimeout: 200,
+      poll: true
+    }
 
+    // prepare config for webpack server and client config
+    _.forEach(entryKeys, (key) => {
+      let entry = entrySettings[key]
+      if (entry.include) {
+        virtualAssets[key] = {
+          'js': `/${key}.js`
+        }
+        clientEntry[key] = [
+          '@babel/polyfill',
+          entry.src,
+          'webpack-hot-middleware/client?reload=true'
+        ]
+      }
+    })
 
-  await new Promise((resolve) => {
+    await copyDevAssets.func(virtualAssets)
+
+    // setup client webpack config's entry
+    devClientConfig.entry = clientEntry
+
     // setup client env config
     devClientConfig.plugins.push(createEnvDefinePlugin('dev'))
     // setup server env config
@@ -87,8 +116,8 @@ async function start() {
     }
 
     serverCompiler.watch({
-      aggregateTimeout: 300,
-      poll: true
+      aggregateTimeout: watchOptions.aggregateTimeout,
+      poll: watchOptions.poll
     }, function (err, stats) {
 
       console.log(stats.toString(devServerConfig.stats))

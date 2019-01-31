@@ -1,0 +1,45 @@
+[{
+  "name": "dev",
+  "commit": {
+    "id": "e5bd8119e640525269da8132c62b46d3acfbce62",
+    "short_id": "e5bd8119",
+    "title": "Merge branch 'master' into 'dev'",
+    "created_at": "2019-01-30T10:52:52.000+00:00",
+    "parent_ids": null,
+    "message": "Merge branch 'master' into 'dev'",
+    "author_name": "xuyucheng",
+    "author_email": "xuyucheng@bertadata.com",
+    "authored_date": "2019-01-30T10:52:52.000+00:00",
+    "committer_name": "xuyucheng",
+    "committer_email": "xuyucheng@bertadata.com",
+    "committed_date": "2019-01-30T10:52:52.000+00:00"
+  },
+  "merged": false,
+  "protected": false,
+  "developers_can_push": false,
+  "developers_can_merge": false,
+  "can_push": true,
+  "default": false
+}, {
+  "name": "master",
+  "commit": {
+    "id": "ec7119ee7b33ceb800f637f5f14c8789aed8d0db",
+    "short_id": "ec7119ee",
+    "title": "'申请开票重复点击开票按钮bug'",
+    "created_at": "2019-01-30T10:57:56.000+00:00",
+    "parent_ids": null,
+    "message": "'申请开票重复点击开票按钮bug'",
+    "author_name": "hexiaomei",
+    "author_email": "hexiaomei@bertadata.com",
+    "authored_date": "2019-01-30T10:57:56.000+00:00",
+    "committer_name": "hexiaomei",
+    "committer_email": "hexiaomei@bertadata.com",
+    "committed_date": "2019-01-30T10:57:56.000+00:00"
+  },
+  "merged": false,
+  "protected": true,
+  "developers_can_push": true,
+  "developers_can_merge": true,
+  "can_push": true,
+  "default": true
+}]

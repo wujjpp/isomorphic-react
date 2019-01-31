@@ -13,7 +13,7 @@ async function copyEnvConfigHelper({ env }) {
   }))
 }
 
-export var copyEnvConfig = {
+export const copyEnvConfig = {
   name: 'generate env.json',
   func: copyEnvConfigHelper
 }
@@ -33,7 +33,7 @@ async function copyPkgHelper() {
   }, null, 2))
 }
 
-export var copyPkg = {
+export const copyPkg = {
   name: 'generate package.json',
   func: copyPkgHelper
 }
@@ -44,7 +44,16 @@ async function copyPublicHelper() {
   await copyDir('src/views', `${config.dist}/views`)
 }
 
-export var copyPublic = {
+export const copyPublic = {
   name: 'copy assets in public folder',
   func: copyPublicHelper
 }
+
+export const copyDevAssets = { // eslint-disable-line
+  name: 'generated assets.json',
+  func: async (obj) => {
+    await makeDir(`${config.dist}`)
+    await writeFile('src/assets.json', JSON.stringify(obj, null, 2))
+  }
+}
+

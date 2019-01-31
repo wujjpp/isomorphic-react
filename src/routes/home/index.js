@@ -17,12 +17,10 @@ class Home extends Component {
   }
 
   componentDidMount() {
-    console.log(this.props)
     this.props.loadReadme()
   }
 
   render() {
-    // console.log(this.props)
     return (
       <div>
         <h2>Home Page</h2>
@@ -34,9 +32,7 @@ class Home extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  data: state.readme
-})
+const mapStateToProps = state => ({ data: state.readme })
 
 const mapDispatchToProps = dispatch => bindActionCreators({ loadReadme }, dispatch)
 
