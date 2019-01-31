@@ -259,7 +259,8 @@ $ npm install
 
 ## 不喜欢React？ 没关系，看看基于Marko和Vue版的同构脚手架
 
-- [isomorphic-marko](https://github.com/wujjpp/isomorphic-marko) NOTE: 服务端的渲染速度相对于React、Vue来说，[Marko](https://github.com/marko-js/marko)还是非常乐观的。
+- [isomorphic-marko](https://github.com/wujjpp/isomorphic-marko) 
+    NOTE: 服务端的渲染速度相对于React、Vue来说，[Marko](https://github.com/marko-js/marko)还是非常乐观的。
 
 - [isomorphic-vue](https://github.com/wujjpp/isomorphic-vue)
 
