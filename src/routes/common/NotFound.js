@@ -3,8 +3,9 @@
 */
 
 import React from 'react'
+import PropTypes from 'prop-types'
 
-export default ({ staticContext = {} }) => {
+const Component = ({ staticContext = {} }) => {
   staticContext.status = 404
   return (
     <div>
@@ -12,3 +13,9 @@ export default ({ staticContext = {} }) => {
     </div>
   )
 }
+
+Component.propTypes = {
+  staticContext: PropTypes.object.isRequired
+}
+
+export default Component

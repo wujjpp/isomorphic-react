@@ -5,6 +5,7 @@
 import React, { Component } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
 import loadReadme from '../../store/actions/readme'
 import { Helmet } from 'react-helmet'
 
@@ -13,8 +14,20 @@ if (__BROWSER__) {
 }
 
 class Home extends Component {
+  static propTypes = {
+    loadReadme: PropTypes.func,
+    data: PropTypes.shape({
+      status: PropTypes.string.isRequired,
+      data: PropTypes.object
+    })
+  }
+
   static init({ store }) {
     return store.dispatch(loadReadme())
+  }
+
+  constructor(props) {
+    super(props)
   }
 
   handleClick() {
@@ -35,8 +48,8 @@ class Home extends Component {
         </Helmet>
         <h2 className="c1">Home Page</h2>
         <h3>Name: {(this.props.data.status !== 'success') && this.props.data.status} {this.props.data.data.name}</h3>
-        <button onClick={() => this.handleClick()}>Test</button>
-        <button onClick={() => this.props.loadReadme()}>LoadReadme</button>
+        <button onClick={this.handleClick}>Test</button>
+        <button onClick={this.props.loadReadme}>LoadReadme</button>
       </div>
     )
   }

@@ -1,8 +1,26 @@
-import React, { Component } from 'react'
+/**
+* Created by Wu Jian Ping on 2019/01/31
+*/
 
-export default class ServerError extends Component {
-  render() {
-    console.log(this.props.error) // eslint-disable-line
-    return (<div>{(this.props.error && this.props.error.message) || '系统错误'}</div>)
-  }
+import React from 'react'
+import Helmet from 'react-helmet'
+import PropTypes from 'prop-types'
+
+const Component = ({ error }) => {
+  return (
+    <>
+      <Helmet>
+        <title>错误：{(error && error.message) || '系统错误'}</title>
+        <meta name="description" content="这是错误页的描述"></meta>
+        <meta name="keywords" content="这是错误页的关键词"></meta>
+      </Helmet>
+      <div>{(error && error.message) || '系统错误'}</div>
+    </>
+  )
 }
+
+Component.propTypes = {
+  error: PropTypes.object
+}
+
+export default Component

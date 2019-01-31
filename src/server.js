@@ -108,7 +108,7 @@ app.get('*', (req, res) => {
         children: ReactDOMServer.renderToString(<ServerError error={err} />),
         scripts: [(assets && assets.errors && assets.errors.js) || '/errors.js'],
         stylesheets: [{ rel: 'stylesheet', href: (assets && assets.errors && assets.errors.css) }],
-        // initialState: store.getState(),
+        initialState: store.getState(),
         helmet: ReactHelmet.renderStatic(),
         env
       }
@@ -119,9 +119,11 @@ app.get('*', (req, res) => {
 
 const PORT = config.backendPort
 
+const consoleLogger = console
+
 app.listen(PORT, err => {
   if (err) {
-    console.error(err) // eslint-disable-line
+    consoleLogger.error(err)
   }
   else {
     console.log(`Listening at http://localhost:${PORT}/`) // eslint-disable-line

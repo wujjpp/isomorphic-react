@@ -35,7 +35,7 @@ class Html extends Component {
           {helmet.title.toComponent()}
           {helmet.meta.toComponent()}
           {helmet.link.toComponent()}
-          {process.env.NODE_ENV === 'production' && stylesheets && stylesheets.map(css => <link {...css} />)}
+          {process.env.NODE_ENV === 'production' && stylesheets && stylesheets.map((css, n) => <link key={n} {...css} />)}
         </head>
         <body {...helmet.bodyAttributes.toComponent()}>
           <div id="app" dangerouslySetInnerHTML={{ __html: children }} />

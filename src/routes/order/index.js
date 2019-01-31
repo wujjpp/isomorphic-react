@@ -4,8 +4,15 @@
 
 import React, { Component } from 'react'
 import { renderRoutes } from 'react-router-config'
+import PropTypes from 'prop-types'
 
 export default class Order extends Component {
+  static propTypes = {
+    route: PropTypes.shape({
+      routes: PropTypes.arrayOf(PropTypes.object)
+    })
+  }
+
   componentDidMount() {
     console.log('order mounted')  // eslint-disable-line
   }
