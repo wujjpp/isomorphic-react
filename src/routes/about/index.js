@@ -5,7 +5,7 @@
 import React from 'react'
 import Helmet from 'react-helmet'
 
-export default () => {
+const About = () => {
   return (
     <div>
       <Helmet>
@@ -17,3 +17,5 @@ export default () => {
     </div>
   )
 }
+
+export default About

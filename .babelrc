@@ -51,6 +51,18 @@
         "loose": false
       }
     ],
-    "@babel/plugin-proposal-json-strings"
-  ]
+    "@babel/plugin-proposal-json-strings",
+
+    "@babel/plugin-transform-react-display-name"
+  ],
+  "env": {
+    "production": {
+      "plugins": [
+        "@babel/transform-react-constant-elements",
+        "@babel/transform-react-inline-elements",
+        "transform-react-remove-prop-types",
+        "transform-react-pure-class-to-function"
+      ]
+    }
+  }
 }

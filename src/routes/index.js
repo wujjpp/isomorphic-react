@@ -1,7 +1,7 @@
 /**
 * Created by Wu Jian Ping on 2019/01/30
 */
-import React from 'react'
+// import React from 'react'
 import Home from './home'
 import About from './about'
 import Order from './order'
@@ -34,7 +34,7 @@ const routes = [
       },
       {
         path: '/old-order',
-        component: () => (<RedirectWithStatus from='/old-order' to='/order' status={302} />)
+        component: RedirectWithStatus({ from: '/old-order', to: '/order', status: 302 }) //eslint-disable-react-dispayname
       },
       {
         path: '*',
