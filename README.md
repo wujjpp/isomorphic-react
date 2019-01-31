@@ -1,7 +1,9 @@
 # Isomorphic-React
 
 同构系统，支持服务器端渲染及客户端渲染，对SEO友好。
+
 前端支持HMR, 后端支持livereload
+
 为什么需要同构系统，需要补脑的[这边走](http://nerds.airbnb.com/isomorphic-javascript-future-web-apps/)
 
 [![Build Status](https://travis-ci.org/wujjpp/isomorphic-react.svg?branch=master)](https://travis-ci.org/wujjpp/isomorphic-react)
