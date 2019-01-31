@@ -6,6 +6,7 @@ import React, { Component } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import loadReadme from '../../store/actions/readme'
+import { Helmet } from 'react-helmet'
 
 if (__BROWSER__) {
   require('./style.scss')
@@ -27,6 +28,11 @@ class Home extends Component {
   render() {
     return (
       <div>
+        <Helmet>
+          <title>这是首页</title>
+          <meta name="description" content="这是首页的描述"></meta>
+          <meta name="keywords" content="这是首页的关键词"></meta>
+        </Helmet>
         <h2 className="c1">Home Page</h2>
         <h3>Name: {(this.props.data.status !== 'success') && this.props.data.status} {this.props.data.data.name}</h3>
         <button onClick={() => this.handleClick()}>Test</button>

@@ -8,31 +8,36 @@ import PropTypes from 'prop-types'
 class Html extends Component {
 
   static propTypes = {
-    children: PropTypes.string.isRequired,
     scripts: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
-    initialState: PropTypes.object,
     stylesheets: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
+    initialState: PropTypes.object,
+    helmet: PropTypes.object,
+    children: PropTypes.string.isRequired,
     env: PropTypes.string.isRequired
   }
 
   render() {
     const {
-      children,
-      initialState,
       scripts,
       stylesheets,
+      initialState,
+      helmet,
+      children,
       env
     } = this.props
 
     return (
-      <html lang="en">
+      <html {...helmet.htmlAttributes.toComponent()}>
         <head>
           <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
           <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
           <meta name="viewport" content="width=device-width, initial-scale=1" />
+          {helmet.title.toComponent()}
+          {helmet.meta.toComponent()}
+          {helmet.link.toComponent()}
           {process.env.NODE_ENV === 'production' && stylesheets && stylesheets.map(css => <link {...css} />)}
         </head>
-        <body>
+        <body {...helmet.bodyAttributes.toComponent()}>
           <div id="app" dangerouslySetInnerHTML={{ __html: children }} />
           {initialState && (<script dangerouslySetInnerHTML={{ __html: `window.INITIAL_STATE=${JSON.stringify(initialState)};window.__ENV__='${env}'` }} />)}
           {scripts && scripts.map(script => <script key={script} src={script} />)}

@@ -14,6 +14,7 @@ import cors from 'cors'
 import { matchRoutes, renderRoutes } from 'react-router-config'
 import _ from 'lodash'
 import Promise from 'bluebird'
+import reactHelmet from 'react-helmet'
 
 import config from '../settings'
 import Html from './Html'
@@ -96,6 +97,7 @@ app.get('*', (req, res) => {
         scripts: [(assets && assets.script && assets.script.js) || '/script.js'],
         stylesheets: [{ rel: 'stylesheet', href: (assets && assets.script && assets.script.css) }],
         initialState: store.getState(),
+        helmet: reactHelmet.rewind(),
         env
       }
       const html = ReactDOMServer.renderToStaticMarkup(<Html {...data} />)
@@ -107,6 +109,7 @@ app.get('*', (req, res) => {
         scripts: [(assets && assets.errors && assets.errors.js) || '/errors.js'],
         stylesheets: [{ rel: 'stylesheet', href: (assets && assets.errors && assets.errors.css) }],
         // initialState: store.getState(),
+        helmet: reactHelmet.rewind(),
         env
       }
       const html = ReactDOMServer.renderToStaticMarkup(<Html {...data} />)
