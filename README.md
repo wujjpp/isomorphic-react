@@ -1,6 +1,7 @@
 # Isomorphic-React
 
 同构系统，支持服务器端渲染及客户端渲染，对SEO友好。
+前端支持HMR, 后端支持livereload
 为什么需要同构系统，需要补脑的[这边走](http://nerds.airbnb.com/isomorphic-javascript-future-web-apps/)
 
 [![Build Status](https://travis-ci.org/wujjpp/isomorphic-react.svg?branch=master)](https://travis-ci.org/wujjpp/isomorphic-react)
@@ -10,7 +11,7 @@
 - [webpack 4](https://webpack.js.org/)
 - [babel 7](https://babeljs.io/)
 - [react 16](https://facebook.github.io/react/)
-- [react-router](https://github.com/ReactTraining/react-router/tree/v3/docs)
+- [react-router 4](https://github.com/ReactTraining/react-router/tree/v3/docs)
 - [redux 4 & react-redux 6](http://redux.js.org/docs/basics/UsageWithReact.html)
 - [redux-thunk](https://github.com/gaearon/redux-thunk)
 - [react-helmet](https://github.com/nfl/react-helmet)
