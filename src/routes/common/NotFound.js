@@ -5,7 +5,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-const Component = ({ staticContext = {} }) => {
+const NotFound = ({ staticContext = {} }) => {
   staticContext.status = 404
   return (
     <div>
@@ -14,8 +14,8 @@ const Component = ({ staticContext = {} }) => {
   )
 }
 
-Component.propTypes = {
+NotFound.propTypes = {
   staticContext: PropTypes.object.isRequired
 }
 
-export default Component
+export default NotFound

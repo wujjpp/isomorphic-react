@@ -6,7 +6,7 @@ import React from 'react'
 import Helmet from 'react-helmet'
 import PropTypes from 'prop-types'
 
-const Component = ({ error }) => {
+const Error = ({ error }) => {
   return (
     <>
       <Helmet>
@@ -19,8 +19,8 @@ const Component = ({ error }) => {
   )
 }
 
-Component.propTypes = {
+Error.propTypes = {
   error: PropTypes.object
 }
 
-export default Component
+export default Error

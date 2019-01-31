@@ -31,6 +31,9 @@ export default {
             options: {
               cacheDirectory: './.cache/babel-loader'
             }
+          },
+          {
+            loader: 'eslint-loader'
           }
         ],
         include: [

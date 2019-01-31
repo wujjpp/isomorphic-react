@@ -41,7 +41,7 @@ export default {
   module: {
     rules: [{
       test: /\.(js|jsx)$/i,
-      use: ['babel-loader'],
+      use: ['babel-loader', 'eslint-loader'],
       include: [
         path.join(process.cwd(), 'src')
       ]
