@@ -4,15 +4,21 @@
 
 import { logger } from './libs/utils'
 
-const run = (task, options) => {
+const run = async (task, options) => {
   const start = new Date()
   logger.chalk(`Starting '${task.name}${options ? ` (${JSON.stringify(options)})` : ''}'...`)
-  return task.func(options).then((resolution) => {
-    const end = new Date()
-    const time = end.getTime() - start.getTime()
-    logger.info(`Finished '${task.name}${options ? ` (${JSON.stringify(options)})` : ''}' after ${time} ms`)
-    return resolution
-  })
+  let resolution = await task.func(options)
+  const end = new Date()
+  const time = end.getTime() - start.getTime()
+  logger.info(`Finished '${task.name}${options ? ` (${JSON.stringify(options)})` : ''}' after ${time} ms`)
+  return resolution
+
+  // task.func(options).then((resolution) => {
+  //   const end = new Date()
+  //   const time = end.getTime() - start.getTime()
+  //   logger.info(`Finished '${task.name}${options ? ` (${JSON.stringify(options)})` : ''}' after ${time} ms`)
+  //   return resolution
+  // })
 }
 
 if (require.main === module && process.argv.length > 2) {

@@ -89,6 +89,7 @@ app.get('*', (req, res) => {
       if (context.status === 404) {
         res.status(404)
       }
+
       // 200
       const data = {
         children,

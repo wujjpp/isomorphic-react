@@ -10,7 +10,7 @@ import { format, getEnv, getPublicPath, createEnvDefinePlugin } from './libs/uti
 import run from './run'
 import clean from './clean'
 import watch from './watch'
-import { copyPublic, copyEnvConfig, copyAssets } from './copy'
+import { copyPublic, copyEnvConfig, copyAssetsJson } from './copy'
 import config from './config'
 import devClientConfig from './webpack/client.dev'
 import devServerConfig from './webpack/server.dev'
@@ -44,13 +44,13 @@ const start = async () => {
         }
         clientEntry[key] = [
           '@babel/polyfill',
-          entry.src,
-          'webpack-hot-middleware/client?reload=true'
+          'webpack-hot-middleware/client?reload=true', //reload - Set to true to auto-reload the page when webpack gets stuck
+          entry.src
         ]
       }
     })
 
-    await run(copyAssets, virtualAssets)
+    await run(copyAssetsJson, virtualAssets)
 
     // setup client webpack config's entry
     devClientConfig.entry = clientEntry

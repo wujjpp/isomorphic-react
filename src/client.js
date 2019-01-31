@@ -12,14 +12,14 @@ import routes from './routes'
 
 const initialState = window.INITIAL_STATE || {}
 
+const store = configureStore(initialState)
+
 // for performance issue, delete useless variables
 if (window.INITIAL_STATE) {
   delete window.INITIAL_STATE
 }
 
-const store = configureStore(initialState)
-
-const render = () => {
+const render = routes => {
   ReactDOM.hydrate(
     <Provider store={store}>
       <BrowserRouter>
@@ -30,10 +30,10 @@ const render = () => {
   )
 }
 
-render()
+render(routes)
 
 if (module.hot) {
   module.hot.accept('./routes', () => {
-    setTimeout(render, 0)
+    render(require('./routes'))
   })
 }

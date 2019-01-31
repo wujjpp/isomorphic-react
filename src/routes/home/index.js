@@ -7,6 +7,10 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import loadReadme from '../../store/actions/readme'
 
+if (__BROWSER__) {
+  require('./style.scss')
+}
+
 class Home extends Component {
   static init({ store }) {
     return store.dispatch(loadReadme())
@@ -23,7 +27,7 @@ class Home extends Component {
   render() {
     return (
       <div>
-        <h2>Home Page</h2>
+        <h2 className="c1">Home Page</h2>
         <h3>Name: {(this.props.data.status !== 'success') && this.props.data.status} {this.props.data.data.name}</h3>
         <button onClick={() => this.handleClick()}>Test</button>
         <button onClick={() => this.props.loadReadme()}>LoadReadme</button>

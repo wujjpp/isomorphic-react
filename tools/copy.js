@@ -43,10 +43,11 @@ export const copyPublic = {
   }
 }
 
-export const copyAssets = { // eslint-disable-line
+export const copyAssetsJson = { // eslint-disable-line
   name: 'generated assets.json',
   func: async obj => {
-    await writeFile('src/assets.json', JSON.stringify(obj, null, 2))
+    await makeDir(config.dist)
+    await writeFile(`${config.dist}/assets.json`, JSON.stringify(obj, null, 2))
   }
 }
 
