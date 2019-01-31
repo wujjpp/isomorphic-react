@@ -99,7 +99,7 @@ const start = async () => {
       }
     }
 
-    const startServer = function () {
+    const startServer = () => {
       if (server) {
         server.kill('SIGTERM')
       }
@@ -118,7 +118,7 @@ const start = async () => {
     serverCompiler.watch({
       aggregateTimeout: watchOptions.aggregateTimeout,
       poll: watchOptions.poll
-    }, function (err, stats) {
+    }, (err, stats) => {
 
       console.log(stats.toString(devServerConfig.stats))
 
