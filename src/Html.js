@@ -6,7 +6,6 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 class Html extends Component {
-
   static propTypes = {
     scripts: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
     stylesheets: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
@@ -40,7 +39,7 @@ class Html extends Component {
         <body {...helmet.bodyAttributes.toComponent()}>
           <div id="app" dangerouslySetInnerHTML={{ __html: children }} />
           {initialState && (<script dangerouslySetInnerHTML={{ __html: `window.INITIAL_STATE=${JSON.stringify(initialState)};window.__ENV__='${env}'` }} />)}
-          {scripts && scripts.map(script => <script key={script} src={script} />)}
+          {scripts && scripts.map((script, n) => <script key={n} src={script} />)}
         </body>
       </html>
     )
