@@ -8,7 +8,7 @@ import { writeFile } from './libs/fs'
 import webpackConfig from './webpack/server.build'
 import config from './config'
 
-async function build(env) {
+const build = async env => {
   env = env || getEnv()
   webpackConfig.output.publicPath = (env === 'dev' ? '/' : getPublicPath(env))
 

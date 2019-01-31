@@ -7,13 +7,32 @@ import webpackConfig from './webpack/client.build'
 import config from './config'
 import { getPublicPath, logger, getEnv, createEnvDefinePlugin } from './libs/utils'
 import { writeFile } from './libs/fs'
+import entrySettings from '../entry-settings'
+import _ from 'lodash'
 
-async function build(env) {
+const build = async env => {
   env = env || getEnv()
   webpackConfig.output.publicPath = (env === 'dev' ? '/' : getPublicPath(env))
 
   logger.chalk(`${chalk.blue('Client public path: ')}${webpackConfig.output.publicPath}`)
 
+  // load entry setting
+  let entryKeys = _.keys(entrySettings)
+  let clientEntry = {}
+
+  // prepare config for webpack server and client config
+  _.forEach(entryKeys, (key) => {
+    let entry = entrySettings[key]
+
+    clientEntry[key] = [
+      '@babel/polyfill', // if we include bable-polyfill, it will made bundle file incress 96 KB, if not it will be crash in IE by Symbol not defined.
+      // 'core-js/es6/symbol', // fox fixing Symbol is not defined in IE
+      // 'core-js/es6/object', // for fixing object.assign is not defined in IE.
+      entry.src
+    ]
+  })
+
+  webpackConfig.entry = clientEntry
 
   webpackConfig.plugins.push(createEnvDefinePlugin(env))
 

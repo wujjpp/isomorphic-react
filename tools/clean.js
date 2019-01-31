@@ -5,7 +5,7 @@
 import { cleanDir } from './libs/fs'
 import config from './config'
 
-function clean() {
+const clean = () => {
   return Promise.all([
     cleanDir(config.dist, {
       nosort: true,

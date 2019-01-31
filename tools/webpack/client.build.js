@@ -31,13 +31,6 @@ export default {
     extensions: ['.js', '.jsx', '.json']
   },
 
-  entry: {
-    script: [
-      '@babel/polyfill',
-      './src/client.js'
-    ]
-  },
-
   output: {
     path: path.join(process.cwd(), config.dist, 'public'),
     filename: '[name].[hash:8].js',
@@ -163,10 +156,6 @@ export default {
       'window.jQuery': 'jquery',
       jQuery: 'jquery'
     }),
-    // new ExtractTextPlugin({
-    //   filename: 'style.[hash:8].css',
-    //   allChunks: true
-    // }),
     new MiniCssExtractPlugin({
       // Options similar to the same options in webpackOptions.output
       // both options are optional
@@ -179,13 +168,6 @@ export default {
       path: path.join(process.cwd(), config.dist),
       prettyPrint: true
     })
-    // new webpack.optimize.UglifyJsPlugin({
-    //   comments: false,
-    //   compress: {
-    //     warnings: false,
-    //     drop_console: true //remove all console
-    //   }
-    // })
   ],
 
   stats: {

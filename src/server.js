@@ -21,7 +21,11 @@ import configureStore from './store/configureStore'
 import routes from './routes'
 import { ServerError } from './routes/common'
 
-let assets = null
+// assets list 
+const assets = require('./assets.json')
+// env defination
+const { env } = require('./env.json')
+
 const app = express()
 
 // enable cors
@@ -62,6 +66,7 @@ app.get('*', (req, res) => {
       }
     })
     .value()
+
   Promise
     .all(promises)
     .then(() => {
@@ -90,11 +95,10 @@ app.get('*', (req, res) => {
         scripts: [(assets && assets.script && assets.script.js) || '/script.js'],
         stylesheets: [{ rel: 'stylesheet', href: (assets && assets.script && assets.script.css) }],
         initialState: store.getState(),
-        env: require('./env.json').env
+        env
       }
       const html = ReactDOMServer.renderToStaticMarkup(<Html {...data} />)
       res.send(`<!doctype html>${html}`)
-
     })
     .catch(err => {
       const data = {
@@ -102,7 +106,7 @@ app.get('*', (req, res) => {
         scripts: [(assets && assets.errors && assets.errors.js) || '/errors.js'],
         stylesheets: [{ rel: 'stylesheet', href: (assets && assets.errors && assets.errors.css) }],
         // initialState: store.getState(),
-        env: require('./env.json').env
+        env
       }
       const html = ReactDOMServer.renderToStaticMarkup(<Html {...data} />)
       res.status(500).send(`<!doctype html>${html}`)

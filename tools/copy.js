@@ -6,53 +6,46 @@ import { writeFile, makeDir, copyDir } from './libs/fs'
 import pkg from '../package.json'
 import config from './config'
 
-async function copyEnvConfigHelper({ env }) {
-  await makeDir(config.dist)
-  await writeFile(`${config.dist}/env.json`, JSON.stringify({
-    env
-  }))
-}
-
 export const copyEnvConfig = {
   name: 'generate env.json',
-  func: copyEnvConfigHelper
-}
-
-async function copyPkgHelper() {
-
-  await makeDir(`${config.dist}`)
-
-  //generate package.json
-  await writeFile(`${config.dist}/package.json`, JSON.stringify({
-    private: true,
-    engines: pkg.engines,
-    dependencies: pkg.dependencies,
-    scripts: {
-      start: 'node server.js',
-    },
-  }, null, 2))
+  func: async env => {
+    await makeDir(config.dist)
+    await writeFile(`${config.dist}/env.json`, JSON.stringify({
+      env
+    }))
+  }
 }
 
 export const copyPkg = {
   name: 'generate package.json',
-  func: copyPkgHelper
-}
+  func: async () => {
 
-async function copyPublicHelper() {
-  await makeDir(config.dist)
-  await copyDir('public', `${config.dist}/public`)
-  await copyDir('src/views', `${config.dist}/views`)
+    await makeDir(`${config.dist}`)
+
+    //generate package.json
+    await writeFile(`${config.dist}/package.json`, JSON.stringify({
+      private: true,
+      engines: pkg.engines,
+      dependencies: pkg.dependencies,
+      scripts: {
+        start: 'node server.js',
+      },
+    }, null, 2))
+  }
 }
 
 export const copyPublic = {
   name: 'copy assets in public folder',
-  func: copyPublicHelper
+  func: async () => {
+    await makeDir(config.dist)
+    await copyDir('public', `${config.dist}/public`)
+    await copyDir('src/views', `${config.dist}/views`)
+  }
 }
 
-export const copyDevAssets = { // eslint-disable-line
+export const copyAssets = { // eslint-disable-line
   name: 'generated assets.json',
-  func: async (obj) => {
-    await makeDir(`${config.dist}`)
+  func: async obj => {
     await writeFile('src/assets.json', JSON.stringify(obj, null, 2))
   }
 }

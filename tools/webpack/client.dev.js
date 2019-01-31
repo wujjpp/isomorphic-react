@@ -17,14 +17,6 @@ export default {
     unsafeCache: true
   },
 
-  entry: {
-    script: [
-      '@babel/polyfill',
-      'webpack-hot-middleware/client?reload=true', //reload - Set to true to auto-reload the page when webpack gets stuck
-      './src/client.js'
-    ]
-  },
-
   output: {
     path: path.join(process.cwd(), config.dist, 'public'),
     filename: '[name].js',

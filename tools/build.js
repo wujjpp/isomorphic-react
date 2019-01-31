@@ -8,14 +8,12 @@ import buildClient from './build-client'
 import buildServer from './build-server'
 import { getEnv } from './libs/utils'
 
-async function build() {
+const build = async () => {
   const env = getEnv()
 
   await run(clean)
   await run(copyPublic)
-  await run(copyEnvConfig, {
-    env: env
-  })
+  await run(copyEnvConfig, env)
   await run(copyPkg)
 
   await run(buildClient, env)

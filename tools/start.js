@@ -10,22 +10,22 @@ import { format, getEnv, getPublicPath, createEnvDefinePlugin } from './libs/uti
 import run from './run'
 import clean from './clean'
 import watch from './watch'
-import { copyPublic, copyEnvConfig, copyDevAssets } from './copy'
+import { copyPublic, copyEnvConfig, copyAssets } from './copy'
 import config from './config'
 import devClientConfig from './webpack/client.dev'
 import devServerConfig from './webpack/server.dev'
 import entrySettings from '../entry-settings'
 import _ from 'lodash'
 
-async function start() {
+const start = async () => {
   let env = getEnv()
   await run(clean)
   await run(copyPublic, { dest: config.dist })
-  await run(copyEnvConfig, { dest: config.dist, env: env })
+  await run(copyEnvConfig, env)
 
   devClientConfig.output.publicPath = devServerConfig.output.publicPath = getPublicPath('dev')
 
-  await new Promise(async (resolve) => {
+  await new Promise(async resolve => {
     // load entry setting
     let entryKeys = _.keys(entrySettings)
     let virtualAssets = {}
@@ -50,7 +50,7 @@ async function start() {
       }
     })
 
-    await copyDevAssets.func(virtualAssets)
+    await run(copyAssets, virtualAssets)
 
     // setup client webpack config's entry
     devClientConfig.entry = clientEntry

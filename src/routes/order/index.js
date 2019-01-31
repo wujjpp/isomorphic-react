@@ -7,7 +7,7 @@ import { renderRoutes } from 'react-router-config'
 
 export default class Order extends Component {
   componentDidMount() {
-    console.log('order mounted')
+    console.log('order mounted')  // eslint-disable-line
   }
 
   render() {
