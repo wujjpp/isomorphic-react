@@ -51,9 +51,7 @@
         "loose": false
       }
     ],
-    "@babel/plugin-proposal-json-strings",
-
-    "@babel/plugin-transform-react-display-name"
+    "@babel/plugin-proposal-json-strings"
   ],
   "env": {
     "production": {

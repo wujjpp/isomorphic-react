@@ -46,7 +46,7 @@ app.use(helmet())
 // static folder
 app.use(express.static(path.join(__dirname, 'public')))
 
-app.get('/api/loadReadme', (req, res) => {
+app.post('/api/loadReadme', (req, res) => {
   setTimeout(() => {
     res.json({
       name: require('casual').name
