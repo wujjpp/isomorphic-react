@@ -2,10 +2,10 @@
  * Created by Wu Jian Ping on 2019/01/30
  */
 
-import PropTypes from 'prop-types'
-import React from 'react'
+import * as PropTypes from 'prop-types'
+import * as React from 'react'
 
-const NotFound = ({ staticContext = {} }) => {
+const NotFound = ({ staticContext = {} }: any) => {
   staticContext.status = 404
   return (
     <div>

@@ -2,12 +2,12 @@
  * Created by Wu Jian Ping on 2019/01/30
  */
 
-import Home from './home'
+import { defaultLayout } from '../layouts'
 import About from './about'
+import { NotFound, RedirectWithStatus } from './common'
+import Home from './home'
 import Order from './order'
 import OrderDetail from './order/detail'
-import { defaultLayout } from '../layouts'
-import { NotFound, RedirectWithStatus } from './common'
 
 const routes = [
   {
@@ -34,7 +34,7 @@ const routes = [
       },
       {
         path: '/old-order',
-        component: RedirectWithStatus({ from: '/old-order', to: '/order', status: 302 }) //eslint-disable-react-dispayname
+        component: RedirectWithStatus({ from: '/old-order', to: '/order', status: 302 }) // eslint-disable-react-dispayname
       },
       {
         path: '*',

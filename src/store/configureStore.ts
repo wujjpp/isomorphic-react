@@ -2,13 +2,13 @@
  * Created by Wu Jian Ping on 2019/01/30
  */
 
-import { createStore, applyMiddleware, compose } from 'redux'
-import thunk from 'redux-thunk'
-import createRootReducer from './reducers'
-import client from '../core/request'
 import axios from 'axios'
+import { applyMiddleware, compose, createStore } from 'redux'
+import thunk from 'redux-thunk'
+import client from '../core/request'
+import createRootReducer from './reducers'
 
-export default initialState => {
+export default (initialState: any) => {
 
   const middlewares = []
 
@@ -20,7 +20,7 @@ export default initialState => {
   ))
 
   if (__BROWSER__ && __DEV__) {
-    middlewares.push(window && window.__REDUX_DEVTOOLS_EXTENSION__ ? window.__REDUX_DEVTOOLS_EXTENSION__() : f => f)
+    middlewares.push(window && window.__REDUX_DEVTOOLS_EXTENSION__ ? window.__REDUX_DEVTOOLS_EXTENSION__() : (f: any) => f)
   }
 
   const store = createStore(
@@ -29,7 +29,7 @@ export default initialState => {
     compose(...middlewares),
   )
 
-  //HMR
+  // HMR
   if (module.hot) {
     module.hot.accept('./reducers', () => {
       const nextRootReducer = require('./reducers')

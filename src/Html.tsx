@@ -2,11 +2,21 @@
  * Created by Wu Jian Ping on 2019/01/30
  */
 
-import PropTypes from 'prop-types'
-import React, { Component } from 'react'
+import * as PropTypes from 'prop-types'
+import * as React from 'react'
+import { HelmetData } from 'react-helmet'
 
-class Html extends Component {
-  static propTypes = {
+interface IProps {
+  scripts: string[],
+  stylesheets: any[],
+  initialState: any
+  helmet: HelmetData,
+  env: string,
+  children: string
+}
+
+class Html extends React.Component<IProps> {
+  public static propTypes = {
     scripts: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
     stylesheets: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
     initialState: PropTypes.object,
@@ -15,7 +25,7 @@ class Html extends Component {
     env: PropTypes.string.isRequired
   }
 
-  render() {
+  public render() {
     const {
       scripts,
       stylesheets,

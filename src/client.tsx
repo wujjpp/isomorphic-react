@@ -2,11 +2,11 @@
  * Created by Wu Jian Ping on 2019/01/30
  */
 
-import React from 'react'
-import ReactDOM from 'react-dom'
+import * as React from 'react'
+import * as ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
+import { renderRoutes, RouteConfig } from 'react-router-config'
 import { BrowserRouter } from 'react-router-dom'
-import { renderRoutes } from 'react-router-config'
 
 import routes from './routes'
 import configureStore from './store/configureStore'
@@ -20,11 +20,11 @@ if (window.INITIAL_STATE) {
   delete window.INITIAL_STATE
 }
 
-const render = routes => {
+const render = (routeConfigs: RouteConfig[]) => {
   ReactDOM.hydrate(
     <Provider store={store}>
       <BrowserRouter>
-        {renderRoutes(routes)}
+        {renderRoutes(routeConfigs)}
       </BrowserRouter>
     </Provider >,
     document.getElementById('app')

@@ -1,10 +1,10 @@
 export default {
   script: {
-    src: './src/client.js',
+    src: './src/client.tsx',
     include: true
   },
   errors: {
-    src: './src/routes/common/client.js',
+    src: './src/routes/common/client.ts',
     include: true
   }
 }

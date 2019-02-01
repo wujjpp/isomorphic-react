@@ -2,25 +2,25 @@
  * Created by Wu Jian Ping on 2019/01/30
  */
 
+import Promise from 'bluebird'
+import compression from 'compression'
+import cors from 'cors'
 import express from 'express'
+import helmet from 'helmet'
+import _ from 'lodash'
 import path from 'path'
 import React from 'react'
 import ReactDOMServer from 'react-dom/server'
-import { StaticRouter } from 'react-router'
 import { Provider } from 'react-redux'
-import compression from 'compression'
-import helmet from 'helmet'
-import cors from 'cors'
+import { StaticRouter } from 'react-router'
 import { matchRoutes, renderRoutes } from 'react-router-config'
-import _ from 'lodash'
-import Promise from 'bluebird'
 import ReactHelmet from 'react-helmet'
 
 import config from '../settings'
 import Html from './Html'
-import configureStore from './store/configureStore'
 import routes from './routes'
 import { ServerError } from './routes/common'
+import configureStore from './store/configureStore'
 
 // assets list 
 const assets = require('./assets.json')
@@ -55,7 +55,7 @@ app.post('/api/loadReadme', (req, res) => {
 })
 
 app.get('*', (req, res) => {
-  const store = configureStore()
+  const store = configureStore({})
 
   const promises = _
     .chain(matchRoutes(routes, req.url))
@@ -126,6 +126,6 @@ app.listen(PORT, err => {
     consoleLogger.error(err)
   }
   else {
-    console.log(`Listening at http://localhost:${PORT}/`) // eslint-disable-line
+    consoleLogger.log(`Listening at http://localhost:${PORT}/`) // tslint:disable-line
   }
 })

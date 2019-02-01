@@ -2,8 +2,7 @@
  * Created by Wu Jian Ping on 2019/01/30
  */
 
-import PropTypes from 'prop-types'
-import React from 'react'
+import * as React from 'react'
 import { Helmet } from 'react-helmet'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
@@ -13,32 +12,32 @@ if (__BROWSER__) {
   require('./style.scss')
 }
 
-class Home extends React.Component {
-  static propTypes = {
-    loadReadme: PropTypes.func,
-    data: PropTypes.shape({
-      status: PropTypes.string.isRequired,
-      data: PropTypes.object
-    })
+interface IHomeProps {
+  data: {
+    status: string,
+    data: any
   }
+  loadReadme: () => any
+}
 
-  static init({ store }) {
+class Home extends React.Component<IHomeProps> {
+  public static init({ store }: { store: any }) {
     return store.dispatch(loadReadme())
   }
 
-  constructor(props) {
+  constructor(props: IHomeProps) {
     super(props)
   }
 
-  handleClick() {
+  public handleClick() {
     alert('clicked')
   }
 
-  componentDidMount() {
+  public componentDidMount(): void {
     this.props.loadReadme()
   }
 
-  render() {
+  public render(): React.ReactNode {
     return (
       <div>
         <Helmet>
@@ -55,8 +54,8 @@ class Home extends React.Component {
   }
 }
 
-const mapStateToProps = state => ({ data: state.readme })
+const mapStateToProps = (state: any) => ({ data: state.readme })
 
-const mapDispatchToProps = dispatch => bindActionCreators({ loadReadme }, dispatch)
+const mapDispatchToProps = (dispatch: any) => bindActionCreators({ loadReadme }, dispatch)
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home)

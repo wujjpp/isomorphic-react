@@ -4,14 +4,14 @@
 
 import * as types from '../constants/readme'
 
-let initialState = {
+const initialState = {
   status: 'success',
   data: {},
   times: 0
 }
 
-//NOTE: readme决定redux store中的对象名
-export const readme = (state = initialState, action) => {
+// NOTE: readme决定redux store中的对象名
+export const readme = (state = initialState, action: IActionPayload) => {
   switch (action.type) {
     case types.LOAD_README_REQUEST:
       return { ...state, data: {}, status: 'loading' }

@@ -2,11 +2,11 @@
  * Created by Wu Jian Ping on 2019/01/31
  */
 
-import PropTypes from 'prop-types'
-import React from 'react'
+import * as PropTypes from 'prop-types'
+import * as React from 'react'
 import Helmet from 'react-helmet'
 
-const Error = ({ error }) => {
+const Error = ({ error }: { error: Error }) => {
   return (
     <>
       <Helmet>

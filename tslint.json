@@ -6,9 +6,11 @@
     ]
   },
   "rules": {
-    "object-literal-sort-keys": false //Disable for typescript
+    "object-literal-sort-keys": false,
+    "no-var-requires": false
   },
   "jsRules": {
-    "object-literal-sort-keys": false //Disable for javascript
+    "object-literal-sort-keys": false,
+    "no-var-requires": false
   }
 }
