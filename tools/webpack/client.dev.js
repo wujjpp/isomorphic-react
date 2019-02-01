@@ -13,7 +13,7 @@ export default {
   mode: 'development',
 
   resolve: {
-    extensions: ['.ts', '.js', '.jsx', '.json'],
+    extensions: ['.js', '.jsx', '.json'],
     unsafeCache: true
   },
 
@@ -32,23 +32,6 @@ export default {
     unsafeCache: true,
 
     rules: [
-      {
-        test: /\.ts$/i,
-        use: [
-          {
-            loader: 'babel-loader',
-            options: {
-              cacheDirectory: './.cache/babel-loader'
-            }
-          },
-          {
-            loader: 'ts-loader'
-          }
-        ],
-        include: [
-          path.join(process.cwd(), 'src')
-        ]
-      },
       {
         test: /\.(js|jsx)$/i,
         use: [

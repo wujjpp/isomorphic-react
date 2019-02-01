@@ -16,7 +16,8 @@ const run = async (task, options) => {
 
 if (require.main === module && process.argv.length > 2) {
   delete require.cache[__filename] // eslint-disable-line no-underscore-dangle
-  const task = require(`./${process.argv[2]}.js`).default // eslint-disable-line import/no-dynamic-require
+  const task = require(`./${process.argv[2]}.js`) // eslint-disable-line import/no-dynamic-require
+  console.log(task)
   run(task).catch((err) => {
     console.error(err.stack)
     process.exit(1)

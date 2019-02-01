@@ -28,7 +28,7 @@ export default {
   },
 
   resolve: {
-    extensions: ['.ts', '.js', '.jsx', '.json']
+    extensions: ['.js', '.jsx', '.json']
   },
 
   output: {
@@ -40,14 +40,6 @@ export default {
 
   module: {
     rules: [
-      {
-        test: /\.ts$/i,
-        use: ['babel-loader', 'ts-loader'],
-        include: [
-          path.join(process.cwd(), 'src')
-        ]
-      },
-
       {
         test: /\.(js|jsx)$/i,
         use: ['babel-loader', 'eslint-loader'],

@@ -1,9 +1,9 @@
-/**
-* Created by Wu Jian Ping on 2019/01/30
-*/
+/*
+ * Created by Wu Jian Ping on 2019/01/30
+ */
 
-import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import React, { Component } from 'react'
 
 class Html extends Component {
   static propTypes = {
