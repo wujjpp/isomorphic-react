@@ -18,6 +18,10 @@ export default {
     minimize: true
   },
 
+  resolve: {
+    alias: {},
+    extensions: ['.ts', '.js', '.jsx', '.json']
+  },
 
   entry: ['@babel/polyfill', './src/server.js'],
 
@@ -30,6 +34,13 @@ export default {
 
   module: {
     rules: [
+      {
+        test: /\.ts$/i,
+        use: ['babel-loader', 'ts-loader'],
+        include: [
+          path.join(process.cwd(), 'src')
+        ]
+      },
       {
         test: /\.(js|jsx)$/i,
         use: ['babel-loader', 'eslint-loader'],
@@ -104,14 +115,6 @@ export default {
     },
   ],
 
-  resolveLoader: {
-    alias: {}
-  },
-
-  resolve: {
-    alias: {},
-    extensions: ['.js', '.jsx', '.json']
-  },
 
   node: {
     __filename: false,

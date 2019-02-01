@@ -28,7 +28,7 @@ export default {
   },
 
   resolve: {
-    extensions: ['.js', '.jsx', '.json']
+    extensions: ['.ts', '.js', '.jsx', '.json']
   },
 
   output: {
@@ -39,108 +39,117 @@ export default {
   },
 
   module: {
-    rules: [{
-      test: /\.(js|jsx)$/i,
-      use: ['babel-loader', 'eslint-loader'],
-      include: [
-        path.join(process.cwd(), 'src')
-      ]
-    },
-
-    {
-      test: /\.scss$/i,
-      use: [
-        {
-          loader: MiniCssExtractPlugin.loader
-        },
-        {
-          loader: 'css-loader',
-        },
-        {
-          loader: 'postcss-loader',
-          options: {
-            config: {
-              path: './tools/'
-            }
-          }
-        },
-        {
-          loader: 'sass-loader'
-        }
-      ]
-    },
-
-    {
-      test: /\.less$/i,
-      use: [
-        {
-          loader: MiniCssExtractPlugin.loader
-        },
-        {
-          loader: 'css-loader'
-        },
-        {
-          loader: 'postcss-loader',
-          options: {
-            config: {
-              path: './tools/'
-            }
-          }
-        },
-        {
-          loader: 'less-loader'
-        }
-      ]
-    },
-
-    {
-      test: /\.css$/i,
-      use: [
-        {
-          loader: MiniCssExtractPlugin.loader
-        },
-        {
-          loader: 'css-loader'
-        },
-        {
-          loader: 'postcss-loader',
-          options: {
-            config: {
-              path: './tools/'
-            }
-          }
-        }
-      ]
-    },
-
-    {
-      test: /\.(ico|gif|png|jpg|jpeg|webp)$/i,
-      use: [{
-        loader: 'file-loader',
-        options: {
-          name: '[name]-[hash:8].[ext]'
-        }
-      }]
-    },
-
-    {
-      test: /\.(mp4|webm|wav|mp3|m4a|aac|oga)$/i,
-      loader: 'file-loader',
-      options: {
-        name: '[name]-[hash:8].[ext]'
-
+    rules: [
+      {
+        test: /\.ts$/i,
+        use: ['babel-loader', 'ts-loader'],
+        include: [
+          path.join(process.cwd(), 'src')
+        ]
       },
-    },
 
-    {
-      test: /\.(woff2?|ttf|eot|svg)$/,
-      use: [{
+      {
+        test: /\.(js|jsx)$/i,
+        use: ['babel-loader', 'eslint-loader'],
+        include: [
+          path.join(process.cwd(), 'src')
+        ]
+      },
+
+      {
+        test: /\.scss$/i,
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader
+          },
+          {
+            loader: 'css-loader',
+          },
+          {
+            loader: 'postcss-loader',
+            options: {
+              config: {
+                path: './tools/'
+              }
+            }
+          },
+          {
+            loader: 'sass-loader'
+          }
+        ]
+      },
+
+      {
+        test: /\.less$/i,
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader
+          },
+          {
+            loader: 'css-loader'
+          },
+          {
+            loader: 'postcss-loader',
+            options: {
+              config: {
+                path: './tools/'
+              }
+            }
+          },
+          {
+            loader: 'less-loader'
+          }
+        ]
+      },
+
+      {
+        test: /\.css$/i,
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader
+          },
+          {
+            loader: 'css-loader'
+          },
+          {
+            loader: 'postcss-loader',
+            options: {
+              config: {
+                path: './tools/'
+              }
+            }
+          }
+        ]
+      },
+
+      {
+        test: /\.(ico|gif|png|jpg|jpeg|webp)$/i,
+        use: [{
+          loader: 'file-loader',
+          options: {
+            name: '[name]-[hash:8].[ext]'
+          }
+        }]
+      },
+
+      {
+        test: /\.(mp4|webm|wav|mp3|m4a|aac|oga)$/i,
         loader: 'file-loader',
         options: {
           name: '[name]-[hash:8].[ext]'
-        }
-      }]
-    }
+
+        },
+      },
+
+      {
+        test: /\.(woff2?|ttf|eot|svg)$/,
+        use: [{
+          loader: 'file-loader',
+          options: {
+            name: '[name]-[hash:8].[ext]'
+          }
+        }]
+      }
     ]
   },
 

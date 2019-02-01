@@ -16,13 +16,30 @@ export default {
   mode: 'development',
 
   resolve: {
-    extensions: ['.js', '.jsx', '.json']
+    extensions: ['.ts', '.js', '.jsx', '.json']
   },
 
   entry: ['@babel/polyfill', './src/server.js'],
 
   module: {
     rules: [
+      {
+        test: /\.ts$/,
+        use: [
+          {
+            loader: 'babel-loader',
+            options: {
+              cacheDirectory: './.cache/babel-loader'
+            }
+          },
+          {
+            loader: 'ts-loader'
+          }
+        ],
+        include: [
+          path.join(process.cwd(), 'src')
+        ]
+      },
       {
         test: /\.(js|jsx)$/,
         use: [
@@ -114,10 +131,6 @@ export default {
       callback(null, Boolean(isExternal))
     },
   ],
-
-  resolveLoader: {
-    alias: {}
-  },
 
   node: {
     __filename: false,
