@@ -1,12 +1,12 @@
-/**
-* Created by Wu Jian Ping on 2019/01/30
-*/
+/*
+ * Created by Wu Jian Ping on 2019/01/30
+ */
 
-import React, { Component } from 'react'
+import * as React from 'react'
 import { Link } from 'react-router-dom'
 
-export default class Nav extends Component {
-  render() {
+export default class Nav extends React.Component {
+  public render(): React.ReactNode {
     return (
       <div>
         <ul>
