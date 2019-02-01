@@ -1,6 +1,6 @@
-/**
-* Created by Wu Jian Ping on 2019/01/30
-*/
+/*
+ * Created by Wu Jian Ping on 2019/01/30
+ */
 
 import { createStore, applyMiddleware, compose } from 'redux'
 import thunk from 'redux-thunk'

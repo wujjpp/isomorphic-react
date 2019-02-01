@@ -20,7 +20,7 @@ export default {
 
   resolve: {
     alias: {},
-    extensions: ['.js', '.jsx', '.json']
+    extensions: ['.js', '.jsx', '.ts', '.tsx']
   },
 
   entry: ['@babel/polyfill', './src/server.js'],
@@ -34,6 +34,13 @@ export default {
 
   module: {
     rules: [
+      {
+        test: /\.(ts|tsx)$/i,
+        use: ['babel-loader', 'ts-loader'],
+        include: [
+          path.join(process.cwd(), 'src')
+        ]
+      },
       {
         test: /\.(js|jsx)$/i,
         use: ['babel-loader', 'eslint-loader'],

@@ -1,19 +1,19 @@
-/**
-* Created by Wu Jian Ping on 2019/01/30
-*/
+/*
+ * Created by Wu Jian Ping on 2019/01/30
+ */
 
-import React, { Component } from 'react'
-import { bindActionCreators } from 'redux'
-import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
-import loadReadme from '../../store/actions/readme'
+import React from 'react'
 import { Helmet } from 'react-helmet'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import loadReadme from '../../store/actions/readme'
 
 if (__BROWSER__) {
   require('./style.scss')
 }
 
-class Home extends Component {
+class Home extends React.Component {
   static propTypes = {
     loadReadme: PropTypes.func,
     data: PropTypes.shape({
@@ -43,8 +43,8 @@ class Home extends Component {
       <div>
         <Helmet>
           <title>这是首页</title>
-          <meta name="description" content="这是首页的描述"></meta>
-          <meta name="keywords" content="这是首页的关键词"></meta>
+          <meta name="description" content="这是首页的描述" />
+          <meta name="keywords" content="这是首页的关键词" />
         </Helmet>
         <h2 className="c1">Home Page</h2>
         <h3>Name: {(this.props.data.status !== 'success') && this.props.data.status} {this.props.data.data.name}</h3>

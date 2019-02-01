@@ -1,6 +1,6 @@
-/**
-* Created by Wu Jian Ping on 2019/01/30
-*/
+/*
+ * Created by Wu Jian Ping on 2019/01/30
+ */
 
 import express from 'express'
 import path from 'path'
