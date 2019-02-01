@@ -12,18 +12,11 @@ const run = async (task, options) => {
   const time = end.getTime() - start.getTime()
   logger.info(`Finished '${task.name}${options ? ` (${JSON.stringify(options)})` : ''}' after ${time} ms`)
   return resolution
-
-  // task.func(options).then((resolution) => {
-  //   const end = new Date()
-  //   const time = end.getTime() - start.getTime()
-  //   logger.info(`Finished '${task.name}${options ? ` (${JSON.stringify(options)})` : ''}' after ${time} ms`)
-  //   return resolution
-  // })
 }
 
 if (require.main === module && process.argv.length > 2) {
   delete require.cache[__filename] // eslint-disable-line no-underscore-dangle
-  const task = require(`./${process.argv[2]}.js`) // eslint-disable-line import/no-dynamic-require
+  const task = require(`./${process.argv[2]}.js`).default // eslint-disable-line import/no-dynamic-require
   run(task).catch((err) => {
     console.error(err.stack)
     process.exit(1)
