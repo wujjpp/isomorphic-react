@@ -2,22 +2,22 @@
  * Created by Wu Jian Ping on 2019/01/30
  */
 
-import React from 'react'
-import ReactDOM from 'react-dom'
-import { Provider } from 'react-redux'
-import { renderRoutes, RouteConfig } from 'react-router-config'
-import { BrowserRouter } from 'react-router-dom'
+import React from "react";
+import ReactDOM from "react-dom";
+import { Provider } from "react-redux";
+import { renderRoutes, RouteConfig } from "react-router-config";
+import { BrowserRouter } from "react-router-dom";
 
-import routes from './routes'
-import configureStore from './store/configureStore'
+import routes from "./routes";
+import configureStore from "./store/configureStore";
 
-const initialState = window.INITIAL_STATE || {}
+const initialState = window.INITIAL_STATE || {};
 
-const store = configureStore(initialState)
+const store = configureStore(initialState);
 
 // for performance issue, delete useless variables
 if (window.INITIAL_STATE) {
-  delete window.INITIAL_STATE
+  delete window.INITIAL_STATE;
 }
 
 const render = (routeConfigs: RouteConfig[]) => {
@@ -27,14 +27,14 @@ const render = (routeConfigs: RouteConfig[]) => {
         {renderRoutes(routeConfigs)}
       </BrowserRouter>
     </Provider >,
-    document.getElementById('app')
-  )
-}
+    document.getElementById("app"),
+  );
+};
 
-render(routes)
+render(routes);
 
 if (module.hot) {
-  module.hot.accept('./routes', () => {
-    render(require('./routes'))
-  })
+  module.hot.accept("./routes", () => {
+    render(require("./routes"));
+  });
 }

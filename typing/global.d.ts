@@ -15,3 +15,7 @@ declare interface IActionPayload {
 declare interface NodeModule {
   hot: any
 }
+
+declare interface IContainerComponent {
+  init({ store, query, match }: { store: any, query: any, match: any }): Promise<any>
+}

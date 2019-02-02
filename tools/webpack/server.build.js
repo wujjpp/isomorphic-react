@@ -23,7 +23,7 @@ export default {
     extensions: ['.js', '.jsx', '.ts', '.tsx']
   },
 
-  entry: ['@babel/polyfill', './src/server.js'],
+  entry: ['@babel/polyfill', './src/server.tsx'],
 
   output: {
     path: path.join(process.cwd(), config.dist),
