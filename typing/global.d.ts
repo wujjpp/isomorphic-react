@@ -15,9 +15,3 @@ declare interface IActionPayload {
 declare interface NodeModule {
   hot: any;
 }
-
-declare interface IReduxThunkCustomArgument {
-  axios: any;
-  client: any;
-}
-

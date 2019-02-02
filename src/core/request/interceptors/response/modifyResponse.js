@@ -3,6 +3,6 @@
  */
 
 export default [
-  (response) => response,
-  (error) => Promise.reject(error)
+  response => response,
+  error => Promise.reject(error),
 ]

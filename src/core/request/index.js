@@ -9,14 +9,14 @@ import setToken from './interceptors/request/setToken'
 import modifyResponse from './interceptors/response/modifyResponse'
 
 const client = axios.create({
-  baseURL: config.apiRoot
+  baseURL: config.apiRoot,
 })
 
-//setup interceptor for request
+// setup interceptor for request
 const [setTokenResolve, setTokenReject] = setToken
 client.interceptors.request.use(setTokenResolve, setTokenReject)
 
-//setup interceptor for response
+// setup interceptor for response
 const [modifyResponseResolve, modifyResponseReject] = modifyResponse
 client.interceptors.response.use(modifyResponseResolve, modifyResponseReject)
 

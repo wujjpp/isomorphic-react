@@ -4,5 +4,5 @@
 
 export default [
   config => config,
-  error => Promise.reject(error)
+  error => Promise.reject(error),
 ]
