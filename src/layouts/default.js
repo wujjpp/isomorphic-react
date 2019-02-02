@@ -11,7 +11,6 @@ if (__BROWSER__) {
   require('../styles/global.scss')
 }
 
-
 class AppRoot extends Component {
   render() {
     return (
