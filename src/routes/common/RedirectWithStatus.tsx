@@ -5,22 +5,24 @@
 import React from "react";
 import { Redirect, Route } from "react-router";
 
-interface IProps {
-  from: string;
+interface IRedirectWithStatusProps {
+  from?: string;
   to: string;
   status: number;
 }
 
-const RedirectWithStatus = ({ from, to, status }: IProps) => {
+const RedirectWithStatus = ({ from, to, status = 301 }: IRedirectWithStatusProps) => {
   function component({ staticContext }: any) {
     if (staticContext) {
       staticContext.status = status;
     }
+
     return <Redirect from={from} to={to} />;
   }
+
   return (<Route render={component} />);
 };
 
-export default ({ from, to, status = 301 }: IProps) => {
+export default ({ from, to, status = 301 }: IRedirectWithStatusProps) => {
   return () => (RedirectWithStatus({ from, to, status }));
 };

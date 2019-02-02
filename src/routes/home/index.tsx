@@ -21,6 +21,7 @@ interface IHomeProps {
 }
 
 class Home extends Component<IHomeProps> {
+
   public static init({ store }: { store: any }) {
     return store.dispatch(loadReadme());
   }

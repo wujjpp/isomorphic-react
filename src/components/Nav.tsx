@@ -2,8 +2,8 @@
  * Created by Wu Jian Ping on 2019/01/30
  */
 
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React from "react";
+import { Link } from "react-router-dom";
 
 export default class Nav extends React.Component {
   public render(): React.ReactNode {
@@ -24,6 +24,6 @@ export default class Nav extends React.Component {
           </li>
         </ul>
       </div>
-    )
+    );
   }
 }

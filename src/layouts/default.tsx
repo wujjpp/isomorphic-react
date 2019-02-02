@@ -2,27 +2,29 @@
  * Created by Wu Jian Ping on 2019/01/30
  */
 
-import React, { Component } from 'react'
-import { renderRoutes, RouteConfig } from 'react-router-config'
-import Nav from '../components/Nav'
+import React, { Component } from "react";
+import { renderRoutes, RouteConfig } from "react-router-config";
+import Nav from "../components/Nav";
 
 if (__BROWSER__) {
-  require('../styles/global.scss')
+  require("../styles/global.scss");
 }
 
 interface IAppRootProps {
   route: {
-    routes: RouteConfig[]
-  }
+    routes: RouteConfig[];
+  };
 }
 
 class AppRoot extends Component<IAppRootProps> {
   public render() {
-    return (<div>
-      <Nav />
-      {renderRoutes(this.props.route.routes)}
-    </div>)
+    return (
+      <div>
+        <Nav />
+        {renderRoutes(this.props.route.routes)}
+      </div>
+    );
   }
 }
 
-export default AppRoot
+export default AppRoot;
