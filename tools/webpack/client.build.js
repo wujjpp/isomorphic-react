@@ -27,6 +27,10 @@ export default {
     ]
   },
 
+  // optimization: {
+  //   minimize: false
+  // },
+
   resolve: {
     extensions: ['.js', '.jsx', '.ts', '.tsx']
   },
