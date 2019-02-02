@@ -2,20 +2,20 @@
  * Created by Wu Jian Ping on 2019/01/30
  */
 
-import React, { Component } from "react";
-import { HelmetData } from "react-helmet";
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 
-interface IProps {
-  scripts: string[];
-  stylesheets: any[];
-  initialState: any;
-  helmet: HelmetData;
-  env: string;
-  children: string;
-}
+class Html extends Component {
+  static propTypes = {
+    scripts: PropTypes.array.isRequired,
+    stylesheets: PropTypes.array.isRequired,
+    initialState: PropTypes.object.isRequired,
+    helmet: PropTypes.object,
+    children: PropTypes.string.isRequired,
+    env: PropTypes.string.isRequired
+  }
 
-class Html extends Component<IProps> {
-  public render() {
+  render() {
     const {
       scripts,
       stylesheets,
@@ -23,7 +23,7 @@ class Html extends Component<IProps> {
       helmet,
       children,
       env,
-    } = this.props;
+    } = this.props
 
     return (
       <html lang="en" {...helmet.htmlAttributes.toComponent()}>
@@ -34,7 +34,7 @@ class Html extends Component<IProps> {
           {helmet.title.toComponent()}
           {helmet.meta.toComponent()}
           {helmet.link.toComponent()}
-          {process.env.NODE_ENV === "production" && stylesheets && stylesheets.map((css, n) => <link key={n} {...css} />)}
+          {process.env.NODE_ENV === 'production' && stylesheets && stylesheets.map((css, n) => <link key={n} {...css} />)}
         </head>
         <body {...helmet.bodyAttributes.toComponent()}>
           <div id="app" dangerouslySetInnerHTML={{ __html: children }} />
@@ -42,8 +42,8 @@ class Html extends Component<IProps> {
           {scripts && scripts.map((script, n) => <script key={n} src={script} />)}
         </body>
       </html>
-    );
+    )
   }
 }
 
-export default Html;
+export default Html

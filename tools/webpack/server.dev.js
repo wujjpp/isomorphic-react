@@ -19,7 +19,7 @@ export default {
     extensions: ['.js', '.jsx', '.ts', '.tsx']
   },
 
-  entry: ['@babel/polyfill', './src/server.tsx'],
+  entry: ['@babel/polyfill', './src/server.js'],
 
   module: {
     rules: [
