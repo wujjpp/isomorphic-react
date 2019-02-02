@@ -6,7 +6,11 @@ import * as PropTypes from 'prop-types'
 import * as React from 'react'
 import Helmet from 'react-helmet'
 
-const Error = ({ error }: { error: Error }) => {
+interface IErrorProps {
+  error: Error
+}
+
+const Error = ({ error }: IErrorProps) => {
   return (
     <>
       <Helmet>
@@ -17,10 +21,6 @@ const Error = ({ error }: { error: Error }) => {
       <div>{(error && error.message) || '系统错误'}</div>
     </>
   )
-}
-
-Error.propTypes = {
-  error: PropTypes.object
 }
 
 export default Error
