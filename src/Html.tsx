@@ -2,8 +2,8 @@
  * Created by Wu Jian Ping on 2019/01/30
  */
 
-import * as PropTypes from 'prop-types'
-import * as React from 'react'
+import PropTypes from 'prop-types'
+import React, { Component } from 'react'
 import { HelmetData } from 'react-helmet'
 
 interface IProps {
@@ -15,7 +15,7 @@ interface IProps {
   children: string
 }
 
-class Html extends React.Component<IProps> {
+class Html extends Component<IProps> {
   public static propTypes = {
     scripts: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
     stylesheets: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,

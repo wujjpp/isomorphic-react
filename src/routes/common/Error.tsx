@@ -2,7 +2,7 @@
  * Created by Wu Jian Ping on 2019/01/31
  */
 
-import * as React from 'react'
+import React from 'react'
 import Helmet from 'react-helmet'
 
 interface IErrorProps {

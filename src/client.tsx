@@ -2,8 +2,8 @@
  * Created by Wu Jian Ping on 2019/01/30
  */
 
-import * as React from 'react'
-import * as ReactDOM from 'react-dom'
+import React from 'react'
+import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
 import { renderRoutes, RouteConfig } from 'react-router-config'
 import { BrowserRouter } from 'react-router-dom'

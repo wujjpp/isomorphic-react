@@ -18,6 +18,9 @@
     "suppressImplicitAnyIndexErrors": true,
     "noUnusedLocals": true,
     "experimentalDecorators": true,
+    "newLine": "lf",
+    "removeComments": true,
+    "allowSyntheticDefaultImports": true
   },
   "exclude": [
     "node_modules",

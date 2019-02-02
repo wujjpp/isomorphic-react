@@ -2,8 +2,7 @@
  * Created by Wu Jian Ping on 2019/01/30
  */
 
-import * as React from 'react'
-import { Component } from 'react'
+import React, { Component, ReactNode } from 'react'
 import { renderRoutes } from 'react-router-config'
 
 interface IOrderProps {
@@ -18,7 +17,7 @@ export default class Order extends Component<IOrderProps> {
     console.log('order mounted')  // tslint:disable-line
   }
 
-  public render(): React.ReactNode {
+  public render(): ReactNode {
     return (
       <div>
         <div>Orders</div>

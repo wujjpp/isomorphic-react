@@ -2,7 +2,7 @@
  * Created by Wu Jian Ping on 2019/01/30
  */
 
-import * as React from 'react'
+import React, { Component, ReactNode } from 'react'
 import { Helmet } from 'react-helmet'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
@@ -20,13 +20,9 @@ interface IHomeProps {
   loadReadme: () => any
 }
 
-class Home extends React.Component<IHomeProps> {
+class Home extends Component<IHomeProps> {
   public static init({ store }: { store: any }) {
     return store.dispatch(loadReadme())
-  }
-
-  constructor(props: IHomeProps) {
-    super(props)
   }
 
   public handleClick() {
@@ -37,7 +33,7 @@ class Home extends React.Component<IHomeProps> {
     this.props.loadReadme()
   }
 
-  public render(): React.ReactNode {
+  public render(): ReactNode {
     return (
       <div>
         <Helmet>

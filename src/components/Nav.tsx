@@ -2,7 +2,7 @@
  * Created by Wu Jian Ping on 2019/01/30
  */
 
-import * as React from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom'
 
 export default class Nav extends React.Component {
