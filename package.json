@@ -12,7 +12,10 @@
     "analyse:client": "webpack-bundle-analyzer build/webpack-client-stats.json build/public",
     "analyse:server": "webpack-bundle-analyzer build/webpack-server-stats.json",
     "test": "mocha \"src/**/*.test.js\" --require @babel/register --require test/setup.js",
-    "eslint": "eslint src"
+    "eslint": "eslint \"src/**/*.js\"",
+    "eslint2": "eslint --fix \"src/**/*.js\"",
+    "tslint": "tslint \"src/**/*.ts{,x}\"",
+    "tslint2": "tslint --fix \"src/**/*.ts{,x}\""
   },
   "repository": {
     "type": "git",
