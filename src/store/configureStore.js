@@ -3,12 +3,12 @@
  */
 
 import axios from 'axios'
-import { applyMiddleware, compose, createStore } from 'redux'
+import { applyMiddleware, createStore, compose } from 'redux'
 import thunk from 'redux-thunk'
 import client from '../core/request'
 import createRootReducer from './reducers'
 
-export default initialState => {
+export default (initialState) => {
   const middlewares = []
 
   middlewares.push(applyMiddleware(
@@ -25,7 +25,7 @@ export default initialState => {
   const store = createStore(
     createRootReducer(),
     initialState,
-    compose(...middlewares),
+    compose(...middlewares)
   )
 
   // HMR
