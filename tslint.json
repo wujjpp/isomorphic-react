@@ -11,7 +11,8 @@
     "no-relative-imports": false,
     "no-default-export": false,
     "no-require-imports": false,
-    "max-line-length": false
+    "max-line-length": false,
+    "max-classes-per-file": false
   },
   "jsRules": {
     "object-literal-sort-keys": false,

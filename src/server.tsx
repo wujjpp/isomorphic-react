@@ -43,7 +43,14 @@ app.use(compression());
 app.use(helmet());
 
 // static folder
-app.use(express.static(path.join(__dirname, "public")));
+if (__DEV__) {
+  app.use(express.static(path.join(__dirname, "public")));
+}
+if (!__DEV__) {
+  app.use(express.static(path.join(__dirname, "public"), {
+    maxAge: "5d",
+  }));
+}
 
 app.post("/api/loadReadme", (req, res) => {
   setTimeout(() => {

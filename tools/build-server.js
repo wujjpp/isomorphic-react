@@ -12,6 +12,7 @@ const build = async env => {
   env = env || getEnv()
   webpackConfig.output.publicPath = (env === 'dev' ? '/' : getPublicPath(env))
 
+  logger.chalk(`${chalk.blue('Enviroment: ')}${chalk.bgRed(env)}`)
   logger.chalk(`${chalk.blue('Server public path: ')}${webpackConfig.output.publicPath}`)
 
   webpackConfig.plugins.push(createEnvDefinePlugin(env))

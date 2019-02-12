@@ -14,6 +14,7 @@ const build = async env => {
   env = env || getEnv()
   webpackConfig.output.publicPath = (env === 'dev' ? '/' : getPublicPath(env))
 
+  logger.chalk(`${chalk.blue('Enviroment: ')}${chalk.bgRed(env)}`)
   logger.chalk(`${chalk.blue('Client public path: ')}${webpackConfig.output.publicPath}`)
 
   // load entry setting
