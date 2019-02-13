@@ -22,7 +22,7 @@
     "newLine": "lf",
     "removeComments": true,
     "allowSyntheticDefaultImports": true,
-    "noEmitOnError": true
+    "noEmitOnError": false
   },
   "exclude": [
     "node_modules",
