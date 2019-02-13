@@ -7,9 +7,8 @@ import { Dispatch } from "redux";
 import * as types from "../constants/readme";
 
 export default function loadReadme() {
-  return (dispatch: Dispatch, getState: any, { client }: IReduxThunkExtraArgument) => {
+  return (dispatch: Dispatch, getState: () => any, { client }: IReduxThunkExtraArgument) => {
     dispatch({ type: types.LOAD_README_REQUEST });
-
     return client
       .post("/api/loadReadme")
       .then((res: AxiosResponse) => {
