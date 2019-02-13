@@ -3,12 +3,11 @@
  */
 
 import { AxiosError, AxiosResponse } from "axios";
-import { Dispatch, Store } from "redux";
+import { Dispatch } from "redux";
 import * as types from "../constants/readme";
 
 export default function loadReadme() {
-  return (dispatch: Dispatch, getState: Store, { client }: IReduxThunkExtraArgument) => {
-
+  return (dispatch: Dispatch, getState: any, { client }: IReduxThunkExtraArgument) => {
     dispatch({ type: types.LOAD_README_REQUEST });
 
     return client
