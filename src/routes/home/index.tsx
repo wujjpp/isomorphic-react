@@ -37,6 +37,11 @@ class Home extends Component<IHomeProps> {
 
   public componentDidMount(): void {
     this.props.loadReadme();
+    console.log("did mount"); //tslint:disable-line
+  }
+
+  public componentWillMount(): void {
+    console.log("will mount"); //tslint:disable-line
   }
 
   public render(): ReactNode {
