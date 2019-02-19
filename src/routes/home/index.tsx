@@ -22,8 +22,8 @@ interface IHomeProps {
 
 class Home extends Component<IHomeProps> {
 
-  public static init({ store }: { store: any }) {
-    return store.dispatch(loadReadme());
+  public static init({ store, req }: { store: any, req?: Request }) {
+    return store.dispatch(loadReadme(req));
   }
 
   constructor(props: any) {
@@ -37,11 +37,11 @@ class Home extends Component<IHomeProps> {
 
   public componentDidMount(): void {
     this.props.loadReadme();
-    console.log("did mount"); //tslint:disable-line
+    // console.log("did mount"); //tslint:disable-line
   }
 
   public componentWillMount(): void {
-    console.log("will mount"); //tslint:disable-line
+    //  console.log("will mount"); //tslint:disable-line
   }
 
   public render(): ReactNode {

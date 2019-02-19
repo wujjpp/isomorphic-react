@@ -6,6 +6,7 @@ import Promise from "bluebird";
 import compression from "compression";
 import cors from "cors";
 import express from "express";
+// import heapdump from "heapdump";
 import helmet from "helmet";
 import _ from "lodash";
 import path from "path";
@@ -16,10 +17,30 @@ import { Provider } from "react-redux";
 import { StaticRouter } from "react-router";
 import { matchRoutes, renderRoutes } from "react-router-config";
 import config from "../settings";
+import Apm from "./core/apm";
 import Html from "./Html";
 import routes from "./routes";
 import { ServerError } from "./routes/common";
 import configureStore from "./store/configureStore";
+
+import http, { Agent as HttpAgent } from "http";
+import https, { Agent as HttpsAgent } from "https";
+
+// http.globalAgent.keepAlive = true;
+// http.globalAgent.keepAliveMsecs = 60 * 1000;
+
+// https.globalAgent.keepAlive = true;
+// https.globalAgent.keepAliveMsecs = 60 * 1000;
+
+http.globalAgent = new HttpAgent({
+  keepAlive: true,
+  keepAliveMsecs: 60 * 1000,
+});
+
+https.globalAgent = new HttpsAgent({
+  keepAlive: true,
+  keepAliveMsecs: 60 * 1000,
+});
 
 // assets list
 const assets = require("./assets.json");
@@ -53,23 +74,42 @@ if (!__DEV__) {
 }
 
 app.post("/api/loadReadme", (req, res) => {
-  setTimeout(() => {
-    res.json({
-      name: require("casual").name,
-    });
-  }, 500);
+  res.json({
+    name: require("casual").name,
+  });
+
+  // setTimeout(() => {
+  //   res.json({
+  //     name: require("casual").name,
+  //   });
+  // }, 500);
 });
+
+// app.get("/heapdump", (req, res) => {
+//   heapdump.writeSnapshot(`${Date.now()}.heapsnapshot`, (err: Error, filename: string) => {
+//     if (!err) {
+//       res.send("success");
+//     } else {
+//       res.status(500).send(err.message);
+//     }
+//   });
+// });
 
 app.get("*", (req, res) => {
   const store = configureStore({});
+  const apm = new Apm("SSR").start();
 
   const promises = _
-    .chain(matchRoutes(routes, req.url))
+    .chain((() => {
+      const results = matchRoutes(routes, req.url);
+      apm.record("matchRoutes");
+      return results;
+    })())
     .map((o) => {
       if (o.route && o.route.component) {
         const c = o.route.component as any;
         if (c.init) {
-          return c.init({ store, query: req.query, match: o.match });
+          return c.init({ store, query: req.query, match: o.match, req });
         } else {
           return Promise.resolve();
         }
@@ -82,6 +122,7 @@ app.get("*", (req, res) => {
   Promise
     .all(promises)
     .then(() => {
+      apm.record("resolve promise");
       const context: { status?: number; url?: string } = {};
       const component = (
         <Provider store={store}>
@@ -90,8 +131,9 @@ app.get("*", (req, res) => {
           </StaticRouter>
         </Provider>
       );
+      apm.record("init component");
       const children = ReactDOMServer.renderToString(component);
-
+      apm.record("render app compnent");
       if (context.status === 301 && context.url) {
         return res.redirect(301, context.url);
       }
@@ -104,23 +146,66 @@ app.get("*", (req, res) => {
         res.status(404);
       }
 
+      let scripts: string[] = [];
+      if (assets && assets.script && assets.script.js) {
+        if (_.isArray(assets.script.js)) {
+          scripts = [...assets.script.js];
+        } else {
+          scripts = [assets.script.js];
+        }
+      } else {
+        scripts = ["/script.js"];
+      }
+
+      let stylesheets: Array<{ rel: string, href: string }> = [];
+      if (assets && assets.script && assets.script.css) {
+        if (_.isArray(assets.script.css)) {
+          stylesheets = _.map(assets.script.css, (o, n) => ({ rel: "stylesheet", href: o }));
+        } else {
+          stylesheets = [{ rel: "stylesheet", href: assets.script.css }];
+        }
+      }
+
       // 200
       const data = {
         children,
-        scripts: [(assets && assets.script && assets.script.js) || "/script.js"],
-        stylesheets: [{ rel: "stylesheet", href: (assets && assets.script && assets.script.css) }],
+        scripts,
+        stylesheets,
         initialState: store.getState(),
         helmet: ReactHelmet.renderStatic(),
         env,
       };
       const html = ReactDOMServer.renderToStaticMarkup(<Html {...data} />);
+      apm.record("render HTML");
       res.send(`<!doctype html>${html}`);
+      apm.print("ms");
     })
     .catch((err) => {
+
+      let scripts: string[] = [];
+      if (assets && assets.errors && assets.errors.js) {
+        if (_.isArray(assets.errors.js)) {
+          scripts = [...assets.errors.js];
+        } else {
+          scripts = [assets.errors.js];
+        }
+      } else {
+        scripts = ["/errors.js"];
+      }
+
+      let stylesheets: Array<{ rel: string, href: string }> = [];
+      if (assets && assets.errors && assets.errors.css) {
+        if (_.isArray(assets.errors.css)) {
+          stylesheets = _.map(assets.errors.css, (o, n) => ({ rel: "stylesheet", href: o }));
+        } else {
+          stylesheets = [{ rel: "stylesheet", href: assets.errors.css }];
+        }
+      }
+
       const data = {
         children: ReactDOMServer.renderToString(<ServerError error={err} />),
-        scripts: [(assets && assets.errors && assets.errors.js) || "/errors.js"],
-        stylesheets: [{ rel: "stylesheet", href: (assets && assets.errors && assets.errors.css) }],
+        scripts,
+        stylesheets,
         initialState: store.getState(),
         helmet: ReactHelmet.renderStatic(),
         env,

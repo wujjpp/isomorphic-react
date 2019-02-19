@@ -5,6 +5,7 @@
 import { defaultLayout } from "../layouts";
 import About from "./about";
 import { NotFound, RedirectWithStatus } from "./common";
+import Counter from "./counter";
 import Home from "./home";
 import Order from "./order";
 import OrderDetail from "./order/detail";
@@ -35,6 +36,10 @@ const routes = [
       {
         path: "/old-order",
         component: RedirectWithStatus({ from: "/old-order", to: "/order", status: 302 }), // eslint-disable-react-dispayname
+      },
+      {
+        path: "/counter",
+        component: Counter,
       },
       {
         path: "*",

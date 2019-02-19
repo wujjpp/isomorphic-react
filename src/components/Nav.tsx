@@ -22,6 +22,9 @@ export default class Nav extends React.Component {
           <li>
             <Link to="/old-order">Old Order</Link>
           </li>
+          <li>
+            <Link to="/counter">Counter</Link>
+          </li>
         </ul>
       </div>
     );

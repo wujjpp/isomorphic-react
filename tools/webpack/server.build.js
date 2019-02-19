@@ -103,11 +103,11 @@ export default {
     (context, request, callback) => {
       const isExternal =
         //the module name start with ('@' or 'a-z') character and contains 'a-z' or '/' or '.' or '-' or '0-9'
-        request.match(/^[@a-z][a-z/.\-0-9]*$/i) &&
+        request.match(/^[@a-z][a-z/.\-0-9]*$/i)
         //not stylesheet
-        !request.match(/\.(css|less|scss|sss)$/i) &&
-        //for performance issue, built react-dom/server to package, it can avoid server use un-minfied react-dom/server
-        !request.match(/react-dom\/server$/i)
+        && !request.match(/\.(css|less|scss|sss)$/i)
+      //for performance issue, built react-dom/server to package, it can avoid server use un-minfied react-dom/server
+      //  && !request.match(/react-dom\/server$/i)
 
       //console.log(request, '------- ', Boolean(isExternal))
 

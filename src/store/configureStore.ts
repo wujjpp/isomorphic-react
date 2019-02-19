@@ -5,7 +5,7 @@
 import axios from "axios";
 import { applyMiddleware, compose, createStore, StoreEnhancer } from "redux";
 import thunk from "redux-thunk";
-import client from "../core/request";
+import createRequest from "../core/request";
 import createRootReducer from "./reducers";
 
 export default (initialState: any) => {
@@ -13,7 +13,7 @@ export default (initialState: any) => {
 
   middlewares.push(applyMiddleware(
     thunk.withExtraArgument({
-      client,
+      createRequest,
       axios,
     }),
   ));

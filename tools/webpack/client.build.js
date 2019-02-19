@@ -17,19 +17,33 @@ export default {
   mode: 'production',
 
   optimization: {
+    // minimize: false,
     minimizer: [
       new UglifyJsPlugin({
         cache: true,
         parallel: true,
         sourceMap: true // set to true if you want JS source maps
       }),
-      new OptimizeCSSAssetsPlugin({})
+      new OptimizeCSSAssetsPlugin({}),
     ]
+    // splitChunks: {
+    //   chunks: 'all',
+    //   minSize: 512 * 1024,
+    //   maxSize: 1024 * 1024,
+    //   minChunks: 1,
+    //   maxAsyncRequests: 5,
+    //   maxInitialRequests: 3,
+    //   automaticNameDelimiter: '.',
+    //   name: false,
+    //   cacheGroups: {
+    //     vendor: {
+    //       test: /[\\/]node_modules[\\/]/,
+    //       priority: -10,
+    //       chunks: 'all'
+    //     }
+    //   }
+    // }
   },
-
-  // optimization: {
-  //   minimize: false
-  // },
 
   resolve: {
     extensions: ['.js', '.jsx', '.ts', '.tsx']
@@ -179,7 +193,8 @@ export default {
     new AssetsPlugin({
       filename: 'assets.json',
       path: path.join(process.cwd(), config.dist),
-      prettyPrint: true
+      prettyPrint: true,
+      entrypoints: true
     })
   ],
 

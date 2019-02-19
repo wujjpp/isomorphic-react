@@ -18,7 +18,8 @@
     "sourceType": "module"
   },
   "plugins": [
-    "react"
+    "react",
+    "react-hooks"
   ],
   "settings": {
     "react": {
@@ -34,7 +35,8 @@
     "react/jsx-uses-vars": "error",
     "linebreak-style": ["error", "unix"],
     "quotes": ["error", "single"],
-    "semi": ["error", "never"]
+    "semi": ["error", "never"],
+    "react-hooks/rules-of-hooks": "error"
   },
   "globals": {
     "$": true,
