@@ -26,12 +26,6 @@ import configureStore from "./store/configureStore";
 import http, { Agent as HttpAgent } from "http";
 import https, { Agent as HttpsAgent } from "https";
 
-// http.globalAgent.keepAlive = true;
-// http.globalAgent.keepAliveMsecs = 60 * 1000;
-
-// https.globalAgent.keepAlive = true;
-// https.globalAgent.keepAliveMsecs = 60 * 1000;
-
 http.globalAgent = new HttpAgent({
   keepAlive: true,
   keepAliveMsecs: 60 * 1000,
@@ -77,12 +71,6 @@ app.post("/api/loadReadme", (req, res) => {
   res.json({
     name: require("casual").name,
   });
-
-  // setTimeout(() => {
-  //   res.json({
-  //     name: require("casual").name,
-  //   });
-  // }, 500);
 });
 
 // app.get("/heapdump", (req, res) => {

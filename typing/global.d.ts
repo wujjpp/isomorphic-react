@@ -17,6 +17,6 @@ declare interface NodeModule {
 }
 
 declare interface IReduxThunkExtraArgument {
-  createRequest: any;
+  createRequest: (req?: Request) => any;
   axios: any;
 }
