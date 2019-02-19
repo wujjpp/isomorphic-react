@@ -85,7 +85,7 @@ app.post("/api/loadReadme", (req, res) => {
 
 app.get("*", (req, res) => {
   const store = configureStore({});
-  const apm = new Apm("SSR").start();
+  const apm = new Apm(`SSR:${req.originalUrl}`).start();
 
   const promises = _
     .chain((() => {
@@ -166,6 +166,7 @@ app.get("*", (req, res) => {
       const html = ReactDOMServer.renderToStaticMarkup(<Html {...data} />);
       apm.record("render HTML");
       res.send(`<!doctype html>${html}`);
+      apm.record("send HTML");
       apm.print("ms");
     })
     .catch((err) => {

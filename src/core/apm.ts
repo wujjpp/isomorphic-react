@@ -40,7 +40,7 @@ export default class Apm {
       results.push(this.resolutions[0]);
       for (let i = 1; i < this.resolutions.length; ++i) {
         this.resolutions[i].elapsed =
-          (this.resolutions[i].hrtime[0] - this.resolutions[i - 1].hrtime[0]) * 1000000000
+          (this.resolutions[i].hrtime[0] - this.resolutions[i - 1].hrtime[0]) * 1e+9
           + this.resolutions[i].hrtime[1] - this.resolutions[i - 1].hrtime[1];
         results.push(this.resolutions[i]);
       }
@@ -48,29 +48,30 @@ export default class Apm {
     return results;
   }
 
-  public print(format: "s" | "ms" | "us" | "ns" = "ns"): void {
+  public print(unit: "s" | "ms" | "us" | "ns" = "ns"): void {
     const values = this.values();
     const table = new Table();
     const consoleLogger = console;
+    const header = `Elapsed(${unit})`;
     values.forEach((resolution) => {
       table.cell("Stage Name", resolution.stage);
-      switch (format) {
+      switch (unit) {
         case "s":
-          table.cell(`Elapsed(${format})`, resolution.elapsed / 1e+9);
+          table.cell(header, resolution.elapsed / 1e+9);
           break;
         case "ms":
-          table.cell(`Elapsed(${format})`, resolution.elapsed / 1e+6);
+          table.cell(header, resolution.elapsed / 1e+6);
           break;
         case "us":
-          table.cell(`Elapsed(${format})`, resolution.elapsed / 1e+3);
+          table.cell(header, resolution.elapsed / 1e+3);
           break;
         default:
-          table.cell(`Elapsed(${format})`, resolution.elapsed);
+          table.cell(header, resolution.elapsed);
           break;
       }
       table.newRow();
     });
-    table.total(`Elapsed(${format})`);
+    table.total(`Elapsed(${unit})`);
     consoleLogger.log(`APM for ${this.name}`);
     consoleLogger.log(table.toString());
   }
