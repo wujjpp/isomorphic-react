@@ -6,7 +6,7 @@ import Table from "easy-table";
 import _ from "lodash";
 
 interface IResolution {
-  stage: string;
+  name: string;
   hrtime: [number, number];
   elapsed: number;
 }
@@ -20,7 +20,7 @@ export default class Apm {
   public start(): Apm {
     this.resolutions = [];
     const obj = {
-      stage: "start",
+      name: "start",
       hrtime: process.hrtime(),
       elapsed: 0,
     };
@@ -28,13 +28,13 @@ export default class Apm {
     return this;
   }
 
-  public record(stage?: string): Apm {
+  public mark(name?: string): Apm {
     if (this.resolutions.length === 0) {
       throw new Error("Call start function first");
     }
 
     const obj = {
-      stage: stage ? stage : `stage-${this.resolutions.length}`,
+      name: name ? name : `stage-${this.resolutions.length}`,
       hrtime: process.hrtime(this.time), //tslint:disable-line
       elapsed: 0,
     };
@@ -62,7 +62,7 @@ export default class Apm {
     const consoleLogger = console;
     const header = `Elapsed(${unit})`;
     values.forEach((resolution) => {
-      table.cell("Stage Name", resolution.stage);
+      table.cell("Stage Name", resolution.name);
       switch (unit) {
         case "s":
           table.cell(header, resolution.elapsed / 1e+9);

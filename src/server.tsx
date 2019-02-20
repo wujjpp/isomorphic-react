@@ -90,7 +90,7 @@ app.get("*", (req, res) => {
   const promises = _
     .chain((() => {
       const results = matchRoutes(routes, req.url);
-      apm.record("matchRoutes");
+      apm.mark("matchRoutes");
       return results;
     })())
     .map((o) => {
@@ -110,7 +110,7 @@ app.get("*", (req, res) => {
   Promise
     .all(promises)
     .then(() => {
-      apm.record("resolve promise");
+      apm.mark("resolve promise");
       const context: { status?: number; url?: string } = {};
       const component = (
         <Provider store={store}>
@@ -119,9 +119,9 @@ app.get("*", (req, res) => {
           </StaticRouter>
         </Provider>
       );
-      apm.record("init component");
+      apm.mark("init component");
       const children = ReactDOMServer.renderToString(component);
-      apm.record("render app compnent");
+      apm.mark("render app compnent");
       if (context.status === 301 && context.url) {
         return res.redirect(301, context.url);
       }
@@ -164,9 +164,9 @@ app.get("*", (req, res) => {
         env,
       };
       const html = ReactDOMServer.renderToStaticMarkup(<Html {...data} />);
-      apm.record("render HTML");
+      apm.mark("render HTML");
       res.send(`<!doctype html>${html}`);
-      apm.record("send HTML");
+      apm.mark("send HTML");
       apm.print("ms");
     })
     .catch((err) => {
