@@ -214,14 +214,14 @@ const server = app.listen(PORT, (err: Error) => {
   if (err) {
     consoleLogger.error(err);
   } else {
-    consoleLogger.log(`Listening at http://localhost:${PORT}/`) // tslint:disable-line
-
-    process.on("SIGTERM", () => {
-      consoleLogger.log("Receive 'SIGTERM'");
-      server.close(() => {
-        consoleLogger.log("Server graceful shutdown");
-        process.exit(0);
-      });
-    });
+    consoleLogger.log(`Listening at http://localhost:${PORT}/`);
   }
+});
+
+process.on("SIGTERM", () => {
+  consoleLogger.log("Process received 'SIGTERM'");
+  server.close(() => {
+    consoleLogger.log("Server graceful shutdown");
+    process.exit(0);
+  });
 });
