@@ -210,10 +210,18 @@ const PORT = config.backendPort;
 
 const consoleLogger = console;
 
-app.listen(PORT, (err: Error) => {
+const server = app.listen(PORT, (err: Error) => {
   if (err) {
     consoleLogger.error(err);
   } else {
     consoleLogger.log(`Listening at http://localhost:${PORT}/`) // tslint:disable-line
+
+    process.on("SIGTERM", () => {
+      consoleLogger.log("Receive 'SIGTERM'");
+      server.close(() => {
+        consoleLogger.log("Server graceful shutdown");
+        process.exit(0);
+      });
+    });
   }
 });

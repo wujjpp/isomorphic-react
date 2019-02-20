@@ -15,16 +15,24 @@ export default class Apm {
   private resolutions: IResolution[] = [];
   private time: [number, number];
 
-  constructor(public name: string) {
-  }
+  constructor(public name: string) { }
 
   public start(): Apm {
     this.resolutions = [];
-    this.time = process.hrtime();
+    const obj = {
+      stage: "start",
+      hrtime: process.hrtime(),
+      elapsed: 0,
+    };
+    this.resolutions.push(obj);
     return this;
   }
 
   public record(stage?: string): Apm {
+    if (this.resolutions.length === 0) {
+      throw new Error("Call start function first");
+    }
+
     const obj = {
       stage: stage ? stage : `stage-${this.resolutions.length}`,
       hrtime: process.hrtime(this.time), //tslint:disable-line
@@ -37,7 +45,7 @@ export default class Apm {
   public values(): IResolution[] {
     const results: IResolution[] = [];
     if (this.resolutions.length > 0) {
-      results.push(this.resolutions[0]);
+      // results.push(this.resolutions[0]);
       for (let i = 1; i < this.resolutions.length; ++i) {
         this.resolutions[i].elapsed =
           (this.resolutions[i].hrtime[0] - this.resolutions[i - 1].hrtime[0]) * 1e+9
@@ -74,5 +82,10 @@ export default class Apm {
     table.total(`Elapsed(${unit})`);
     consoleLogger.log(`APM for ${this.name}`);
     consoleLogger.log(table.toString());
+  }
+
+  public reset(): Apm {
+    this.resolutions = [];
+    return this;
   }
 }
