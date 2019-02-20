@@ -13,7 +13,6 @@ interface IResolution {
 
 export default class Apm {
   private resolutions: IResolution[] = [];
-  private time: [number, number];
 
   constructor(public name: string) { }
 
@@ -35,7 +34,7 @@ export default class Apm {
 
     const obj = {
       name: name ? name : `stage-${this.resolutions.length}`,
-      hrtime: process.hrtime(this.time), //tslint:disable-line
+      hrtime: process.hrtime(), //tslint:disable-line
       elapsed: 0,
     };
     this.resolutions.push(obj);
@@ -45,7 +44,6 @@ export default class Apm {
   public values(): IResolution[] {
     const results: IResolution[] = [];
     if (this.resolutions.length > 0) {
-      // results.push(this.resolutions[0]);
       for (let i = 1; i < this.resolutions.length; ++i) {
         this.resolutions[i].elapsed =
           (this.resolutions[i].hrtime[0] - this.resolutions[i - 1].hrtime[0]) * 1e+9
