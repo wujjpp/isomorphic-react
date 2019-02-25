@@ -25,6 +25,9 @@ export default class Nav extends React.Component {
           <li>
             <Link to="/counter">Counter</Link>
           </li>
+          <li>
+            <Link to="/lifecycle">Lifecycle</Link>
+          </li>
         </ul>
       </div>
     );

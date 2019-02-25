@@ -7,6 +7,7 @@ import About from "./about";
 import { NotFound, RedirectWithStatus } from "./common";
 import Counter from "./counter";
 import Home from "./home";
+import Lifecycle from "./lifecycle";
 import Order from "./order";
 import OrderDetail from "./order/detail";
 
@@ -40,6 +41,10 @@ const routes = [
       {
         path: "/counter",
         component: Counter,
+      },
+      {
+        path: "/lifecycle",
+        component: Lifecycle,
       },
       {
         path: "*",
