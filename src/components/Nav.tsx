@@ -28,6 +28,9 @@ export default class Nav extends React.Component {
           <li>
             <Link to="/lifecycle">Lifecycle</Link>
           </li>
+          <li>
+            <Link to="/context">Context</Link>
+          </li>
         </ul>
       </div>
     );

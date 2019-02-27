@@ -5,6 +5,7 @@
 import { defaultLayout } from "../layouts";
 import About from "./about";
 import { NotFound, RedirectWithStatus } from "./common";
+import Context from "./context";
 import Counter from "./counter";
 import Home from "./home";
 import Lifecycle from "./lifecycle";
@@ -45,6 +46,10 @@ const routes = [
       {
         path: "/lifecycle",
         component: Lifecycle,
+      },
+      {
+        path: "/context",
+        component: Context,
       },
       {
         path: "*",
