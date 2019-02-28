@@ -1,5 +1,5 @@
 /*
- * Created by Wu Jian Ping on 2019//
+ * Created by Wu Jian Ping on 2019/02/16
  */
 
 import Table from "easy-table";
