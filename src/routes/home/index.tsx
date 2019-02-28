@@ -31,7 +31,7 @@ class Home extends Component<IHomeProps> {
     this.handleClick = this.handleClick.bind(this);
   }
 
-  public handleClick() {
+  public handleClick(): void {
     alert("clicked");
   }
 
