@@ -2,29 +2,19 @@
  * Created by Wu Jian Ping on 2019/03/05
  */
 
-import React, { PureComponent } from "react";
+import React from "react";
+import AutoFocusTextInput from "./AutoFocusTextInput";
+import CustomTextInput from "./CustomTextInput";
+import CustomTextInput2 from "./CustomTextInput2";
 
-export default class CustomTextInput extends PureComponent {
+const Refs = () => {
+  return (
+    <div>
+      <CustomTextInput />
+      <AutoFocusTextInput />
+      <CustomTextInput2 />
+    </div>
+  );
+};
 
-  private textInput: any;
-
-  constructor(props: any) {
-    super(props);
-    this.textInput = React.createRef();
-    this.focusTextInput = this.focusTextInput.bind(this);
-  }
-
-  public focusTextInput() {
-    this.textInput.current.focus();
-    this.textInput.current.select();
-  }
-
-  public render() {
-    return (
-      <div>
-        <input type="text" ref={this.textInput} />
-        <input type="button" value="Focus the text input" onClick={this.focusTextInput} />
-      </div>
-    );
-  }
-}
+export default Refs;

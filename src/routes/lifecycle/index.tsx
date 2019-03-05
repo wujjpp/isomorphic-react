@@ -4,17 +4,18 @@
 
 import React, { Component, ReactNode } from "react";
 
-interface ILifecycle {
+interface IState {
   count: number;
 }
 
-export default class Lifecycle extends Component<{}, ILifecycle> {
+export default class Lifecycle extends Component<{}, IState> {
+
+  public readonly state: Readonly<IState> = {
+    count: 1,
+  };
+
   constructor(props: any) {
     super(props);
-    this.state = {
-
-      count: 0,
-    };
   }
 
   public inc = () => {
