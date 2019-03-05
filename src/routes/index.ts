@@ -12,6 +12,7 @@ import Lifecycle from "./lifecycle";
 import Order from "./order";
 import OrderDetail from "./order/detail";
 import Refs from "./refs";
+import RenderProps from "./render-props";
 
 const routes = [
   {
@@ -55,6 +56,10 @@ const routes = [
       {
         path: "/refs",
         component: Refs,
+      },
+      {
+        path: "/render-props",
+        component: RenderProps,
       },
       {
         path: "*",

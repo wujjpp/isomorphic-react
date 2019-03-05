@@ -2,9 +2,9 @@
  * Created by Wu Jian Ping on 2019/03/05
  */
 
-import React from "react";
+import React, { Component } from "react";
 
-export default class CustomTextInput extends React.Component {
+export default class CustomTextInput extends Component {
   private textInput: HTMLInputElement;
 
   constructor(props: {}) {

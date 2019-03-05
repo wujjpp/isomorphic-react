@@ -2,11 +2,11 @@
  * Created by Wu Jian Ping on 2019/03/05
  */
 
-import React, { PureComponent, RefObject } from "react";
+import React, { Component, RefObject } from "react";
 
 import CustomTextInput from "./CustomTextInput";
 
-export default class AutoFocusTextInput extends PureComponent {
+export default class AutoFocusTextInput extends Component {
   private customTextInput: RefObject<CustomTextInput>;
 
   constructor(props: {}) {

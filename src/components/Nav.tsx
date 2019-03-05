@@ -34,6 +34,9 @@ export default class Nav extends React.Component {
           <li>
             <Link to="/refs">Refs</Link>
           </li>
+          <li>
+            <Link to="/render-props">Render Props</Link>
+          </li>
         </ul>
       </div>
     );

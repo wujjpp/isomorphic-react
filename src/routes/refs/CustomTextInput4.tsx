@@ -1,4 +1,4 @@
-import React, { PureComponent } from "react";
+import React, { Component } from "react";
 
 interface IProps {
   inputRef: (el: HTMLInputElement) => void;
@@ -8,7 +8,7 @@ function CustomTextInput(props: IProps) {
   return <input ref={props.inputRef} />;
 }
 
-export default class Parent extends PureComponent {
+export default class Parent extends Component {
 
   private inputElement: HTMLInputElement;
 

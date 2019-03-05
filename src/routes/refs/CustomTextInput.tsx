@@ -3,9 +3,9 @@
  * Created by Wu Jian Ping on 2019/03/05
  */
 
-import React, { PureComponent, RefObject } from "react";
+import React, { Component, RefObject } from "react";
 
-export default class CustomTextInput extends PureComponent {
+export default class CustomTextInput extends Component {
 
   private textInput: RefObject<HTMLInputElement>;
 
