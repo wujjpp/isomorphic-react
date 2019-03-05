@@ -31,6 +31,9 @@ export default class Nav extends React.Component {
           <li>
             <Link to="/context">Context</Link>
           </li>
+          <li>
+            <Link to="/refs">Refs</Link>
+          </li>
         </ul>
       </div>
     );

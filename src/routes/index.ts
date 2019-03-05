@@ -11,6 +11,7 @@ import Home from "./home";
 import Lifecycle from "./lifecycle";
 import Order from "./order";
 import OrderDetail from "./order/detail";
+import Refs from "./refs";
 
 const routes = [
   {
@@ -50,6 +51,10 @@ const routes = [
       {
         path: "/context",
         component: Context,
+      },
+      {
+        path: "/refs",
+        component: Refs,
       },
       {
         path: "*",
