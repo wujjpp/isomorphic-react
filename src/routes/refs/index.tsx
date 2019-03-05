@@ -6,6 +6,7 @@ import React from "react";
 import AutoFocusTextInput from "./AutoFocusTextInput";
 import CustomTextInput from "./CustomTextInput";
 import CustomTextInput2 from "./CustomTextInput2";
+import CustomTextInput3 from "./CustomTextInput3";
 
 const Refs = () => {
   return (
@@ -13,6 +14,7 @@ const Refs = () => {
       <CustomTextInput />
       <AutoFocusTextInput />
       <CustomTextInput2 />
+      <CustomTextInput3 />
     </div>
   );
 };

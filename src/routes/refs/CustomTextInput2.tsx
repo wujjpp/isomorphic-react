@@ -17,7 +17,7 @@ export default function CustomTextInput2(props: {}) {
   return (
     <div>
       <input type="text" ref={textInput} />
-      <input type="button" value="Focus the text input2" onClick={handleClick} />
+      <input type="button" value="Focus the text input - 2" onClick={handleClick} />
     </div>
   );
 }

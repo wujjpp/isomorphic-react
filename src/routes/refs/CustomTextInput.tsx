@@ -25,7 +25,7 @@ export default class CustomTextInput extends PureComponent {
     return (
       <div>
         <input type="text" ref={this.textInput} />
-        <input type="button" value="Focus the text input" onClick={this.focusTextInput} />
+        <input type="button" value="Focus the text input - 1" onClick={this.focusTextInput} />
       </div>
     );
   }
