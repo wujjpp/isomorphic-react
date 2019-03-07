@@ -9,6 +9,7 @@ import Context from "./context";
 import Counter from "./counter";
 import Home from "./home";
 import Lifecycle from "./lifecycle";
+import Mobx from "./mobx";
 import Order from "./order";
 import OrderDetail from "./order/detail";
 import Refs from "./refs";
@@ -60,6 +61,10 @@ const routes = [
       {
         path: "/render-props",
         component: RenderProps,
+      },
+      {
+        path: "/mobx",
+        component: Mobx,
       },
       {
         path: "*",
