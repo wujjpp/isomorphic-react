@@ -5,7 +5,7 @@
 import * as types from "../constants/readme";
 
 const initialState = {
-  status: "success",
+  status: "",
   data: {},
   times: 0,
 };

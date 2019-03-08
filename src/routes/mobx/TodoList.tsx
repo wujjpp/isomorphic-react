@@ -15,7 +15,8 @@ export default class TodoList extends Component<{ store: TodoStore }> {
 
     return (
       <div>
-        {store.report}
+        <p>{store.report}</p>
+        <p>{store.title}</p>
         <ul>
           {store.todos.map((todo, idx) => <TodoView todo={todo} key={idx} />)}
         </ul>

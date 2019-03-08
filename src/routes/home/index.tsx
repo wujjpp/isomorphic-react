@@ -36,8 +36,9 @@ class Home extends Component<IHomeProps> {
   }
 
   public componentDidMount(): void {
-    this.props.loadReadme();
-    // console.log("did mount"); //tslint:disable-line
+    if (this.props.data.status !== "success") {
+      this.props.loadReadme();
+    }
   }
 
   public componentWillMount(): void {

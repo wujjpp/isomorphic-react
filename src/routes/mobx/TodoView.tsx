@@ -1,5 +1,8 @@
+
+import { action } from "mobx";
 import { observer } from "mobx-react";
 import React, { Component } from "react";
+import uuid from "uuid";
 import { ITask } from "./TodoStore";
 
 @observer
@@ -7,7 +10,7 @@ export default class TodoView extends Component<{ todo: ITask }> {
   private id: string;
 
   public componentWillMount() {
-    this.id = `todoView${Math.random().toString().replace(/0\./, "")}`;
+    this.id = uuid();
   }
 
   public render() {
@@ -19,17 +22,18 @@ export default class TodoView extends Component<{ todo: ITask }> {
           type="checkbox"
           checked={todo.completed}
           onChange={this.onToggleCompleted}
-        />
-        <label htmlFor={this.id}>{todo.taskName}</label>
+        />&nbsp;&nbsp;<label htmlFor={this.id}>{todo.taskName}</label>
       </li>
     );
   }
 
+  @action
   public onToggleCompleted = () => {
     const todo = this.props.todo;
     todo.completed = !todo.completed;
   }
 
+  @action
   public onRename = () => {
     const todo = this.props.todo;
     todo.taskName = prompt("Task name", todo.taskName) || todo.taskName;

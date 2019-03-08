@@ -1,4 +1,8 @@
-import { autorun, computed, observable } from "mobx";
+import { action, autorun, computed, configure, observable } from "mobx";
+
+configure({
+  enforceActions: "observed",
+});
 
 export interface ITask {
   taskName: string;
@@ -10,6 +14,9 @@ export class TodoStore {
 
   @observable
   public todos: ITask[] = [];
+
+  @observable
+  public title: string = "total: 0";
 
   constructor() {
     autorun(() => console.log(this.report)); // tslint:disable-line
@@ -23,11 +30,12 @@ export class TodoStore {
   @computed
   get report() {
     if (this.todos.length === 0) {
-      return "<none>";
+      return "No Todo";
     }
     return `Progress: ${this.completedTodosCount}/${this.todos.length}`;
   }
 
+  @action
   public addTodo(taskName: string | null) {
     if (taskName) {
       this.todos.push({
@@ -35,6 +43,7 @@ export class TodoStore {
         completed: false,
         assignee: null,
       });
+      this.title = `total:${this.todos.length}`;
     }
   }
 }
