@@ -5,6 +5,6 @@
 import { AxiosError, AxiosResponse } from "axios";
 
 export default [
-  (response: AxiosResponse) => response,
+  (response: AxiosResponse) => response.data,
   (error: AxiosError) => Promise.reject(error),
 ];

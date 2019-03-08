@@ -3,17 +3,20 @@
  */
 
 import Promise from "bluebird";
+import bodyParser from "body-parser";
 import compression from "compression";
+import cookieParser from "cookie-parser";
 import cors from "cors";
 import express from "express";
 // import heapdump from "heapdump";
 import helmet from "helmet";
 import _ from "lodash";
+import { toJS } from "mobx";
+import { Provider } from "mobx-react";
 import path from "path";
 import React from "react";
 import ReactDOMServer from "react-dom/server";
 import ReactHelmet from "react-helmet";
-import { Provider } from "react-redux";
 import { StaticRouter } from "react-router";
 import { matchRoutes, renderRoutes } from "react-router-config";
 import config from "../settings";
@@ -21,7 +24,7 @@ import Apm from "./core/apm";
 import Html from "./Html";
 import routes from "./routes";
 import { ServerError } from "./routes/common";
-import configureStore from "./store/configureStore";
+import Store from "./store";
 
 import http, { Agent as HttpAgent } from "http";
 import https, { Agent as HttpsAgent } from "https";
@@ -67,11 +70,16 @@ if (!__DEV__) {
   }));
 }
 
-app.post("/api/loadReadme", (req, res) => {
-  res.json({
-    name: require("casual").name,
-  });
-});
+// setup body-parser
+app.use(bodyParser.json({ limit: "5000kb" }));
+app.use(bodyParser.raw({ limit: "5000kb" }));
+app.use(bodyParser.urlencoded({ extended: false, limit: "5000kb" }));
+app.use(bodyParser.text({ type: "text/xml" }));
+
+// setup cookie-parser
+app.use(cookieParser());
+
+app.use("/api", require("./apis"));
 
 // app.get("/heapdump", (req, res) => {
 //   heapdump.writeSnapshot(`${Date.now()}.heapsnapshot`, (err: Error, filename: string) => {
@@ -84,12 +92,14 @@ app.post("/api/loadReadme", (req, res) => {
 // });
 
 app.get("*", (req, res) => {
-  const store = configureStore({});
+
   const apm = new Apm(`SSR:${req.originalUrl}`).start();
+
+  const store = new Store();
 
   const promises = _
     .chain((() => {
-      const results = matchRoutes(routes, req.url);
+      const results = matchRoutes(routes, req.path);
       apm.mark("matchRoutes");
       return results;
     })())
@@ -113,11 +123,11 @@ app.get("*", (req, res) => {
       apm.mark("resolve promise");
       const context: { status?: number; url?: string } = {};
       const component = (
-        <Provider store={store}>
-          <StaticRouter location={req.url} context={context}>
+        <StaticRouter location={req.url} context={context}>
+          <Provider {...store}>
             {renderRoutes(routes)}
-          </StaticRouter>
-        </Provider>
+          </Provider>
+        </StaticRouter>
       );
       apm.mark("init component");
       const children = ReactDOMServer.renderToString(component);
@@ -159,7 +169,7 @@ app.get("*", (req, res) => {
         children,
         scripts,
         stylesheets,
-        initialState: store.getState(),
+        initialState: toJS(store),
         helmet: ReactHelmet.renderStatic(),
         env,
       };
@@ -195,7 +205,7 @@ app.get("*", (req, res) => {
         children: ReactDOMServer.renderToString(<ServerError error={err} />),
         scripts,
         stylesheets,
-        initialState: store.getState(),
+        initialState: toJS(store),
         helmet: ReactHelmet.renderStatic(),
         env,
       };

@@ -2,31 +2,30 @@
  * Created by Wu Jian Ping on 2019/01/30
  */
 
+import { Provider } from "mobx-react";
 import React from "react";
 import ReactDOM from "react-dom";
-import { Provider } from "react-redux";
 import { renderRoutes, RouteConfig } from "react-router-config";
 import { BrowserRouter } from "react-router-dom";
-
 import routes from "./routes";
-import configureStore from "./store/configureStore";
+import Store from "./store";
 
 const initialState = window.INITIAL_STATE || {};
-
-const store = configureStore(initialState);
 
 // for performance issue, delete useless variables
 if (window.INITIAL_STATE) {
   delete window.INITIAL_STATE;
 }
 
+const store = new Store(initialState);
+
 const render = (routeConfigs: RouteConfig[]) => {
   ReactDOM.hydrate(
-    <Provider store={store}>
-      <BrowserRouter>
+    <BrowserRouter>
+      <Provider {...store}>
         {renderRoutes(routeConfigs)}
-      </BrowserRouter>
-    </Provider >,
+      </Provider>
+    </BrowserRouter>,
     document.getElementById("app"),
   );
 };
