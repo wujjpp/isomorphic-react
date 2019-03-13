@@ -12,7 +12,7 @@ import express from "express";
 import helmet from "helmet";
 import _ from "lodash";
 import { toJS } from "mobx";
-import { Provider } from "mobx-react";
+import { Provider, useStaticRendering } from "mobx-react";
 import path from "path";
 import React from "react";
 import ReactDOMServer from "react-dom/server";
@@ -92,6 +92,8 @@ app.use("/api", require("./apis"));
 // });
 
 app.get("*", (req, res) => {
+
+  useStaticRendering(true);
 
   const apm = new Apm(`SSR:${req.originalUrl}`).start();
 
