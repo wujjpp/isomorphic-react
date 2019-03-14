@@ -1,12 +1,11 @@
 
 import { inject, observer } from "mobx-react";
 import React, { Component } from "react";
-import Store, { TaskStore } from "../../store";
+import { IInit, TaskStore } from "../../store";
 import TaskView from "./TaskView";
 
 class TaskApp extends Component<{ taskStore: TaskStore }> {
-
-  public static init({ store, req }: { store: Store, req?: Request }) {
+  public static init({ store, req }: IInit) {
     return store.taskStore.loadTask(req);
   }
 

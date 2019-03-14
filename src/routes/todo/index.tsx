@@ -1,12 +1,12 @@
 
 import { inject, observer } from "mobx-react";
 import React, { Component } from "react";
-import Store, { TodoStore } from "../../store";
+import { IInit, TodoStore } from "../../store";
 import TodoView from "./TodoView";
 
 class TodoApp extends Component<{ todoStore: TodoStore }> {
 
-  public static init({ store, req, query, match }: { store: Store, req?: Request, query: any, match: any }) {
+  public static init({ store, query, params, match, req }: IInit) {
     return store.todoStore.loadTodo(req);
   }
 

@@ -19,7 +19,7 @@ const routes = [
         component: Home,
       },
       {
-        path: "/todo",
+        path: "/todo/:page?",
         component: TodoApp,
       },
       {

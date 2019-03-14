@@ -16,6 +16,14 @@ export default class Store {
   }
 }
 
+export interface IInit {
+  store: Store;
+  params: any;
+  query: any;
+  match: any;
+  req?: Request;
+}
+
 export {
   ITask,
   TodoStore,

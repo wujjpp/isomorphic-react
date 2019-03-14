@@ -4,13 +4,12 @@
 
 import React, { Component, ReactNode } from "react";
 import { Helmet } from "react-helmet";
+import data from "./data";
+import EnterpriseView from "./EnterpriseView";
 
-if (__BROWSER__) {
-  require("./style.scss");
-}
+import "./style.scss";
 
 export default class Home extends Component {
-
   constructor(props: any) {
     super(props);
   }
@@ -24,6 +23,7 @@ export default class Home extends Component {
           <meta name="keywords" content="这是首页的关键词" />
         </Helmet>
         <h1 className="c1">Home Page</h1>
+        <EnterpriseView data={data} />
       </div>
     );
   }

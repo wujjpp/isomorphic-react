@@ -20,8 +20,8 @@ import ReactHelmet from "react-helmet";
 import { StaticRouter } from "react-router";
 import { matchRoutes, renderRoutes } from "react-router-config";
 import config from "../settings";
+import Html from "./components/Html";
 import Apm from "./core/apm";
-import Html from "./Html";
 import routes from "./routes";
 import { ServerError } from "./routes/common";
 import Store from "./store";
@@ -91,9 +91,9 @@ app.use("/api", require("./apis"));
 //   });
 // });
 
-app.get("*", (req, res) => {
+useStaticRendering(true);
 
-  useStaticRendering(true);
+app.get("*", (req, res) => {
 
   const apm = new Apm(`SSR:${req.originalUrl}`).start();
 
@@ -109,7 +109,7 @@ app.get("*", (req, res) => {
       if (o.route && o.route.component) {
         const c = o.route.component as any;
         if (c.init) {
-          return c.init({ store, query: req.query, match: o.match, req });
+          return c.init({ store, query: req.query, params: o.match.params, match: o.match, req });
         } else {
           return Promise.resolve();
         }
@@ -133,7 +133,9 @@ app.get("*", (req, res) => {
       );
       apm.mark("init component");
       const children = ReactDOMServer.renderToString(component);
+
       apm.mark("render app compnent");
+
       if (context.status === 301 && context.url) {
         return res.redirect(301, context.url);
       }
@@ -179,7 +181,7 @@ app.get("*", (req, res) => {
       apm.mark("render HTML");
       res.send(`<!doctype html>${html}`);
       apm.mark("send HTML");
-      apm.print("ms");
+      // apm.print("ms");
     })
     .catch((err) => {
 
