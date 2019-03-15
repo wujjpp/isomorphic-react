@@ -1,41 +1,11 @@
 
-import { inject, observer } from "mobx-react";
-import React, { Component } from "react";
-import { IInit, TodoStore } from "../../store";
-import TodoView from "./TodoView";
+/*
+ * Created by Wu Jian Ping on 2019/03/15
+ */
 
-class TodoApp extends Component<{ todoStore: TodoStore }> {
+import asyncComponent from "../../components/AsyncComponent";
 
-  public static init({ store, query, params, match, req }: IInit) {
-    return store.todoStore.loadTodo(req);
-  }
-
-  public componentDidMount() {
-    if (this.props.todoStore.todos.length <= 0) {
-      this.props.todoStore.loadTodo();
-    }
-  }
-
-  public render() {
-    return (
-      <div>
-        <p>{this.props.todoStore.report}</p>
-        <ul>
-          {this.props.todoStore.todos.map((todo, idx) => <TodoView todo={todo} key={idx} />)}
-        </ul>
-        <button onClick={this.createTodo}>New Todo</button>
-        <small> (double-click a todo to edit)</small>
-      </div>
-    );
-  }
-
-  public createTodo = () => {
-    const todo = prompt("Enter a new todo:", `Todo - ${this.props.todoStore.todos.length + 1}`);
-
-    if (todo) {
-      this.props.todoStore.addTodo(todo);
-    }
-  }
-}
-
-export default inject("todoStore")(observer(TodoApp));
+export default asyncComponent({
+  loader: () => import("./TodoList"),
+  init: ({ store, req }) => store.todoStore.loadTodo(req),
+});

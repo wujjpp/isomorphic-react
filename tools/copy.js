@@ -51,3 +51,11 @@ export const copyAssetsJson = { // eslint-disable-line
   }
 }
 
+export const copyFakeReactLoadable = {
+  name: 'generate fake react loadable file',
+  func: async () => {
+    await makeDir(config.dist)
+    await writeFile(`${config.dist}/react-loadable.json`, JSON.stringify({}, null, 2))
+  }
+}
+

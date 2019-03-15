@@ -33,7 +33,7 @@ class TaskStore {
     }
   }
 
-  public async loadTask(req?: Request) {
+  public async loadTask(req?: any) {
     try {
       const data = await taskService.loadTasks(req);
       runInAction(() => {

@@ -116,6 +116,7 @@ export default {
   externals: [
     /^\.\/assets\.json$/,
     /^\.\/env\.json$/,
+    /^\.\/react-loadable\.json$/,
 
     (context, request, callback) => {
       const isExternal =

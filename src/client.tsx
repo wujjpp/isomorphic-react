@@ -5,6 +5,7 @@
 import { Provider } from "mobx-react";
 import React from "react";
 import ReactDOM from "react-dom";
+import Loadable from "react-loadable";
 import { renderRoutes, RouteConfig } from "react-router-config";
 import { BrowserRouter } from "react-router-dom";
 import routes from "./routes";
@@ -20,14 +21,18 @@ if (window.INITIAL_STATE) {
 const store = new Store(initialState);
 
 const render = (routeConfigs: RouteConfig[]) => {
-  ReactDOM.hydrate(
-    <BrowserRouter>
-      <Provider {...store}>
-        {renderRoutes(routeConfigs)}
-      </Provider>
-    </BrowserRouter>,
-    document.getElementById("app"),
-  );
+  Loadable
+    .preloadReady()
+    .then(() => {
+      ReactDOM.hydrate(
+        <BrowserRouter>
+          <Provider {...store}>
+            {renderRoutes(routeConfigs)}
+          </Provider>
+        </BrowserRouter>,
+        document.getElementById("app"),
+      );
+    });
 };
 
 render(routes);

@@ -8,8 +8,9 @@ import compression from "compression";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 import express from "express";
-// import heapdump from "heapdump";
 import helmet from "helmet";
+import http, { Agent as HttpAgent } from "http";
+import https, { Agent as HttpsAgent } from "https";
 import _ from "lodash";
 import { toJS } from "mobx";
 import { Provider, useStaticRendering } from "mobx-react";
@@ -17,6 +18,8 @@ import path from "path";
 import React from "react";
 import ReactDOMServer from "react-dom/server";
 import ReactHelmet from "react-helmet";
+import Loadable from "react-loadable";
+import { getBundles } from "react-loadable/webpack";
 import { StaticRouter } from "react-router";
 import { matchRoutes, renderRoutes } from "react-router-config";
 import config from "../settings";
@@ -25,9 +28,6 @@ import Apm from "./core/apm";
 import routes from "./routes";
 import { ServerError } from "./routes/common";
 import Store from "./store";
-
-import http, { Agent as HttpAgent } from "http";
-import https, { Agent as HttpsAgent } from "https";
 
 http.globalAgent = new HttpAgent({
   keepAlive: true,
@@ -43,6 +43,8 @@ https.globalAgent = new HttpsAgent({
 const assets = require("./assets.json");
 // env defination
 const { env } = require("./env.json");
+// react-loadable
+const stats = require("./react-loadable.json");
 
 const app = express();
 
@@ -81,20 +83,9 @@ app.use(cookieParser());
 
 app.use("/api", require("./apis"));
 
-// app.get("/heapdump", (req, res) => {
-//   heapdump.writeSnapshot(`${Date.now()}.heapsnapshot`, (err: Error, filename: string) => {
-//     if (!err) {
-//       res.send("success");
-//     } else {
-//       res.status(500).send(err.message);
-//     }
-//   });
-// });
-
 useStaticRendering(true);
 
 app.get("*", (req, res) => {
-
   const apm = new Apm(`SSR:${req.originalUrl}`).start();
 
   const store = new Store();
@@ -123,17 +114,25 @@ app.get("*", (req, res) => {
     .all(promises)
     .then(() => {
       apm.mark("resolve promise");
+
+      const modules: any[] = [];
+
       const context: { status?: number; url?: string } = {};
+
+      const collect = (moduleName: string) => modules.push(moduleName);
+
       const component = (
-        <StaticRouter location={req.url} context={context}>
-          <Provider {...store}>
-            {renderRoutes(routes)}
-          </Provider>
-        </StaticRouter>
+        <Loadable.Capture report={collect}>
+          <StaticRouter location={req.url} context={context}>
+            <Provider {...store}>
+              {renderRoutes(routes)}
+            </Provider>
+          </StaticRouter>
+        </Loadable.Capture>
       );
+
       apm.mark("init component");
       const children = ReactDOMServer.renderToString(component);
-
       apm.mark("render app compnent");
 
       if (context.status === 301 && context.url) {
@@ -148,31 +147,50 @@ app.get("*", (req, res) => {
         res.status(404);
       }
 
+      const bundles = getBundles(stats, modules);
+
+      // Prepare scripts
       let scripts: string[] = [];
+
+      const js = _.filter(bundles, (bundle) => bundle.file.endsWith(".js"));
+      js.forEach((o: any) => {
+        scripts.push(o.publicPath);
+      });
+
       if (assets && assets.script && assets.script.js) {
         if (_.isArray(assets.script.js)) {
-          scripts = [...assets.script.js];
+          scripts = _.concat([...scripts], [...assets.script.js]);
         } else {
-          scripts = [assets.script.js];
+          scripts = _.concat([...scripts], [assets.script.js]);
         }
       } else {
-        scripts = ["/script.js"];
+        scripts = _.concat([...scripts], ["/script.js"]);
       }
+      scripts = _.uniqWith(scripts);
 
-      let stylesheets: Array<{ rel: string, href: string }> = [];
+      // Prepare stylesheets
+      let stylesheets: string[] = [];
       if (assets && assets.script && assets.script.css) {
         if (_.isArray(assets.script.css)) {
-          stylesheets = _.map(assets.script.css, (o, n) => ({ rel: "stylesheet", href: o }));
+          stylesheets = [...assets.script.css];
         } else {
-          stylesheets = [{ rel: "stylesheet", href: assets.script.css }];
+          stylesheets = [assets.script.css];
         }
       }
+
+      const css = _.filter(bundles, (bundle) => bundle.file.endsWith(".css"));
+      if (css.length > 0) {
+        css.forEach((o: any) => {
+          stylesheets.push(o.publicPath);
+        });
+      }
+      stylesheets = _.uniqWith(stylesheets);
 
       // 200
       const data = {
         children,
         scripts,
-        stylesheets,
+        stylesheets: _.map(stylesheets, (s) => ({ rel: "stylesheet", href: s })),
         initialState: toJS(store),
         helmet: ReactHelmet.renderStatic(),
         env,
@@ -184,7 +202,6 @@ app.get("*", (req, res) => {
       // apm.print("ms");
     })
     .catch((err) => {
-
       let scripts: string[] = [];
       if (assets && assets.errors && assets.errors.js) {
         if (_.isArray(assets.errors.js)) {
@@ -224,18 +241,22 @@ const PORT = config.backendPort;
 
 const consoleLogger = console;
 
-const server = app.listen(PORT, (err: Error) => {
-  if (err) {
-    consoleLogger.error(err);
-  } else {
-    consoleLogger.log(`Listening at http://localhost:${PORT}/`);
-  }
-});
+Loadable
+  .preloadAll()
+  .then(() => {
+    const server = app.listen(PORT, (err: Error) => {
+      if (err) {
+        consoleLogger.error(err);
+      } else {
+        consoleLogger.log(`Listening at http://localhost:${PORT}/`);
+      }
+    });
 
-process.on("SIGTERM", () => {
-  consoleLogger.log("Process received 'SIGTERM'");
-  server.close(() => {
-    consoleLogger.log("Server graceful shutdown");
-    process.exit(0);
+    process.on("SIGTERM", () => {
+      consoleLogger.log("Process received 'SIGTERM'");
+      server.close(() => {
+        consoleLogger.log("Server graceful shutdown");
+        process.exit(0);
+      });
+    });
   });
-});

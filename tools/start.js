@@ -10,7 +10,7 @@ import { format, getEnv, getPublicPath, createEnvDefinePlugin } from './libs/uti
 import run from './run'
 import clean from './clean'
 import watch from './watch'
-import { copyPublic, copyEnvConfig, copyAssetsJson } from './copy'
+import { copyPublic, copyEnvConfig, copyAssetsJson, copyFakeReactLoadable } from './copy'
 import config from './config'
 import devClientConfig from './webpack/client.dev'
 import devServerConfig from './webpack/server.dev'
@@ -22,6 +22,7 @@ const start = async () => {
   await run(clean)
   await run(copyPublic, { dest: config.dist })
   await run(copyEnvConfig, env)
+  await run(copyFakeReactLoadable)
 
   devClientConfig.output.publicPath = devServerConfig.output.publicPath = getPublicPath('dev')
 

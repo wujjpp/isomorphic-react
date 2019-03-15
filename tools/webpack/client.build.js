@@ -10,6 +10,7 @@ import config from '../config'
 import MiniCssExtractPlugin from 'mini-css-extract-plugin'
 import UglifyJsPlugin from 'uglifyjs-webpack-plugin'
 import OptimizeCSSAssetsPlugin from 'optimize-css-assets-webpack-plugin'
+import { ReactLoadablePlugin } from 'react-loadable/webpack'
 
 export default {
   target: 'web',
@@ -189,13 +190,18 @@ export default {
       filename: '[contenthash].css',
       chunkFilename: '[id].css'
     }),
+
     new webpack.optimize.AggressiveMergingPlugin(),
     new AssetsPlugin({
       filename: 'assets.json',
       path: path.join(process.cwd(), config.dist),
       prettyPrint: true,
       entrypoints: true
-    })
+    }),
+
+    new ReactLoadablePlugin({
+      filename: `${config.dist}/react-loadable.json`,
+    }),
   ],
 
   stats: {

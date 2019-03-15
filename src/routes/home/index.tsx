@@ -6,6 +6,7 @@ import React, { Component, ReactNode } from "react";
 import { Helmet } from "react-helmet";
 import data from "./data";
 import EnterpriseView from "./EnterpriseView";
+import Foo from "./Foo";
 
 import "./style.scss";
 
@@ -24,6 +25,7 @@ export default class Home extends Component {
         </Helmet>
         <h1 className="c1">Home Page</h1>
         <EnterpriseView data={data} />
+        <Foo />
       </div>
     );
   }

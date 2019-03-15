@@ -5,7 +5,7 @@
 import webpack, { HotModuleReplacementPlugin } from 'webpack'
 import path from 'path'
 import config from '../config'
-
+import { ReactLoadablePlugin } from 'react-loadable/webpack'
 
 export default {
   target: 'web',
@@ -194,7 +194,11 @@ export default {
     }),
 
     new HotModuleReplacementPlugin(),
-    new webpack.NoEmitOnErrorsPlugin()
+    new webpack.NoEmitOnErrorsPlugin(),
+
+    new ReactLoadablePlugin({
+      filename: `${config.dist}/react-loadable.json`,
+    }),
   ],
 
   stats: {

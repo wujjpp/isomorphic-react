@@ -5,7 +5,7 @@
 import { defaultLayout } from "../layouts";
 import { NotFound } from "./common";
 
-import Home from "./home";
+import HomeApp from "./home";
 import TaskApp from "./task";
 import TodoApp from "./todo";
 
@@ -16,7 +16,7 @@ const routes = [
       {
         path: "/",
         exact: true,
-        component: Home,
+        component: HomeApp,
       },
       {
         path: "/todo/:page?",

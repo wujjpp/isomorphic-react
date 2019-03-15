@@ -5,10 +5,7 @@
 import React, { Component } from "react";
 import { renderRoutes, RouteConfig } from "react-router-config";
 import Nav from "../components/Nav";
-
-if (__BROWSER__) {
-  require("../styles/global.scss");
-}
+import "../styles/global.scss";
 
 interface IAppRootProps {
   route: {
