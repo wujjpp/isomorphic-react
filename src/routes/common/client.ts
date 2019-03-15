@@ -1,3 +1,3 @@
 if (__BROWSER__) {
-  console.log('error') // tslint:disable-line
+  console.log("client"); // tslint:disable-line
 }
