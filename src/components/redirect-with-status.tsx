@@ -11,7 +11,7 @@ interface IRedirectWithStatusProps {
   status: number;
 }
 
-const RedirectWithStatus = ({ from, to, status = 301 }: IRedirectWithStatusProps) => {
+const redirectWithStatus = ({ from, to, status = 301 }: IRedirectWithStatusProps) => {
   function component({ staticContext }: any) {
     if (staticContext) {
       staticContext.status = status;
@@ -24,5 +24,5 @@ const RedirectWithStatus = ({ from, to, status = 301 }: IRedirectWithStatusProps
 };
 
 export default ({ from, to, status = 301 }: IRedirectWithStatusProps) => {
-  return () => (RedirectWithStatus({ from, to, status }));
+  return () => (redirectWithStatus({ from, to, status }));
 };

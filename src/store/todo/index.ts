@@ -36,7 +36,7 @@ class TodoStore {
     return `Progress: ${this.completedTodosCount}/${this.todos.length}`;
   }
 
-  public async loadTodo(req?: any) {
+  public async loadTodo(req?: Request) {
     const data = await todoService.loadTodos(req);
 
     runInAction(() => {
