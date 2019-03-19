@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 import Loadable from "react-loadable";
 import Loading from "../../components/Loading";
 
@@ -7,7 +7,7 @@ const LoadableBar = Loadable({
   loading: Loading,
 });
 
-export default class MyComponent extends React.Component {
+export default class MyComponent extends Component {
   public state = { showBar: false };
 
   public onClick = () => {
