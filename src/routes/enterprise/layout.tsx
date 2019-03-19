@@ -1,6 +1,7 @@
 import React, { Component, ReactNode } from "react";
 import { renderRoutes } from "react-router-config";
 import Header from "./compoments/head";
+import Nav from "./compoments/nav";
 
 interface IOrderProps {
   route: {
@@ -18,6 +19,7 @@ export default class Order extends Component<IOrderProps> {
     return (
       <div>
         <Header />
+        <Nav />
         {renderRoutes(this.props.route.routes)}
       </div>
     );

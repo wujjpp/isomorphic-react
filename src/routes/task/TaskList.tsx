@@ -24,6 +24,8 @@ class TaskList extends Component<{ taskStore: TaskStore }> {
           <meta name="keywords" content="这是TASK关键词" />
         </Helmet>
         <div>
+          <h1>Task App</h1>
+          <hr />
           <p>{store.report}</p>
           <ul>
             {store.tasks.map((task, idx) => <TaskView task={task} key={idx} />)}

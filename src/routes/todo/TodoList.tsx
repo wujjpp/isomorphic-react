@@ -21,6 +21,8 @@ class TodoList extends Component<{ todoStore: TodoStore }> {
           <meta name="keywords" content="这是TODO关键词" />
         </Helmet>
         <div>
+          <h1>Todo App</h1>
+          <hr />
           <p>{this.props.todoStore.report}</p>
           <ul>
             {this.props.todoStore.todos.map((todo, idx) => <TodoView todo={todo} key={idx} />)}

@@ -17,13 +17,14 @@ export default class Home extends Component {
 
   public render(): ReactNode {
     return (
-      <div>
+      <div className="home">
         <Helmet>
           <title>这是首页</title>
           <meta name="description" content="这是首页的描述" />
           <meta name="keywords" content="这是首页的关键词" />
         </Helmet>
         <h1 className="c1">Home Page</h1>
+        <hr />
         <EnterpriseView data={data} />
         <Foo />
       </div>
