@@ -14,6 +14,7 @@ export default class Nav extends React.Component {
           <Link to="/">【Home】</Link>
           <Link to="/todo">【Todo】</Link>
           <Link to="/task">【Task】</Link>
+          <Link to="/enterprise">【Enterprise】</Link>
         </div>
         <hr />
       </>
