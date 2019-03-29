@@ -9,11 +9,11 @@ import HomeApp from "./home";
 import TaskApp from "./task";
 import TodoApp from "./todo";
 
-// import EnterpiseApp from "./enterprise";
+import EnterpiseApp from "./enterprise";
 
-import Info from "./enterprise/info";
-import layout from "./enterprise/layout";
-import Risk from "./enterprise/risk";
+// import Info from "./enterprise/info";
+// import layout from "./enterprise/layout";
+// import Risk from "./enterprise/risk";
 
 const routes = [
   {
@@ -32,20 +32,7 @@ const routes = [
         path: "/task",
         component: TaskApp,
       },
-      {
-        path: "/enterprise",
-        component: layout,
-        routes: [
-          {
-            path: "/enterprise/info",
-            component: Info,
-          },
-          {
-            path: "/enterprise/risk",
-            component: Risk,
-          },
-        ],
-      },
+      EnterpiseApp,
       {
         path: "*",
         component: NotFound,
