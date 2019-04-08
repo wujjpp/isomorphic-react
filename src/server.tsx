@@ -199,7 +199,7 @@ app.get("*", (req, res) => {
       apm.mark("render HTML");
       res.send(`<!doctype html>${html}`);
       apm.mark("send HTML");
-      // apm.print("ms");
+      apm.print("ms");
     })
     .catch((err) => {
       let scripts: string[] = [];
